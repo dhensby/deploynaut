@@ -541,4 +541,26 @@ class CapistranoDeploymentBackend extends Object implements DeploymentBackend {
 		return true;
 	}
 
+	public function letmein(\DNEnvironment $environment, \DeploynautLogFile $log, $username, $password) {
+		$name = $environment->getFullName();
+		$command = $this->getCommand(
+			'letmein:request',
+			'web',
+			$environment,
+			[
+				'username' => $username,
+				'password' => $password,
+			],
+			$log
+		);
+		$command->run(function($type, $buffer) use($log) {
+			$log->write($buffer);
+		});
+		if (!$command->isSuccessful()) {
+			$log->write(sprintf('Temporary CMS access on "%s" failed: %s', $name, $command->getErrorOutput()));
+			throw new \RuntimeException($command->getErrorOutput());
+		}
+		$log->write(sprintf('Temporary CMS access on "%s" set up', $name));
+	}
+
 }

@@ -70,4 +70,14 @@ interface DeploymentBackend {
 	 * @param DNProject $project
 	 */
 	public function ping(\DNEnvironment $environment, \DeploynautLogFile $log, \DNProject $project);
+
+	/**
+	 * Invoke letmein script on the environment boxes to let the user in temporarily.
+	 *
+	 * @param DNEnvironment $environment
+	 * @param DeploynautLogFile $log
+	 * @param string $username
+	 * @param string $password
+	 */
+	public function letmein(\DNEnvironment $environment, \DeploynautLogFile $log, $username, $password);
 }
