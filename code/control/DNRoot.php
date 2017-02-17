@@ -1792,8 +1792,9 @@ class DNRoot extends Controller implements PermissionProvider, TemplateGlobalPro
 
 	/**
 	 * View a form to delete a specific {@link DataArchive}.
+	 * Or delete multiple {@link DataArchives()}.
 	 * Permission checks are handled in {@link DataArchives()}.
-	 * Submissions are handled through {@link doDelete()}.
+	 * Submissions are handled through {@link DataArchive()->delete()()}.
 	 *
 	 * @param \SS_HTTPRequest $request
 	 *
@@ -1803,9 +1804,41 @@ class DNRoot extends Controller implements PermissionProvider, TemplateGlobalPro
 	public function deletesnapshot(\SS_HTTPRequest $request) {
 		$this->setCurrentActionType(self::ACTION_SNAPSHOT);
 
-		/** @var DNDataArchive $dataArchive */
-		$dataArchive = DNDataArchive::get()->byId($request->param('DataArchiveID'));
+		// Render Individual delete form (second "delete" button) 
+		if(!$request->postVars()){
+			$snapshotID = $request->param('DataArchiveID');
+			$dataArchive = DNDataArchive::get()->byId($snapshotID);
+			$this->processArchive($dataArchive);
+			// This delete form's action re-routes us to this request, but with the POST variables,
+			// DataArchiveID and action_deletesnapshot set
+			$form = $this->getDeleteForm($this->request, $dataArchive);
+			return $form->forTemplate();
+		}
 
+		// Bulk delete and Individual delete based on POST data
+		$snapshotIDs = $request->postVar('DataArchiveID');
+		if (!$snapshotIDs) {
+			throw new SS_HTTPResponse_Exception('No snapshot IDs received', 400);
+		}
+
+		if (!is_array($snapshotIDs)){
+			$snapshotIDs = [$snapshotIDs];
+		}
+
+		foreach ($snapshotIDs as $id) {
+			$dataArchive = DNDataArchive::get()->byId($id);
+			$this->processArchive($dataArchive);
+			$dataArchive->delete();
+		}
+		return $this->redirectBack();
+	}
+
+	/**
+	 * Perform sanity checks on requested IDs to be deleted.
+	 * 
+	 * @param $dataArchive
+	 */
+	public function processArchive($dataArchive) {
 		if (!$dataArchive) {
 			throw new SS_HTTPResponse_Exception('Archive not found', 404);
 		}
@@ -1813,11 +1846,6 @@ class DNRoot extends Controller implements PermissionProvider, TemplateGlobalPro
 		if (!$dataArchive->canDelete()) {
 			throw new SS_HTTPResponse_Exception('Not allowed to delete archive', 403);
 		}
-
-		$form = $this->getDeleteForm($this->request, $dataArchive);
-
-		// View currently only available via ajax
-		return $form->forTemplate();
 	}
 
 	/**
@@ -1847,51 +1875,13 @@ class DNRoot extends Controller implements PermissionProvider, TemplateGlobalPro
 				LiteralField::create('Warning', $snapshotDeleteWarning)
 			),
 			FieldList::create(
-				FormAction::create('doDelete', 'Delete')
+				FormAction::create('deletesnapshot', 'Delete')
 					->addExtraClass('btn')
 			)
 		);
 		$form->setFormAction($project->Link() . '/DeleteForm');
 
 		return $form;
-	}
-
-	/**
-	 * @param array $data
-	 * @param Form $form
-	 *
-	 * @return bool|SS_HTTPResponse
-	 * @throws SS_HTTPResponse_Exception
-	 */
-	public function doDelete($data, Form $form) {
-		$this->setCurrentActionType(self::ACTION_SNAPSHOT);
-
-		// Performs canView permission check by limiting visible projects
-		$project = $this->getCurrentProject();
-		if (!$project) {
-			return $this->project404Response();
-		}
-
-		$dataArchive = null;
-
-		if (
-			isset($data['DataArchiveID'])
-			&& is_numeric($data['DataArchiveID'])
-		) {
-			$dataArchive = DNDataArchive::get()->byId($data['DataArchiveID']);
-		}
-
-		if (!$dataArchive) {
-			throw new LogicException('Invalid data archive');
-		}
-
-		if (!$dataArchive->canDelete()) {
-			throw new SS_HTTPResponse_Exception('Not allowed to delete archive', 403);
-		}
-
-		$dataArchive->delete();
-
-		return $this->redirectBack();
 	}
 
 	/**
