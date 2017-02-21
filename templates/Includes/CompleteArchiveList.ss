@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<h3>Snapshots</h3>
-
+		<button type="button" data-url="$CurrentProject.Link/snapshots/bulkdeletesnapshot" class="btn btn-warning bulk-delete-submit" disabled="true">Delete</button>
 		<% if $CanViewArchives %>
 			<% if $CompleteDataArchives %>
 				<div class="table-responsive">
@@ -17,7 +17,6 @@
 								<th>Actions</th>
 							</tr>
 						</thead>
-
 						<tbody>
 							<% loop $CompleteDataArchives %>
 								<tr>
@@ -28,28 +27,32 @@
 									<td>$ModeNice<% if $IsBackup %> (automated backup)<% end_if %></td>
 									<td>$FileSize</td>
 									<td class="text-center">
-	                                    <div class="btn-group" role="group">
+										<div class="btn-group" role="group">
 											<% if $CanDownload && $ArchiveFile && $validTargetEnvironments.count %>
-	                                            <a href="$Top.CurrentProject.Link/movesnapshot/$ID" class="extended-trigger btn" data-extended-target="#archive-list-extended-$ID" data-extended-container="#archive-list-extended-container-$ID">
-	                                                Move
-	                                            </a>
+												<a href="$Top.CurrentProject.Link/snapshots/movesnapshot/$ID" class="extended-trigger btn" data-extended-target="#archive-list-extended-$ID" data-extended-container="#archive-list-extended-container-$ID">
+													Move
+												</a>
 											<% end_if %>
 											<% if $CanDelete && $ArchiveFile %>
-	                                            <a href="$Top.CurrentProject.Link/deletesnapshot/$ID" class="extended-trigger btn" data-extended-target="#archive-list-extended-$ID" data-extended-container="#archive-list-extended-container-$ID">
-	                                                Delete
-	                                            </a>
+												<a href="$Top.CurrentProject.Link/snapshots/deletesnapshot/$ID" class="extended-trigger btn" data-extended-target="#archive-list-extended-$ID" data-extended-container="#archive-list-extended-container-$ID">
+													Delete
+												</a>
 											<% end_if %>
 											<% if $CanDownload && $ArchiveFile %>
-	                                            <a href="$ArchiveFile.Link" download="" class="btn">
-	                                                Download
-	                                            </a>
+												<a href="$ArchiveFile.Link" download="" class="btn">
+													Download
+												</a>
 											<% end_if %>
 											<% if $CanDownload && $ArchiveFile %>
-	                                            <a href="$Top.CurrentProject.Link/restoresnapshot/$ID" class="extended-trigger btn" data-extended-target="#archive-list-extended-$ID" data-extended-container="#archive-list-extended-container-$ID">
-	                                                Restore
-	                                            </a>
+												<a href="$Top.CurrentProject.Link/snapshots/restoresnapshot/$ID" class="extended-trigger btn" data-extended-target="#archive-list-extended-$ID" data-extended-container="#archive-list-extended-container-$ID">
+													Restore
+												</a>
 											<% end_if %>
-	                                    </div>
+											<% if $CanDelete && $ArchiveFile %>
+												<input type="checkbox" value="$ID" name="ID[$ID]" class="bulk-delete-select">
+												<input type="hidden" name="snapshotActionBulk" value="bulkDelete">
+											<% end_if %>
+										</div>
 									</td>
 								</tr>
 								<tr class="extended archive-list-extended" id="archive-list-extended-container-$ID">
@@ -61,7 +64,6 @@
 						</tbody>
 					</table>
 				</div>
-
 				<% include Pagination Pagination=$CompleteDataArchives %>
 			<% else %>
 				<div class="alert alert-info">

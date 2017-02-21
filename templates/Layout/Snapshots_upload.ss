@@ -8,12 +8,12 @@
 				<li><a href="$CurrentProject.Link('snapshots')">Overview</a></li>
 
 				<% if $CurrentProject.canBackup %>
-				<li><a href="$CurrentProject.Link('createsnapshot')">Create snapshot</a></li>
+				<li><a href="$CurrentProject.Link('snapshots/createsnapshot')">Create snapshot</a></li>
 				<% end_if %>
 				<% if $CurrentProject.canUploadArchive %>
-				<li class="active"><a href="$CurrentProject.Link('uploadsnapshot')">Upload snapshot</a></li>
+				<li class="active"><a href="$CurrentProject.Link('snapshots/upload')">Upload snapshot</a></li>
 				<% end_if %>
-				<li><a href="$CurrentProject.Link('snapshotslog')">Log</a></li>
+				<li><a href="$CurrentProject.Link('snapshots/history')">History</a></li>
 			</ul>
 			<% end_if %>
 		</div>
@@ -31,19 +31,19 @@
 			<% else %>
 				<div class="tab-content">
 					<div class="tab-pane active" id="uploadform">
-						<h3>Upload a snapshot</h3>
+						<h3>$Title</h3>
 						<a href="#" data-target="#manualform" class="pull-right upload-exceed-link btn btn-warning">File exceeds <% if $UploadLimit %>$UploadLimit<% else %>2GB<% end_if %>?</a>
 						<p>Choose a local snapshot file to transfer<% if $UploadLimit %> (up to $UploadLimit)<% end_if %> (see below how to create this file). Once uploaded, you can choose to restore this file into an actual environment.</p>
-						$UploadSnapshotForm
+						$UploadForm
 					</div>
-					<div class="tab-pane " id="manualform">
-						<h3>Upload a snapshot</h3>
+					<div class="tab-pane" id="manualform">
+						<h3>$Title</h3>
 						<div class="panel panel-warning upload-exceed-container">
 							<div class="panel-body">
 								<a href="#" data-target="#uploadform" class="pull-right upload-exceed-link btn btn-warning"><i class="fa fa-times"></i> Close</a>
 								<h4 class="font-w600">Large files</h4>
 								<p>For large files <% if $UploadLimit %>exceeding $UploadLimit,<% end_if %> you can provide the file to us - we will then upload it on your behalf. Submit a request below to start this process.</p>
-								$PostSnapshotForm
+								$PostForm
 							</div>
 						</div>
 					</div>

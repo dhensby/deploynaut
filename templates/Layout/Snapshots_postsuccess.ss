@@ -7,12 +7,12 @@
 					<li><a href="$CurrentProject.Link('snapshots')">Overview</a></li>
 
 					<% if $CurrentProject.canBackup %>
-						<li><a href="$CurrentProject.Link('createsnapshot')">Create snapshot</a></li>
+						<li><a href="$CurrentProject.Link('snapshots/createsnapshot')">Create snapshot</a></li>
 					<% end_if %>
 					<% if $CurrentProject.canUploadArchive %>
-						<li><a href="$CurrentProject.Link('uploadsnapshot')">Upload snapshot</a></li>
+						<li><a href="$CurrentProject.Link('snapshots/upload')">Upload snapshot</a></li>
 					<% end_if %>
-					<li><a href="$CurrentProject.Link('snapshotslog')">Log</a></li>
+					<li><a href="$CurrentProject.Link('snapshots/history')">History</a></li>
 				</ul>
 			<% end_if %>
 		</div>

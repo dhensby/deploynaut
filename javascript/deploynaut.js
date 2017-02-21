@@ -254,6 +254,41 @@
 			return false;
 		});
 
+		var bulkCheckboxes = $('.bulk-delete-select');
+		var bulkSubmit = $('.bulk-delete-submit')
+
+		bulkCheckboxes.click(function() {
+			// If the submit button is disabled and there's one or more snapshots selected, enable the submit button
+			if (bulkSubmit.attr('disabled', true) && bulkCheckboxes.filter(':checked').length > 0) {
+				bulkSubmit.prop('disabled', false);
+			}
+
+			// Also check that we aren't unticking a box
+			if (bulkCheckboxes.filter(':checked').length < 1) {
+				// If there's less than one ticked we simply disable the button again
+				bulkSubmit.prop('disabled', true);
+			}
+		});
+
+		bulkSubmit.click(function() {
+			var numSnapsToDelete = bulkCheckboxes.filter(':checked').length;
+			// Display the "are you sure" pop-up
+			var submitForm = confirm("Are you sure you want to delete "+numSnapsToDelete+" snapshots? This can not be undone.");
+			// If they don't choose to continue return false
+			if (!submitForm) {
+				return false;
+			}
+
+			$.post(
+				$(this).data('url'),
+				{ ID: bulkCheckboxes.map(function() { return $(this).val(); }).get() },
+				function(data) {
+					location.reload();
+				}
+			);
+			return false;
+		});
+
 	});
 
 	$('button.abort').click(function(event) {
