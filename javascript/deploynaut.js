@@ -231,6 +231,7 @@
 				} else {
 					$container.data('href', null);
 				}
+
 			}
 
 			e.preventDefault();
@@ -253,34 +254,6 @@
 			return false;
 		});
 
-		var inputBoxes = $(".bulk-delete-select");
-		var submitButton = $(".bulk-delete-submit");
-
-		// On click of any of the checkboxes
-		inputBoxes.click(function(){
-			// If the submit button is disabled and there's one or more snapshots selected, enable the submit button
-			if (submitButton.attr('disabled', true) && inputBoxes.filter(':checked').length > 0) {
-				submitButton.prop('disabled', false);
-			}
-
-			// Also check that we aren't unticking a box
-			if (inputBoxes.filter(':checked').length < 1){
-				// If there's less than one ticked we simply disable the button again
-				ssubmitButton.prop('disabled', true);
-			}
-		});
-
-		// On click of the "Bulk Delete" submission button
-		submitButton.click(function(){
-			var numSnapsToDelete = inputBoxes.filter(':checked').length;
-			// Display the "are you sure" pop-up
-			var submitForm = confirm("Are you sure you want to delete "+numSnapsToDelete+" snapshots? This can not be undone.");
-			// If they don't choose to continue return false
-			if (!submitForm) {
-				return false;
-			}
-		});
-
 	});
 
 	$('button.abort').click(function(event) {
@@ -301,5 +274,4 @@
 			console.error(data);
 		});
 	});
-
 }(jQuery));
