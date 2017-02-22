@@ -33,7 +33,7 @@ function LetmeinOverview(props) {
 		<div>
 			<h3>CMS access</h3>
 			<p>Use this feature to gain temporary admin access to the CMS for this environment.</p>
-			<p><strong>Please note that these credentials will expire after 1 hour.</strong></p>
+			<p><strong>Please note that these credentials will expire after 2 hours.</strong></p>
 			{error}
 			{details}
 		</div>
