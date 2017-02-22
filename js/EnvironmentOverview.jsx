@@ -17,8 +17,7 @@ const useRouterHistory = require('react-router').useRouterHistory;
 
 const middleware = [thunk];
 if (process.env.NODE_ENV !== "production") {
-	const logger = createLogger();
-	middleware.push(logger);
+	middleware.push(createLogger());
 }
 
 const store = Redux.createStore(

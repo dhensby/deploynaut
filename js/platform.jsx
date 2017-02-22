@@ -1,9 +1,11 @@
 /* global environmentConfigContext */
 
-var React = require("react");
-var ReactDOM = require("react-dom");
-
-var DeploymentDialog = require('./DeploymentDialog.jsx');
+const React = require('react');
+const ReactDOM = require('react-dom');
+const DeploymentDialog = require('./DeploymentDialog.jsx');
+const Tools = require('../../deploynaut/js/tools.jsx');
+const Letmein = require('./Letmein.jsx');
+const EnvironmentOverview = require('./EnvironmentOverview.jsx');
 
 // Mount the component only on the page where the holder is actually present.
 var holder = document.getElementById('deployment-dialog-holder');
@@ -14,7 +16,5 @@ if (holder) {
 	);
 }
 
-var Tools = require('../../deploynaut/js/tools.jsx');
-var EnvironmentOverview = require('./EnvironmentOverview.jsx');
-
 Tools.install(EnvironmentOverview, 'EnvironmentOverview');
+Tools.install(Letmein, 'Letmein');

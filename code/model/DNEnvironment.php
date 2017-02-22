@@ -215,17 +215,26 @@ class DNEnvironment extends DataObject {
 	}
 
 	public function Menu() {
-		$list = new ArrayList();
+		$list = new \ArrayList();
 
-		$controller = Controller::curr();
+		$controller = \Controller::curr();
 		$actionType = $controller->getField('CurrentActionType');
 
 		$list->push(new ArrayData([
 			'Link' => $this->DeploymentsLink(),
 			'Title' => 'Deployments',
 			'IsCurrent' => $this->isCurrent(),
-			'IsSection' => $this->isSection() && ($actionType == DNRoot::ACTION_DEPLOY || $actionType == \EnvironmentOverview::ACTION_OVERVIEW)
+			'IsSection' => $this->isSection() && ($actionType == \DNRoot::ACTION_DEPLOY || $actionType == \EnvironmentOverview::ACTION_OVERVIEW)
 		]));
+
+		if ($this->Project()->allowed(\LetmeinDispatcher::ALLOW_LETMEIN)) {
+			$list->push(new \ArrayData([
+				'Link' => $this->Link('letmein'),
+				'Title' => 'CMS access',
+				'IsCurrent' => $this->isCurrent(),
+				'IsSection' => $this->isSection() && $actionType == \LetmeinDispatcher::ACTION_LETMEIN
+			]));
+		}
 
 		$this->extend('updateMenu', $list);
 

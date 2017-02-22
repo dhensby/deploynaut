@@ -6,6 +6,7 @@ const constants = require('./constants/deployment.js');
 const gitAPI = api.create('git');
 const deployAPI = api.create('deploys');
 const approvalsAPI = api.create('approvals');
+const letmeinAPI = api.create('letmein');
 
 // allows history to be accessed throughout the project, this will be set
 // when the store is configured in EnvironmentOverview.jsx
@@ -517,7 +518,7 @@ export function succeedAbortDeployment(data) {
 	return {
 		type: SUCCEED_ABORT_DEPLOYMENT,
 		data: data
-	}
+	};
 }
 
 export const FAIL_ABORT_DEPLOYMENT = 'FAIL_ABORT_DEPLOYMENT';
@@ -618,5 +619,49 @@ export function deleteDeployment() {
 				return dispatch(succeedDeploymentDelete(data));
 			})
 			.catch((error) => dispatch(failDeploymentDelete(error)));
+	};
+}
+
+export const START_LETMEIN_REQUEST = 'START_LETMEIN_REQUEST';
+export function startLetmeinRequest() {
+	return {
+		type: START_LETMEIN_REQUEST,
+	};
+}
+
+export const SUCCEED_LETMEIN_REQUEST = 'SUCCEED_LETMEIN_REQUEST';
+export function succeedLetmeinRequest(data) {
+	return {
+		type: SUCCEED_LETMEIN_REQUEST,
+		data: data
+	};
+}
+
+export const FAIL_LETMEIN_REQUEST = 'FAIL_LETMEIN_REQUEST';
+export function failLetmeinRequest(err) {
+	return {
+		type: FAIL_LETMEIN_REQUEST,
+		error: err
+	};
+}
+
+export function letmeinRequest() {
+	return (dispatch, getState) => {
+		dispatch(startLetmeinRequest());
+		return letmeinAPI.call(getState, '/request', 'post')
+			.then(initialResponseData => {
+				letmeinAPI.waitForSuccess(getState, `/request/${initialResponseData.id}`)
+					.then(waitResponseData => {
+						// Add in the username/password from the first request response.
+						// This is because the credentials are not persisted, and therefore
+						// can't be retrieved from the second request response.
+						const updatedResponseData = waitResponseData;
+						updatedResponseData.username = initialResponseData.username;
+						updatedResponseData.password = initialResponseData.password;
+						return dispatch(succeedLetmeinRequest(updatedResponseData));
+					})
+					.catch(err => dispatch(failLetmeinRequest(err)));
+			})
+			.catch(err => dispatch(failLetmeinRequest(err)));
 	};
 }

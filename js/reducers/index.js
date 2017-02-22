@@ -7,15 +7,17 @@ const environment = require('./environment.js');
 const git = require('./git.js');
 const plan = require('./plan.js');
 const user = require('./user.js');
+const letmein = require('./letmein.js');
 
-const planApp = Redux.combineReducers({
+const reducers = Redux.combineReducers({
 	api,
 	git,
 	plan,
 	approval,
 	deployment,
 	environment,
-	user
+	user,
+	letmein
 });
 
-module.exports = planApp;
+module.exports = reducers;

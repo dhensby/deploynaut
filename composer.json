@@ -9,6 +9,7 @@
 		"silverstripe/framework": "~3.4",
 		"stojg/silverstripe-resque": "~1.2",
 		"gitonomy/gitlib": "dev-master",
+		"passwordlib/passwordlib": "1.0.0-beta1",
 		"undefinedoffset/sortablegridfield": "*",
 		"silverstripe/secureassets": "dev-master",
 		"silverstripe-australia/gridfieldextensions": "1.4.2",
