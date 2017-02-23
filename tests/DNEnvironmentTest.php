@@ -176,6 +176,10 @@ class BackendOne extends Object implements DeploymentBackend, TestOnly {
 		// noop
 	}
 
+	public function letmein(\DNEnvironment $environment, \DeploynautLogFile $log, $username, $password) {
+		// noop
+	}
+
 }
 
 class BackendTwo extends Object implements DeploymentBackend, TestOnly {
@@ -213,5 +217,8 @@ class BackendTwo extends Object implements DeploymentBackend, TestOnly {
 		// noop
 	}
 
-}
+	public function letmein(\DNEnvironment $environment, \DeploynautLogFile $log, $username, $password) {
+		// noop
+	}
 
+}
