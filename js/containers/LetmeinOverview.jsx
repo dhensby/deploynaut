@@ -7,9 +7,7 @@ function LetmeinOverview(props) {
 	if (props.error) {
 		error = (
 			<div className="alert alert-danger">
-				<div className="">
-					{props.error}
-				</div>
+				{props.error}
 			</div>
 		);
 	}
@@ -18,9 +16,11 @@ function LetmeinOverview(props) {
 	if (props.is_requesting === false && props.username && props.password) {
 		details = (
 			<div className="alert alert-good">
-				<div className="">
-					Here are your credentials: {props.username} / {props.password}
-				</div>
+				Here are your credentials:
+				<ul>
+					<li>Username: <strong>{props.username}</strong></li>
+					<li>Password: <strong>{props.password}</strong></li>
+				</ul>
 			</div>
 		);
 	} else {
@@ -32,7 +32,7 @@ function LetmeinOverview(props) {
 	return (
 		<div>
 			<h3>CMS access</h3>
-			<p>Use this feature to gain temporary admin access to the CMS for this environment.</p>
+			<p>Use this feature to create temporary admin access to the CMS for this environment.</p>
 			<p><strong>Please note that these credentials will expire after 2 hours.</strong></p>
 			{error}
 			{details}
