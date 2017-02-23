@@ -8,7 +8,7 @@ const mapStateToProps = function(state) {
 		disabled: state.letmein.is_requesting,
 		icon: state.letmein.is_requesting ? 'fa fa-refresh fa-spin' : '',
 		style: 'btn btn-primary btn-lg-wide',
-		value: state.letmein.is_requesting ? 'Gaining CMS access...' : 'Gain CMS access'
+		value: state.letmein.is_requesting ? 'Creating credentials...' : 'Create temporary credentials'
 	};
 };
 
