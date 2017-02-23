@@ -67,3 +67,8 @@ File:
 Security:
   extensions:
     - DeploynautSecurityExtension
+SS_Backtrace:
+  ignore_function_args:
+    -
+      - 'CapistranoDeploymentBackend'
+      - 'letmein'
