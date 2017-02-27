@@ -366,11 +366,11 @@ class DNEnvironment extends DataObject {
 		// Must be logged in to check permissions
 
 		if ($this->Usage === self::PRODUCTION || $this->Usage === self::UNSPECIFIED) {
-			if ($this->Project()->allowed(DNRoot::ALLOW_PROD_SNAPSHOT, $member)) {
+			if ($this->Project()->allowed(Snapshots::ALLOW_PROD_SNAPSHOT, $member)) {
 				return true;
 			}
 		} else {
-			if ($this->Project()->allowed(DNRoot::ALLOW_NON_PROD_SNAPSHOT, $member)) {
+			if ($this->Project()->allowed(Snapshots::ALLOW_NON_PROD_SNAPSHOT, $member)) {
 				return true;
 			}
 		}
@@ -401,7 +401,7 @@ class DNEnvironment extends DataObject {
 		}
 
 		if ($this->Usage === self::PRODUCTION || $this->Usage === self::UNSPECIFIED) {
-			if ($this->Project()->allowed(DNRoot::ALLOW_PROD_SNAPSHOT, $member)) {
+			if ($this->Project()->allowed(Snapshots::ALLOW_PROD_SNAPSHOT, $member)) {
 				return true;
 			}
 		} else {
@@ -440,11 +440,11 @@ class DNEnvironment extends DataObject {
 		// Must be logged in to check permissions
 
 		if ($this->Usage === self::PRODUCTION || $this->Usage === self::UNSPECIFIED) {
-			if ($this->Project()->allowed(DNRoot::ALLOW_PROD_SNAPSHOT, $member)) {
+			if ($this->Project()->allowed(Snapshots::ALLOW_PROD_SNAPSHOT, $member)) {
 				return true;
 			}
 		} else {
-			if ($this->Project()->allowed(DNRoot::ALLOW_NON_PROD_SNAPSHOT, $member)) {
+			if ($this->Project()->allowed(Snapshots::ALLOW_NON_PROD_SNAPSHOT, $member)) {
 				return true;
 			}
 		}
@@ -470,11 +470,11 @@ class DNEnvironment extends DataObject {
 		// Must be logged in to check permissions
 
 		if ($this->Usage === self::PRODUCTION || $this->Usage === self::UNSPECIFIED) {
-			if ($this->Project()->allowed(DNRoot::ALLOW_PROD_SNAPSHOT, $member)) {
+			if ($this->Project()->allowed(Snapshots::ALLOW_PROD_SNAPSHOT, $member)) {
 				return true;
 			}
 		} else {
-			if ($this->Project()->allowed(DNRoot::ALLOW_NON_PROD_SNAPSHOT, $member)) {
+			if ($this->Project()->allowed(Snapshots::ALLOW_NON_PROD_SNAPSHOT, $member)) {
 				return true;
 			}
 		}
@@ -500,11 +500,11 @@ class DNEnvironment extends DataObject {
 		// Must be logged in to check permissions
 
 		if ($this->Usage === self::PRODUCTION || $this->Usage === self::UNSPECIFIED) {
-			if ($this->Project()->allowed(DNRoot::ALLOW_PROD_SNAPSHOT, $member)) {
+			if ($this->Project()->allowed(Snapshots::ALLOW_PROD_SNAPSHOT, $member)) {
 				return true;
 			}
 		} else {
-			if ($this->Project()->allowed(DNRoot::ALLOW_NON_PROD_SNAPSHOT, $member)) {
+			if ($this->Project()->allowed(Snapshots::ALLOW_NON_PROD_SNAPSHOT, $member)) {
 				return true;
 			}
 		}

@@ -269,7 +269,7 @@ class DNProject extends DataObject {
 				'Link' => $this->Link('snapshots'),
 				'Title' => 'Snapshots',
 				'IsCurrent' => $this->isSection() && $controller->getAction() == 'snapshots',
-				'IsSection' => $this->isSection() && $actionType == DNRoot::ACTION_SNAPSHOT
+				'IsSection' => $this->isSection() && $actionType == Snapshots::ACTION_SNAPSHOT
 			]));
 		}
 
@@ -334,8 +334,8 @@ class DNProject extends DataObject {
 	public function canRestore($member = null) {
 		if ($this->allowedAny(
 			[
-				DNRoot::ALLOW_PROD_SNAPSHOT,
-				DNRoot::ALLOW_NON_PROD_SNAPSHOT
+				Snapshots::ALLOW_PROD_SNAPSHOT,
+				Snapshots::ALLOW_NON_PROD_SNAPSHOT
 			],
 			$member
 		)
@@ -355,8 +355,8 @@ class DNProject extends DataObject {
 	public function canBackup($member = null) {
 		if ($this->allowedAny(
 			[
-				DNRoot::ALLOW_PROD_SNAPSHOT,
-				DNRoot::ALLOW_NON_PROD_SNAPSHOT
+				Snapshots::ALLOW_PROD_SNAPSHOT,
+				Snapshots::ALLOW_NON_PROD_SNAPSHOT
 			],
 			$member
 		)
@@ -376,8 +376,8 @@ class DNProject extends DataObject {
 	public function canUploadArchive($member = null) {
 		if ($this->allowedAny(
 			[
-				DNRoot::ALLOW_PROD_SNAPSHOT,
-				DNRoot::ALLOW_NON_PROD_SNAPSHOT
+				Snapshots::ALLOW_PROD_SNAPSHOT,
+				Snapshots::ALLOW_NON_PROD_SNAPSHOT
 			],
 			$member
 		)
@@ -397,8 +397,8 @@ class DNProject extends DataObject {
 	public function canDownloadArchive($member = null) {
 		if ($this->allowedAny(
 			[
-				DNRoot::ALLOW_PROD_SNAPSHOT,
-				DNRoot::ALLOW_NON_PROD_SNAPSHOT
+				Snapshots::ALLOW_PROD_SNAPSHOT,
+				Snapshots::ALLOW_NON_PROD_SNAPSHOT
 			],
 			$member
 		)
