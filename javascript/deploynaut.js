@@ -279,11 +279,13 @@
 				return false;
 			}
 
+			var self = $(this);
+
 			$.post(
-				$(this).data('url'),
-				{ ID: bulkCheckboxes.map(function() { return $(this).val(); }).get() },
+				self.data('url'),
+				{ ID: bulkCheckboxes.filter(':checked').map(function() { return $(this).val(); }).get() },
 				function(data) {
-					location.reload();
+					location.href = self.data('snapshots-url');
 				}
 			);
 			return false;

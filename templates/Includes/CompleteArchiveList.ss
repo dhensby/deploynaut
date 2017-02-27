@@ -1,7 +1,14 @@
 <div class="row">
 	<div class="col-md-12">
 		<h3>Snapshots</h3>
-		<button type="button" data-url="$CurrentProject.Link/snapshots/bulkdeletesnapshot" class="btn btn-warning bulk-delete-submit" disabled="true">Delete</button>
+		<button
+			type="button"
+			data-url="$CurrentProject.Link/snapshots/bulkdeletesnapshot"
+			data-snapshots-url="$CurrentProject.Link/snapshots"
+			class="btn btn-warning bulk-delete-submit"
+			disabled="true">
+				Delete
+		</button>
 		<% if $CanViewArchives %>
 			<% if $CompleteDataArchives %>
 				<div class="table-responsive">
