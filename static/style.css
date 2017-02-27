@@ -12969,6 +12969,11 @@ button.abort {
   padding: 1px 4px;
   margin: -5px 0px 0px; }
 
+.bulk-delete-submit {
+  position: absolute;
+  top: 15px;
+  right: 17px; }
+
 .fade-in {
   opacity: 0;
   /* make things invisible upon start */

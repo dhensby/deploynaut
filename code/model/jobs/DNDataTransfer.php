@@ -118,7 +118,7 @@ class DNDataTransfer extends DataObject {
 	}
 
 	public function Link() {
-		return Controller::join_links($this->Environment()->Project()->Link(), 'transfer', $this->ID);
+		return Controller::join_links($this->Environment()->Project()->Link(), '/snapshots/transfer', $this->ID);
 	}
 
 	public function LogLink() {
