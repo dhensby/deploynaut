@@ -405,7 +405,7 @@ class DNEnvironment extends DataObject {
 				return true;
 			}
 		} else {
-			if ($this->Project()->allowed(DNRoot::ALLOW_NON_PROD_SNAPSHOT, $member)) {
+			if ($this->Project()->allowed(Snapshots::ALLOW_NON_PROD_SNAPSHOT, $member)) {
 				return true;
 			}
 		}
