@@ -13,11 +13,6 @@ class DNRoot extends Controller implements PermissionProvider, TemplateGlobalPro
 	 */
 	const ACTION_DEPLOY = 'deploy';
 
-	/**
-	 * @const string - action type for actions that manipulate snapshots
-	 */
-	const ACTION_SNAPSHOT = 'snapshot';
-
 	const ACTION_ENVIRONMENTS = 'createenv';
 
 	const PROJECT_OVERVIEW = 'overview';
@@ -30,10 +25,6 @@ class DNRoot extends Controller implements PermissionProvider, TemplateGlobalPro
 	const ALLOW_PROD_DEPLOYMENT = 'ALLOW_PROD_DEPLOYMENT';
 
 	const ALLOW_NON_PROD_DEPLOYMENT = 'ALLOW_NON_PROD_DEPLOYMENT';
-
-	const ALLOW_PROD_SNAPSHOT = 'ALLOW_PROD_SNAPSHOT';
-
-	const ALLOW_NON_PROD_SNAPSHOT = 'ALLOW_NON_PROD_SNAPSHOT';
 
 	const ALLOW_CREATE_ENVIRONMENT = 'ALLOW_CREATE_ENVIRONMENT';
 
@@ -1118,14 +1109,6 @@ class DNRoot extends Controller implements PermissionProvider, TemplateGlobalPro
 			],
 			self::ALLOW_NON_PROD_DEPLOYMENT => [
 				'name' => "Ability to deploy to non-production environments",
-				'category' => "Deploynaut",
-			],
-			self::ALLOW_PROD_SNAPSHOT => [
-				'name' => "Ability to make production snapshots",
-				'category' => "Deploynaut",
-			],
-			self::ALLOW_NON_PROD_SNAPSHOT => [
-				'name' => "Ability to make non-production snapshots",
 				'category' => "Deploynaut",
 			],
 			self::ALLOW_CREATE_ENVIRONMENT => [
