@@ -190,12 +190,16 @@ class GitDispatcher extends Dispatcher {
 		if (!$fetch) {
 			return $this->getAPIResponse(['message' => 'GIT update (' . $ID . ') not found'], 404);
 		}
+
+		$resqueStatus = $fetch->ResqueStatus();
+		if ($resqueStatus==='Failed') {
+			return $this->getAPIResponse(['message' => 'job has failed'], 400);
+		}
+
 		$output = [
 			'id' => $ID,
-			'status' => $fetch->ResqueStatus(),
-			'message' => array_filter(explode(PHP_EOL, $fetch->LogContent()))
+			'status' => $fetch->ResqueStatus()
 		];
-
 		return $this->getAPIResponse($output, 200);
 	}
 
