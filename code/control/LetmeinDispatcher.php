@@ -128,12 +128,16 @@ class LetmeinDispatcher extends \Dispatcher implements \PermissionProvider {
 		if (!$record || !$record->exists()) {
 			return $this->getAPIResponse(['message' => sprintf('CMS access request (%s) not found', $id)], 404);
 		}
+
+		$resqueStatus = $record->ResqueStatus();
+		if ($resqueStatus==='Failed') {
+			return $this->getAPIResponse(['message' => 'job has failed'], 400);
+		}
+
 		$output = [
 			'id' => $id,
-			'status' => $record->ResqueStatus(),
-			'message' => array_filter(explode(PHP_EOL, $record->LogContent()))
+			'status' => $resqueStatus
 		];
-
 		return $this->getAPIResponse($output, 200);
 	}
 }
