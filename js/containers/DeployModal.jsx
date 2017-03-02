@@ -199,7 +199,6 @@ const DeployModal = React.createClass({
 
 		return (
 			<Modal
-				show={this.props.is_open}
 				className={"deploy status-" + this.props.state}
 				closeHandler={this.props.onClose}
 				title={headerText}
@@ -226,7 +225,7 @@ const DeployModal = React.createClass({
 	}
 });
 
-const mapStateToProps = function(state, ownProps) {
+const mapStateToProps = function(state) {
 	function deployPlanIsOk() {
 		return state.plan.validation_code === 'success' || state.plan.validation_code === 'warning';
 	}
@@ -250,7 +249,6 @@ const mapStateToProps = function(state, ownProps) {
 			constants.isDeployDone(current.state)
 		],
 		can_edit: constants.canEdit(state),
-		is_open: typeof (ownProps.params.id) !== 'undefined' && ownProps.params.id !== null,
 		state: current.state,
 		environment_name: state.environment.name,
 		project_name: state.environment.project_name,
