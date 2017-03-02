@@ -22,10 +22,6 @@ var Modal = React.createClass({
 		this.modal({show: this.props.show, keyboard: this.props.keyboard});
 	},
 
-	componentWillReceiveProps: function(props) {
-		this.modal({show: props.show, keyboard: props.keyboard});
-	},
-
 	componentWillUnmount: function() {
 		this.modal('hide');
 	},
