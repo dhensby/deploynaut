@@ -207,10 +207,7 @@ const DeployModal = React.createClass({
 			>
 				<div className="row">
 					<div className="col-md-3 menu affix">
-						<StepMenu
-							steps={steps}
-							onClick={this.props.onStepClick}
-						/>
+						<StepMenu steps={steps} />
 					</div>
 					<div className="col-md-9 main" >
 						<div className="deploy-form">
