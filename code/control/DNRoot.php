@@ -76,8 +76,6 @@ class DNRoot extends Controller implements PermissionProvider, TemplateGlobalPro
 		'project/$Project/environment/$Environment/deploy/$Identifier/log' => 'deploylog',
 		'project/$Project/environment/$Environment/deploy/$Identifier/abort-deploy' => 'abortDeploy',
 		'project/$Project/environment/$Environment/deploy/$Identifier' => 'deploy',
-		'project/$Project/transfer/$Identifier/log' => 'transferlog',
-		'project/$Project/transfer/$Identifier' => 'transfer',
 		'project/$Project/environment/$Environment' => 'environment',
 		'project/$Project/createenv/$Identifier/log' => 'createenvlog',
 		'project/$Project/createenv/$Identifier' => 'createenv',
@@ -1173,47 +1171,6 @@ class DNRoot extends Controller implements PermissionProvider, TemplateGlobalPro
 	}
 
 	/**
-	 * Helper method to allow templates to know whether they should show the 'Archive List' include or not.
-	 * The actual permissions are set on a per-environment level, so we need to find out if this $member can upload to
-	 * or download from *any* {@link DNEnvironment} that (s)he has access to.
-	 *
-	 * TODO To be replaced with a method that just returns the list of archives this {@link Member} has access to.
-	 *
-	 * @param Member|null $member The {@link Member} to check (or null to check the currently logged in Member)
-	 * @return boolean|null true if $member has access to upload or download to at least one {@link DNEnvironment}.
-	 */
-	public function CanViewArchives(\Member $member = null) {
-		if ($member === null) {
-			$member = Member::currentUser();
-		}
-
-		if (Permission::checkMember($member, 'ADMIN')) {
-			return true;
-		}
-
-		$allProjects = $this->DNProjectList();
-		if (!$allProjects) {
-			return false;
-		}
-
-		foreach ($allProjects as $project) {
-			if ($project->Environments()) {
-				foreach ($project->Environments() as $environment) {
-					if (
-						$environment->canRestore($member) ||
-						$environment->canBackup($member) ||
-						$environment->canUploadArchive($member) ||
-						$environment->canDownloadArchive($member)
-					) {
-						// We can return early as we only need to know that we can access one environment
-						return true;
-					}
-				}
-			}
-		}
-	}
-
-	/**
 	 * Returns a list of attempted environment creations.
 	 *
 	 * @return PaginatedList
@@ -1228,43 +1185,6 @@ class DNRoot extends Controller implements PermissionProvider, TemplateGlobalPro
 
 		$this->extend('updateCreateEnvironmentList', $dataList);
 		return new PaginatedList($dataList->sort('Created DESC'), $this->request);
-	}
-
-	/**
-	 * Returns a list of all archive files that can be accessed by the currently logged-in {@link Member}
-	 *
-	 * @return PaginatedList
-	 */
-	public function CompleteDataArchives() {
-		$project = $this->getCurrentProject();
-		$archives = new ArrayList();
-
-		$archiveList = $project->Environments()->relation("DataArchives");
-		if ($archiveList->count() > 0) {
-			foreach ($archiveList as $archive) {
-				if (!$archive->isPending()) {
-					$archives->push($archive);
-				}
-			}
-		}
-		return new PaginatedList($archives->sort("Created", "DESC"), $this->request);
-	}
-
-	/**
-	 * @return PaginatedList The list of "pending" data archives which are waiting for a file
-	 * to be delivered offline by post, and manually uploaded into the system.
-	 */
-	public function PendingDataArchives() {
-		$project = $this->getCurrentProject();
-		$archives = new ArrayList();
-		foreach ($project->DNEnvironmentList() as $env) {
-			foreach ($env->DataArchives() as $archive) {
-				if ($archive->isPending()) {
-					$archives->push($archive);
-				}
-			}
-		}
-		return new PaginatedList($archives->sort("Created", "DESC"), $this->request);
 	}
 
 	/**
