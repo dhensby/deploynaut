@@ -8,6 +8,19 @@
 		$('[data-toggle="popover"]').popover()
 	});
 
+	$('#current-build-toggle').on('click', function(evt) {
+		evt.stopPropagation();
+		$('.current-build-data').toggleClass('hide');
+		$(this).find('i').toggleClass('fa-caret-down').toggleClass('fa-caret-up');
+	});
+
+	// Ensure no more than one full-deploy-info popover is open.
+	$('.deploy-history').on('click', 'a.full-deploy-info', function() {
+		$('a.full-deploy-info').not(this).popover('hide');
+		$(this).popover('toggle');
+		return false;
+	});
+
 	// Openclose nav
 	$('button.sidebar-open').on('click', function(e) {
 		$('.page-container').toggleClass("open"); // you can list several class names
@@ -278,5 +291,24 @@
 			return false;
 		});
 
+	});
+
+	$('button.abort').click(function(event) {
+		event.preventDefault();
+		var button = $(this);
+		button.prop('disabled', true);
+		button.html('Requesting...');
+		Q($.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: button.attr('data-url'),
+			data: {}
+		})).then(function(data) {
+			button.html(button.attr('data-terminate'));
+			button.prop('disabled', false);
+		}, function(data){
+			button.html('Failed - reload page to retry');
+			console.error(data);
+		});
 	});
 }(jQuery));

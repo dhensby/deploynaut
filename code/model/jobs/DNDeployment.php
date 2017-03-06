@@ -114,7 +114,11 @@ class DNDeployment extends DataObject implements Finite\StatefulInterface, HasSt
 	}
 
 	public function Link() {
-		return \Controller::join_links($this->Environment()->Link(\EnvironmentOverview::ACTION_OVERVIEW), 'deployment', $this->ID);
+		if ($this->Environment()->IsNewDeployEnabled()) {
+			return \Controller::join_links($this->Environment()->Link(\EnvironmentOverview::ACTION_OVERVIEW), 'deployment', $this->ID);
+		} else {
+			return \Controller::join_links($this->Environment()->Link(), 'deploy', $this->ID);
+		}
 	}
 
 	public function LogLink() {
