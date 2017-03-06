@@ -341,6 +341,15 @@ class DNEnvironment extends DataObject {
 	}
 
 	/**
+	 * Provide reason why the user cannot deploy.
+	 *
+	 * @return string
+	 */
+	public function getCannotDeployMessage() {
+		return 'You cannot deploy to this environment.';
+	}
+
+	/**
 	 * Allows only selected {@link Member} objects to restore {@link DNDataArchive} objects into this
 	 * {@link DNEnvironment}.
 	 *
@@ -680,9 +689,44 @@ class DNEnvironment extends DataObject {
 		// default / fallback sort order
 		$sort['LastEdited'] = 'DESC';
 
-		return $this->Deployments()
+		$deployments = $this->Deployments()
 			->where('"SHA" IS NOT NULL')
 			->sort($sort);
+
+		if (!$this->IsNewDeployEnabled()) {
+			$deployments = $deployments->filter('State', [
+				DNDeployment::STATE_COMPLETED,
+				DNDeployment::STATE_FAILED,
+				DNDeployment::STATE_INVALID
+			]);
+		}
+		return $deployments;
+	}
+
+	/**
+	 * Check if the new deployment form is enabled by whether the project has it,
+	 * falling back to environment variables on whether it's enabled.
+	 *
+	 * @return bool
+	 */
+	public function IsNewDeployEnabled() {
+		if ($this->Project()->IsNewDeployEnabled) {
+			return true;
+		}
+		// Check for feature flags:
+		// - FLAG_NEWDEPLOY_ENABLED: set to true to enable globally
+		// - FLAG_NEWDEPLOY_ENABLED_FOR_MEMBERS: set to semicolon-separated list of email addresses of allowed users.
+		if (defined('FLAG_NEWDEPLOY_ENABLED') && FLAG_NEWDEPLOY_ENABLED) {
+			return true;
+		}
+		if (defined('FLAG_NEWDEPLOY_ENABLED_FOR_MEMBERS') && FLAG_NEWDEPLOY_ENABLED_FOR_MEMBERS) {
+			$allowedMembers = explode(';', FLAG_NEWDEPLOY_ENABLED_FOR_MEMBERS);
+			$member = Member::currentUser();
+			if ($allowedMembers && $member && in_array($member->Email, $allowedMembers)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -692,7 +736,10 @@ class DNEnvironment extends DataObject {
 	 * @return string
 	 */
 	public function DeploymentsLink() {
-		return $this->Link(\EnvironmentOverview::ACTION_OVERVIEW);
+		if ($this->IsNewDeployEnabled()) {
+			return $this->Link(\EnvironmentOverview::ACTION_OVERVIEW);
+		}
+		return $this->Link();
 	}
 
 	/**

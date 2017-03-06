@@ -17,6 +17,11 @@ class DNRoot extends Controller implements PermissionProvider, TemplateGlobalPro
 
 	const PROJECT_OVERVIEW = 'overview';
 
+	/**
+	 * Allow advanced options on deployments
+	 */
+	const DEPLOYNAUT_ADVANCED_DEPLOY_OPTIONS = 'DEPLOYNAUT_ADVANCED_DEPLOY_OPTIONS';
+
 	const ALLOW_PROD_DEPLOYMENT = 'ALLOW_PROD_DEPLOYMENT';
 
 	const ALLOW_NON_PROD_DEPLOYMENT = 'ALLOW_NON_PROD_DEPLOYMENT';
@@ -47,19 +52,35 @@ class DNRoot extends Controller implements PermissionProvider, TemplateGlobalPro
 		'update',
 		'project',
 		'toggleprojectstar',
+		'branch',
 		'environment',
 		'createenvlog',
-		'createenv'
+		'createenv',
+		'getDeployForm',
+		'doDeploy',
+		'deploy',
+		'deploylog',
+		'abortDeploy',
+		'gitRevisions',
+		'deploySummary',
+		'startDeploy'
 	];
 
 	/**
 	 * URL handlers pretending that we have a deep URL structure.
 	 */
 	private static $url_handlers = [
+		'project/$Project/environment/$Environment/deploy_summary' => 'deploySummary',
+		'project/$Project/environment/$Environment/git_revisions' => 'gitRevisions',
+		'project/$Project/environment/$Environment/start-deploy' => 'startDeploy',
+		'project/$Project/environment/$Environment/deploy/$Identifier/log' => 'deploylog',
+		'project/$Project/environment/$Environment/deploy/$Identifier/abort-deploy' => 'abortDeploy',
+		'project/$Project/environment/$Environment/deploy/$Identifier' => 'deploy',
 		'project/$Project/environment/$Environment' => 'environment',
 		'project/$Project/createenv/$Identifier/log' => 'createenvlog',
 		'project/$Project/createenv/$Identifier' => 'createenv',
 		'project/$Project/CreateEnvironmentForm' => 'getCreateEnvironmentForm',
+		'project/$Project/branch' => 'branch',
 		'project/$Project/build/$Build' => 'build',
 		'project/$Project/update' => 'update',
 		'project/$Project/star' => 'toggleprojectstar',
@@ -297,6 +318,27 @@ class DNRoot extends Controller implements PermissionProvider, TemplateGlobalPro
 	 * @param \SS_HTTPRequest $request
 	 * @return \SS_HTTPResponse
 	 */
+	public function branch(\SS_HTTPRequest $request) {
+		$project = $this->getCurrentProject();
+		if (!$project) {
+			return $this->project404Response();
+		}
+
+		$branchName = $request->getVar('name');
+		$branch = $project->DNBranchList()->byName($branchName);
+		if (!$branch) {
+			return new SS_HTTPResponse("Branch '" . Convert::raw2xml($branchName) . "' not found.", 404);
+		}
+
+		return $this->render([
+			'CurrentBranch' => $branch,
+		]);
+	}
+
+	/**
+	 * @param \SS_HTTPRequest $request
+	 * @return \SS_HTTPResponse
+	 */
 	public function environment(\SS_HTTPRequest $request) {
 		// Performs canView permission check by limiting visible projects
 		$project = $this->getCurrentProject();
@@ -310,8 +352,10 @@ class DNRoot extends Controller implements PermissionProvider, TemplateGlobalPro
 			return $this->environment404Response();
 		}
 
-		// Redirect to the deployment controller
-		return $env->DeploymentsLink();
+		return $this->render([
+			'DNEnvironmentList' => $this->getCurrentProject()->DNEnvironmentList(),
+			'Redeploy' => (bool) $request->getVar('redeploy')
+		]);
 	}
 
 	/**
@@ -362,7 +406,7 @@ class DNRoot extends Controller implements PermissionProvider, TemplateGlobalPro
 		$project = $env->Project();
 
 		if ($project->Name != $params['Project']) {
-			throw new LogicException("Project in URL doesn't match this env creation");
+			throw new LogicException("Project in URL doesn't match this deploy");
 		}
 
 		$log = $env->log();
@@ -588,6 +632,442 @@ class DNRoot extends Controller implements PermissionProvider, TemplateGlobalPro
 	}
 
 	/**
+	 * Construct the deployment form
+	 *
+	 * @deprecated 2.0.0 - moved to DeployDispatcher
+	 *
+	 * @return Form
+	 */
+	public function getDeployForm($request = null) {
+
+		// Performs canView permission check by limiting visible projects
+		$project = $this->getCurrentProject();
+		if (!$project) {
+			return $this->project404Response();
+		}
+
+		// Performs canView permission check by limiting visible projects
+		$environment = $this->getCurrentEnvironment($project);
+		if (!$environment) {
+			return $this->environment404Response();
+		}
+
+		if (!$environment->canDeploy()) {
+			return new SS_HTTPResponse("Not allowed to deploy", 401);
+		}
+
+		// Generate the form
+		$form = new DeployForm($this, 'DeployForm', $environment, $project);
+
+		// If this is an ajax request we don't want to submit the form - we just want to retrieve the markup.
+		if (
+			$request &&
+			!$request->requestVar('action_showDeploySummary') &&
+			$this->getRequest()->isAjax() &&
+			$this->getRequest()->isGET()
+		) {
+			// We can just use the URL we're accessing
+			$form->setFormAction($this->getRequest()->getURL());
+
+			$body = json_encode(['Content' => $form->forAjaxTemplate()->forTemplate()]);
+			$this->getResponse()->addHeader('Content-Type', 'application/json');
+			$this->getResponse()->setBody($body);
+			return $body;
+		}
+
+		$form->setFormAction($this->getRequest()->getURL() . '/DeployForm');
+		return $form;
+	}
+
+	/**
+	 * @deprecated 2.0.0 - moved to GitDispatcher
+	 *
+	 * @param \SS_HTTPRequest $request
+	 *
+	 * @return SS_HTTPResponse|string
+	 */
+	public function gitRevisions(\SS_HTTPRequest $request) {
+
+		// Performs canView permission check by limiting visible projects
+		$project = $this->getCurrentProject();
+		if (!$project) {
+			return $this->project404Response();
+		}
+
+		// Performs canView permission check by limiting visible projects
+		$env = $this->getCurrentEnvironment($project);
+		if (!$env) {
+			return $this->environment404Response();
+		}
+
+		$options = [];
+		foreach ($env->getSupportedOptions() as $option) {
+			$options[] = [
+				'name' => $option->getName(),
+				'title' => $option->getTitle(),
+				'defaultValue' => $option->getDefaultValue()
+			];
+		}
+
+		$tabs = [];
+		$id = 0;
+		$data = [
+			'id' => ++$id,
+			'name' => 'Deploy the latest version of a branch',
+			'field_type' => 'dropdown',
+			'field_label' => 'Choose a branch',
+			'field_id' => 'branch',
+			'field_data' => [],
+			'options' => $options
+		];
+		foreach ($project->DNBranchList() as $branch) {
+			$sha = $branch->SHA();
+			$name = $branch->Name();
+			$branchValue = sprintf("%s (%s, %s old)",
+				$name,
+				substr($sha, 0, 8),
+				$branch->LastUpdated()->TimeDiff()
+			);
+			$data['field_data'][] = [
+				'id' => $sha,
+				'text' => $branchValue,
+				'branch_name' => $name // the raw branch name, not including the time etc
+			];
+		}
+		$tabs[] = $data;
+
+		$data = [
+			'id' => ++$id,
+			'name' => 'Deploy a tagged release',
+			'field_type' => 'dropdown',
+			'field_label' => 'Choose a tag',
+			'field_id' => 'tag',
+			'field_data' => [],
+			'options' => $options
+		];
+
+		foreach ($project->DNTagList()->setLimit(null) as $tag) {
+			$name = $tag->Name();
+			$data['field_data'][] = [
+				'id' => $tag->SHA(),
+				'text' => sprintf("%s", $name)
+			];
+		}
+
+		// show newest tags first.
+		$data['field_data'] = array_reverse($data['field_data']);
+
+		$tabs[] = $data;
+
+		// Past deployments
+		$data = [
+			'id' => ++$id,
+			'name' => 'Redeploy a release that was previously deployed (to any environment)',
+			'field_type' => 'dropdown',
+			'field_label' => 'Choose a previously deployed release',
+			'field_id' => 'release',
+			'field_data' => [],
+			'options' => $options
+		];
+		// We are aiming at the format:
+		// [{text: 'optgroup text', children: [{id: '<sha>', text: '<inner text>'}]}]
+		$redeploy = [];
+		foreach ($project->DNEnvironmentList() as $dnEnvironment) {
+			$envName = $dnEnvironment->Name;
+			$perEnvDeploys = [];
+
+			foreach ($dnEnvironment->DeployHistory()->filter('State', \DNDeployment::STATE_COMPLETED) as $deploy) {
+				$sha = $deploy->SHA;
+
+				// Check if exists to make sure the newest deployment date is used.
+				if (!isset($perEnvDeploys[$sha])) {
+					$pastValue = sprintf("%s (deployed %s)",
+						substr($sha, 0, 8),
+						$deploy->obj('LastEdited')->Ago()
+					);
+					$perEnvDeploys[$sha] = [
+						'id' => $sha,
+						'text' => $pastValue
+					];
+				}
+			}
+
+			if (!empty($perEnvDeploys)) {
+				$redeploy[$envName] = array_values($perEnvDeploys);
+			}
+		}
+		// Convert the array to the frontend format (i.e. keyed to regular array)
+		foreach ($redeploy as $name => $descr) {
+			$data['field_data'][] = ['text' => $name, 'children' => $descr];
+		}
+		$tabs[] = $data;
+
+		$data = [
+			'id' => ++$id,
+			'name' => 'Deploy a specific SHA',
+			'field_type' => 'textfield',
+			'field_label' => 'Choose a SHA',
+			'field_id' => 'SHA',
+			'field_data' => [],
+			'options' => $options
+		];
+		$tabs[] = $data;
+
+		// get the last time git fetch was run
+		$lastFetched = 'never';
+		$fetch = DNGitFetch::get()
+			->filter([
+				'ProjectID' => $project->ID,
+				'Status' => 'Finished'
+			])
+			->sort('LastEdited', 'DESC')
+			->first();
+		if ($fetch) {
+			$lastFetched = $fetch->dbObject('LastEdited')->Ago();
+		}
+
+		$data = [
+			'Tabs' => $tabs,
+			'last_fetched' => $lastFetched
+		];
+
+		$this->applyRedeploy($request, $data);
+
+		return json_encode($data, JSON_PRETTY_PRINT);
+	}
+
+	/**
+	 * @deprecated 2.0.0 - moved to DeployDispatcher
+	 *
+	 * @param \SS_HTTPRequest $request
+	 *
+	 * @return string
+	 */
+	public function deploySummary(\SS_HTTPRequest $request) {
+
+		// Performs canView permission check by limiting visible projects
+		$project = $this->getCurrentProject();
+		if (!$project) {
+			return $this->project404Response();
+		}
+
+		// Performs canView permission check by limiting visible projects
+		$environment = $this->getCurrentEnvironment($project);
+		if (!$environment) {
+			return $this->environment404Response();
+		}
+
+		// Plan the deployment.
+		$strategy = $environment->getDeployStrategy($request);
+		$data = $strategy->toArray();
+
+		// Add in a URL for comparing from->to code changes. Ensure that we have
+		// two proper 40 character SHAs, otherwise we can't show the compare link.
+		$interface = $project->getRepositoryInterface();
+		if (
+			!empty($interface) && !empty($interface->URL)
+			&& !empty($data['changes']['Code version']['from'])
+			&& strlen($data['changes']['Code version']['from']) == '40'
+			&& !empty($data['changes']['Code version']['to'])
+			&& strlen($data['changes']['Code version']['to']) == '40'
+		) {
+			$compareurl = sprintf(
+				'%s/compare/%s...%s',
+				$interface->URL,
+				$data['changes']['Code version']['from'],
+				$data['changes']['Code version']['to']
+			);
+			$data['changes']['Code version']['compareUrl'] = $compareurl;
+		}
+
+		// Append json to response
+		$token = SecurityToken::inst();
+		$data['SecurityID'] = $token->getValue();
+
+		$this->extend('updateDeploySummary', $data);
+
+		return json_encode($data);
+	}
+
+	/**
+	 * Deployment form submission handler.
+	 *
+	 * @deprecated 2.0.0 - moved to DeployDispatcher
+	 *
+	 * Initiate a DNDeployment record and redirect to it for status polling
+	 *
+	 * @param \SS_HTTPRequest $request
+	 *
+	 * @return SS_HTTPResponse
+	 * @throws ValidationException
+	 * @throws null
+	 */
+	public function startDeploy(\SS_HTTPRequest $request) {
+
+		$token = SecurityToken::inst();
+
+		// Ensure the submitted token has a value
+		$submittedToken = $request->postVar(\Dispatcher::SECURITY_TOKEN_NAME);
+		if (!$submittedToken) {
+			return false;
+		}
+		// Do the actual check.
+		$check = $token->check($submittedToken);
+		// Ensure the CSRF Token is correct
+		if (!$check) {
+			// CSRF token didn't match
+			return $this->httpError(400, 'Bad Request');
+		}
+
+		// Performs canView permission check by limiting visible projects
+		$project = $this->getCurrentProject();
+		if (!$project) {
+			return $this->project404Response();
+		}
+
+		// Performs canView permission check by limiting visible projects
+		$environment = $this->getCurrentEnvironment($project);
+		if (!$environment) {
+			return $this->environment404Response();
+		}
+
+		// Initiate the deployment
+		// The extension point should pass in: Project, Environment, SelectRelease, buildName
+		$this->extend('doDeploy', $project, $environment, $buildName, $data);
+
+		// Start the deployment based on the approved strategy.
+		$strategy = new DeploymentStrategy($environment);
+		$strategy->fromArray($request->requestVar('strategy'));
+		$deployment = $strategy->createDeployment();
+		// Bypass approval by going straight to Queued.
+		$deployment->getMachine()->apply(DNDeployment::TR_QUEUE);
+
+		return json_encode([
+			'url' => Director::absoluteBaseURL() . $deployment->Link()
+		], JSON_PRETTY_PRINT);
+	}
+
+	/**
+	 * @deprecated 2.0.0 - moved to DeployDispatcher
+	 *
+	 * Action - Do the actual deploy
+	 *
+	 * @param \SS_HTTPRequest $request
+	 *
+	 * @return SS_HTTPResponse|string
+	 * @throws SS_HTTPResponse_Exception
+	 */
+	public function deploy(\SS_HTTPRequest $request) {
+		$params = $request->params();
+		$deployment = DNDeployment::get()->byId($params['Identifier']);
+
+		if (!$deployment || !$deployment->ID) {
+			throw new SS_HTTPResponse_Exception('Deployment not found', 404);
+		}
+		if (!$deployment->canView()) {
+			return Security::permissionFailure();
+		}
+
+		$environment = $deployment->Environment();
+		$project = $environment->Project();
+
+		if ($environment->Name != $params['Environment']) {
+			throw new LogicException("Environment in URL doesn't match this deploy");
+		}
+		if ($project->Name != $params['Project']) {
+			throw new LogicException("Project in URL doesn't match this deploy");
+		}
+
+		return $this->render([
+			'Deployment' => $deployment,
+		]);
+	}
+
+	/**
+	 * @deprecated 2.0.0 - moved to DeployDispatcher
+	 *
+	 * Action - Get the latest deploy log
+	 *
+	 * @param \SS_HTTPRequest $request
+	 *
+	 * @return string
+	 * @throws SS_HTTPResponse_Exception
+	 */
+	public function deploylog(\SS_HTTPRequest $request) {
+		$params = $request->params();
+		$deployment = DNDeployment::get()->byId($params['Identifier']);
+
+		if (!$deployment || !$deployment->ID) {
+			throw new SS_HTTPResponse_Exception('Deployment not found', 404);
+		}
+		if (!$deployment->canView()) {
+			return Security::permissionFailure();
+		}
+
+		$environment = $deployment->Environment();
+		$project = $environment->Project();
+
+		if ($environment->Name != $params['Environment']) {
+			throw new LogicException("Environment in URL doesn't match this deploy");
+		}
+		if ($project->Name != $params['Project']) {
+			throw new LogicException("Project in URL doesn't match this deploy");
+		}
+
+		$log = $deployment->log();
+		if ($log->exists()) {
+			$content = $log->content();
+		} else {
+			$content = 'Waiting for action to start';
+		}
+
+		return $this->sendResponse($deployment->ResqueStatus(), $content);
+	}
+
+	/**
+	 * @deprecated 2.0.0 - moved to DeployDispatcher
+	 *
+	 * @param \SS_HTTPRequest $request
+	 *
+	 * @return string
+	 * @throws SS_HTTPResponse_Exception
+	 */
+	public function abortDeploy(\SS_HTTPRequest $request) {
+		$params = $request->params();
+		$deployment = DNDeployment::get()->byId($params['Identifier']);
+
+		if (!$deployment || !$deployment->ID) {
+			throw new SS_HTTPResponse_Exception('Deployment not found', 404);
+		}
+		if (!$deployment->canView()) {
+			return Security::permissionFailure();
+		}
+
+		// For now restrict to ADMINs only.
+		if (!Permission::check('ADMIN')) {
+			return Security::permissionFailure();
+		}
+
+		$environment = $deployment->Environment();
+		$project = $environment->Project();
+
+		if ($environment->Name != $params['Environment']) {
+			throw new LogicException("Environment in URL doesn't match this deploy");
+		}
+		if ($project->Name != $params['Project']) {
+			throw new LogicException("Project in URL doesn't match this deploy");
+		}
+
+		if (!in_array($deployment->Status, ['Queued', 'Deploying', 'Aborting'])) {
+			throw new LogicException(sprintf("Cannot abort from %s state.", $deployment->Status));
+		}
+
+		$deployment->getMachine()->apply(DNDeployment::TR_ABORT);
+
+		return $this->sendResponse($deployment->ResqueStatus(), []);
+	}
+
+	/**
 	 * Returns an error message if redis is unavailable
 	 *
 	 * @return string
@@ -615,6 +1095,12 @@ class DNRoot extends Controller implements PermissionProvider, TemplateGlobalPro
 	 */
 	public function providePermissions() {
 		return [
+			self::DEPLOYNAUT_ADVANCED_DEPLOY_OPTIONS => [
+				'name' => "Access to advanced deploy options",
+				'category' => "Deploynaut",
+			],
+
+			// Permissions that are intended to be added to the roles.
 			self::ALLOW_PROD_DEPLOYMENT => [
 				'name' => "Ability to deploy to production environments",
 				'category' => "Deploynaut",
@@ -702,6 +1188,23 @@ class DNRoot extends Controller implements PermissionProvider, TemplateGlobalPro
 	}
 
 	/**
+	 * @deprecated 2.0.0 - moved to DeployDispatcher
+	 *
+	 * @return null|PaginatedList
+	 */
+	public function DeployHistory() {
+		if ($env = $this->getCurrentEnvironment()) {
+			$history = $env->DeployHistory();
+			if ($history->count() > 0) {
+				$pagination = new PaginatedList($history, $this->getRequest());
+				$pagination->setPageLength(4);
+				return $pagination;
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * @param string $status
 	 * @param string $content
 	 *
@@ -762,6 +1265,35 @@ class DNRoot extends Controller implements PermissionProvider, TemplateGlobalPro
 		}
 
 		return singleton('DNProject')->canCreate($member);
+	}
+
+	protected function applyRedeploy(\SS_HTTPRequest $request, &$data) {
+		if (!$request->getVar('redeploy')) {
+			return;
+		}
+
+		$project = $this->getCurrentProject();
+		if (!$project) {
+			return $this->project404Response();
+		}
+
+		// Performs canView permission check by limiting visible projects
+		$env = $this->getCurrentEnvironment($project);
+		if (!$env) {
+			return $this->environment404Response();
+		}
+
+		$current = $env->CurrentBuild();
+		if ($current && $current->exists()) {
+			$data['preselect_tab'] = 3;
+			$data['preselect_sha'] = $current->SHA;
+		} else {
+			$master = $project->DNBranchList()->byName('master');
+			if ($master) {
+				$data['preselect_tab'] = 1;
+				$data['preselect_sha'] = $master->SHA();
+			}
+		}
 	}
 
 	/**
