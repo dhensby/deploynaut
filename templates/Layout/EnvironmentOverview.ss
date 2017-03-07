@@ -3,6 +3,7 @@
 		<div class="col-md-12">
 			<% include Breadcrumb %>
 			<% include DeploymentTabs %>
+			<% include ProjectLinks %>
 		</div>
 	</div>
 </div>
