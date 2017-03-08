@@ -172,7 +172,11 @@ var VariableEditor = React.createClass({
 					for (var i = 0; i < self.props.blacklist.length; i++) {
 						var re = new RegExp(self.props.blacklist[i]);
 						if (value.match(re)) {
-							message = "Value not allowed.";
+							message = (
+								<span>
+									This variable is automatically set by SilverStripe Platform. Please see the <a href="//docs.platform.silverstripe.com/platform-features/variables/">documentation</a> for more info
+								</span>
+							);
 							break;
 						}
 					}
