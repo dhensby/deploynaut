@@ -153,7 +153,7 @@ class Snapshots extends DNRoot {
 				\FormAction::create('doUpload', 'Upload File')
 					->addExtraClass('btn')
 			),
-			\RequiredFields::create('ArchiveFile')
+			\RequiredFields::create('ArchiveFile', 'EnvironmentID')
 		);
 
 		$form->addExtraClass('fields-wide');
