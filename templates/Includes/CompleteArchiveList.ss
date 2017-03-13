@@ -30,8 +30,8 @@
 									</button>
 									<button
 										type="button"
-										class="btn btn-info bulk-delete-unselect-all hide">
-										UnSelect All
+										class="btn btn-info bulk-delete-deselect-all hide">
+										Deselect All
 									</button>
 								</th>
 							</tr>

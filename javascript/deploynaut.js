@@ -257,7 +257,7 @@
 		var bulkCheckboxes = $('.bulk-delete-select');
 		var bulkSubmit = $('.bulk-delete-submit')
 		var bulkSelectAll = $('.bulk-delete-select-all')
-		var bulkUnselectAll = $('.bulk-delete-unselect-all');
+		var bulkDeselectAll = $('.bulk-delete-deselect-all');
 
 		bulkCheckboxes.click(function() {
 			var numCheckBoxes = bulkCheckboxes.length;
@@ -273,20 +273,20 @@
 				// Show Select all button
 				bulkSelectAll.removeClass('hide');
 				// Hide Unselect all button
-				bulkUnselectAll.addClass('hide');
+				bulkDeselectAll.addClass('hide');
 			}
 
 			// numCheckBoxes is an integer equal to the number of .bulk-delete-select boxes
 			// If all .bulk-delete-select are checked then we 
-			if (bulkCheckboxes.filter(':checked').length == numCheckBoxes) {
+			if (bulkCheckboxes.filter(':checked').length === numCheckBoxes) {
 				// Hide Select all button
 				bulkSelectAll.addClass('hide');
 				// Show the Unselect all button
-				bulkUnselectAll.toggleClass('hide');
+				bulkDeselectAll.toggleClass('hide');
 			//Otherwise we are clicking and not all checkboxes selected
 			} else {
 				// Ensure unselect is hidden
-				bulkUnselectAll.addClass('hide');
+				bulkDeselectAll.addClass('hide');
 				// Ensure select all is shown
 				bulkSelectAll.removeClass('hide');
 			}
@@ -322,17 +322,17 @@
 			// Hide self
 			bulkSelectAll.addClass('hide');
 			// Show the Unselect all button
-			bulkUnselectAll.toggleClass('hide');
+			bulkDeselectAll.toggleClass('hide');
 		});
 
 		// On click of unselect all
-		bulkUnselectAll.click(function() {
+		bulkDeselectAll.click(function() {
 			// Uncheck all boxes
 			bulkCheckboxes.prop("checked", false);
 			// Disable the deletion button
 			bulkSubmit.prop('disabled', true);
 			// Hide self
-			bulkUnselectAll.addClass('hide');
+			bulkDeselectAll.addClass('hide');
 			// Show Select all button
 			bulkSelectAll.toggleClass('hide');
 		});
