@@ -21,7 +21,19 @@
 								<th>Environment</th>
 								<th>Mode</th>
 								<th>File Size</th>
-								<th>Actions</th>
+								<th>
+									Actions
+									<button
+										type="button"
+										class="btn btn-info bulk-delete-select-all">
+										Select All
+									</button>
+									<button
+										type="button"
+										class="btn btn-info bulk-delete-unselect-all hide">
+										UnSelect All
+									</button>
+								</th>
 							</tr>
 						</thead>
 						<tbody>

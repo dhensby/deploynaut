@@ -256,8 +256,11 @@
 
 		var bulkCheckboxes = $('.bulk-delete-select');
 		var bulkSubmit = $('.bulk-delete-submit')
+		var bulkSelectAll = $('.bulk-delete-select-all')
+		var bulkUnselectAll = $('.bulk-delete-unselect-all');
 
 		bulkCheckboxes.click(function() {
+			var numCheckBoxes = bulkCheckboxes.length;
 			// If the submit button is disabled and there's one or more snapshots selected, enable the submit button
 			if (bulkSubmit.attr('disabled', true) && bulkCheckboxes.filter(':checked').length > 0) {
 				bulkSubmit.prop('disabled', false);
@@ -267,6 +270,25 @@
 			if (bulkCheckboxes.filter(':checked').length < 1) {
 				// If there's less than one ticked we simply disable the button again
 				bulkSubmit.prop('disabled', true);
+				// Show Select all button
+				bulkSelectAll.removeClass('hide');
+				// Hide Unselect all button
+				bulkUnselectAll.addClass('hide');
+			}
+
+			// numCheckBoxes is an integer equal to the number of .bulk-delete-select boxes
+			// If all .bulk-delete-select are checked then we 
+			if (bulkCheckboxes.filter(':checked').length == numCheckBoxes) {
+				// Hide Select all button
+				bulkSelectAll.addClass('hide');
+				// Show the Unselect all button
+				bulkUnselectAll.toggleClass('hide');
+			//Otherwise we are clicking and not all checkboxes selected
+			} else {
+				// Ensure unselect is hidden
+				bulkUnselectAll.addClass('hide');
+				// Ensure select all is shown
+				bulkSelectAll.removeClass('hide');
 			}
 		});
 
@@ -289,6 +311,30 @@
 				}
 			);
 			return false;
+		});
+
+		// On click of the Select All
+		bulkSelectAll.click(function() {
+			// Check all boxes
+			bulkCheckboxes.prop("checked", true);
+			// Enable deletion button
+			bulkSubmit.prop('disabled', false);
+			// Hide self
+			bulkSelectAll.addClass('hide');
+			// Show the Unselect all button
+			bulkUnselectAll.toggleClass('hide');
+		});
+
+		// On click of unselect all
+		bulkUnselectAll.click(function() {
+			// Uncheck all boxes
+			bulkCheckboxes.prop("checked", false);
+			// Disable the deletion button
+			bulkSubmit.prop('disabled', true);
+			// Hide self
+			bulkUnselectAll.addClass('hide');
+			// Show Select all button
+			bulkSelectAll.toggleClass('hide');
 		});
 
 	});

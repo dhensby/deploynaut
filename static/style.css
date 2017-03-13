@@ -12833,6 +12833,9 @@ input[type="button"], .table-data-archives
 input[type="reset"], .table-data-archives .deploy-dropdown {
   margin-bottom: 0; }
 
+.table-data-archives thead tr th {
+  vertical-align: top; }
+
 .popover-content {
   word-wrap: break-word; }
 
@@ -12973,6 +12976,10 @@ button.abort {
   position: absolute;
   top: 15px;
   right: 17px; }
+
+.bulk-delete-select-all, .bulk-delete-unselect-all {
+  float: right;
+  margin-right: 10px; }
 
 .fade-in {
   opacity: 0;
