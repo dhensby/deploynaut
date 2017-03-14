@@ -149,6 +149,14 @@ class DNEnvironment extends DataObject {
 	private static $allowed_backends = [];
 
 	/**
+	 * Composer modules to check for when deploying.
+	 *
+	 * @config
+	 * @var array
+	 */
+	private static $required_modules = [];
+
+	/**
 	 * Used by the sync task
 	 *
 	 * @param string $path
@@ -1192,6 +1200,77 @@ PHP
 		}
 
 		return $result;
+	}
+
+
+	/**
+	 * Returns an array of required modules not found in composer files
+	 * @param string $sha
+	 * @return array
+	 */
+	public function findMissingRequiredModules($sha = 'HEAD') {
+		$requiredModules = $this->config()->required_modules;
+		// If there aren't any required modules, then we are good to go
+		if (empty($requiredModules)) {
+			return [];
+		}
+		$foundModules = [];
+		foreach (['composer.lock', 'composer.json'] as $file) {
+			$content = $this->getCVSFileContent($sha, $file);
+			if (!$content) {
+				continue;
+			}
+			$composer = json_decode($content, true);
+			if (empty($composer['packages'])) {
+				return $requiredModules;
+			}
+			foreach ($composer['packages'] as $package) {
+				if (in_array($package['name'], $requiredModules)) {
+					$foundModules[] = $package['name'];
+				}
+			}
+		}
+		return array_diff($requiredModules, $foundModules);
+	}
+
+	/**
+	 * Get the contents of a file $filename at $sha point-in-time
+	 * @param string $sha
+	 * @param string $filename
+	 * @return bool false if file not found|string
+	 */
+	public function getCVSFileContent($sha, $filename) {
+		$repo = $this->Project()->getRepository();
+		if (!$repo) {
+			return false;
+		}
+		$commit = $repo->getCommit($sha);
+		$blob = $this->findInTree($commit->getTree(), $filename);
+		if ($blob && $blob instanceof \Gitonomy\Git\Blob) {
+			return $blob->getContent();
+		}
+		return false;
+	}
+
+	/**
+	 * Iterates thorough the tree of files and directories in git until it finds it
+	 *
+	 * @param \Gitonomy\Git\Tree $tree
+	 * @param string $filename - 'mysite/_config.php' or 'composer.json' (no leading './' or '/')
+	 * @return false|\Gitonomy\Git\Blob
+	 */
+	protected function findInTree(\Gitonomy\Git\Tree $tree, $filename) {
+		foreach ($tree->getEntries() as $gitFileName => $data) {
+			$filePath = explode(DIRECTORY_SEPARATOR, $filename);
+			list(,$entry) = $data;
+			if (count($filePath) > 1 && $gitFileName == $filePath[0] && $entry instanceof \Gitonomy\Git\Tree) {
+				array_shift($filePath);
+				return $this->findInTree($entry, implode(DIRECTORY_SEPARATOR, $filePath));
+			} else if($filename == $gitFileName) {
+				return $entry;
+			}
+		}
+		return false;
 	}
 
 }
