@@ -1300,10 +1300,7 @@ class DNRoot extends Controller implements PermissionProvider, TemplateGlobalPro
 	 * @return SS_HTTPResponse
 	 */
 	protected function project404Response() {
-		return new SS_HTTPResponse(
-			"Project '" . Convert::raw2xml($this->getRequest()->param('Project')) . "' not found.",
-			404
-		);
+		$this->httpError(404, "Project '" . Convert::raw2xml($this->getRequest()->param('Project')) . "' not found.");
 	}
 
 	/**
@@ -1311,7 +1308,7 @@ class DNRoot extends Controller implements PermissionProvider, TemplateGlobalPro
 	 */
 	protected function environment404Response() {
 		$envName = Convert::raw2xml($this->getRequest()->param('Environment'));
-		return new SS_HTTPResponse("Environment '" . $envName . "' not found.", 404);
+		$this->httpError(404, "Environment '" . $envName . "' not found.");
 	}
 
 	/**
