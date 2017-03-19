@@ -63,7 +63,8 @@ class DNRoot extends Controller implements PermissionProvider, TemplateGlobalPro
 		'abortDeploy',
 		'gitRevisions',
 		'deploySummary',
-		'startDeploy'
+		'startDeploy',
+		'getCreateEnvironmentForm',
 	];
 
 	/**
