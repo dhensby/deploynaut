@@ -18,21 +18,3 @@ The main design considerations have been:
 ## Installation and configuration
 
 See [docs](docs/en/index.md).
-
-## Screenshots
-
-### Project list
-
-![project list](docs/_images/projects.png)
-
-### Project view
-
-![project list](docs/_images/project.png)
-
-#### Environment view
-
-![project list](docs/_images/environment.png)
-
-#### Deployment view
-
-![project list](docs/_images/deployment.png)
