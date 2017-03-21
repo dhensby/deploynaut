@@ -97,7 +97,7 @@ class FetchJob extends DeploynautJob {
 	protected function cloneRepo() {
 		if(file_exists($this->project->getLocalCVSPath())) {
 			$this->runCommand(sprintf(
-				'rm -rf %s',
+				'/bin/rm -rf %s',
 				escapeshellarg($this->project->getLocalCVSPath())
 			));
 		}
