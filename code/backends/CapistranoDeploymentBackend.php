@@ -120,7 +120,7 @@ class CapistranoDeploymentBackend extends Object implements DeploymentBackend {
 
 		$currentBuild = $environment->CurrentBuild();
 		if (empty($currentBuild) || (!empty($options['no_rollback']) && $options['no_rollback'] !== 'false')) {
-			throw new RuntimeException($command->getErrorOutput());
+			throw new RuntimeException('Could not find current build. Cannot roll back.');
 		}
 
 		// re-run deploy with the current build sha to rollback
