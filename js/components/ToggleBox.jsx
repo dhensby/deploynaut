@@ -1,6 +1,7 @@
 var React = require("react");
 
 var Switch = require('./Switch.jsx');
+var LoadingBar = require('./LoadingBar.jsx');
 
 var ToggleBox = React.createClass({
 
@@ -8,7 +9,8 @@ var ToggleBox = React.createClass({
 		className: React.PropTypes.string.isRequired,
 		enabled: React.PropTypes.bool.isRequired,
 		pending: React.PropTypes.bool.isRequired,
-		onChangeHandler: React.PropTypes.func.isRequired
+		onChangeHandler: React.PropTypes.func.isRequired,
+		loading: React.PropTypes.bool
 	},
 
 	onChangeHandler: function(evt) {
@@ -19,20 +21,26 @@ var ToggleBox = React.createClass({
 	},
 
 	wrapperClasses: function() {
-		if(this.props.pending) {
-			return this.props.className + "-toggle alert alert-warning";
-		} else if(this.props.enabled) {
-			return this.props.className + "-toggle alert alert-info";
+		var wrapperClassList = this.props.className + "-toggle";
+		if (this.props.loading) {
+			wrapperClassList += " loading";
 		}
-		return this.props.className + "-toggle disabled";
+		if (this.props.pending) {
+			wrapperClassList += " alert alert-warning";
+		} else if (this.props.enabled) {
+			wrapperClassList += " alert alert-info";
+		} else {
+			wrapperClassList += " disabled";
+		}
+		return wrapperClassList;
 	},
 
 	render: function() {
 
 		var infoText = null;
-		if(this.props.pending) {
+		if (this.props.pending) {
 			infoText = <PendingInfo {...this.props} />;
-		} else if(!this.props.enabled) {
+		} else if (!this.props.enabled) {
 			infoText = <DisabledInfo {...this.props} />;
 		}
 
@@ -43,12 +51,14 @@ var ToggleBox = React.createClass({
 						<Switch
 							checked={this.props.enabled}
 							changeHandler={this.onChangeHandler}
+							disabled={this.props.loading}
 						/>
 					</div>
 					<div className="text">
 						Your {this.props.className} is { this.props.enabled ? "enabled" : "disabled" }
 					</div>
 				</div>
+				<LoadingBar show={this.props.loading} />
 				{ infoText }
 			</div>
 		);
