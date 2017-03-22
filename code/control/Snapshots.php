@@ -424,7 +424,10 @@ class Snapshots extends DNRoot {
 			throw new \SS_HTTPResponse_Exception('Invalid direction', 400);
 		}
 
-		$environment = $this->validateEnvironmentUploadTo($data);
+		$environment = $validEnvs->find('ID', $data['EnvironmentID']);
+		if (!$environment) {
+			throw new \SS_HTTPResponse_Exception('Invalid environment');
+		}
 		$this->validateSnapshotMode($data['Mode']);
 
 		// Only 'push' direction is allowed an association with an existing archive.
@@ -800,7 +803,7 @@ class Snapshots extends DNRoot {
 		$validEnvs = $dataArchive->validTargetEnvironments();
 		$environment = $validEnvs->find('ID', $data['EnvironmentID']);
 		if (!$environment) {
-			throw new LogicException('Invalid environment');
+			throw new \SS_HTTPResponse_Exception('Invalid environment');
 		}
 		$dataArchive->EnvironmentID = $environment->ID;
 		$dataArchive->write();
