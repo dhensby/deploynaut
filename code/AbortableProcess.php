@@ -17,7 +17,7 @@ class AbortableProcess extends \Symfony\Component\Process\Process {
 		$this->start($callback);
 		while($this->isRunning()) {
 			$this->checkTimeout();
-			sleep(1);
+			usleep(1000);
 		}
 
 		if ($this->hasBeenSignaled()) {
