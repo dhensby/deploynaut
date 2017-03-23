@@ -1202,7 +1202,6 @@ PHP
 		return $result;
 	}
 
-
 	/**
 	 * Returns an array of required modules not found in composer files
 	 * @param string $sha
@@ -1215,12 +1214,11 @@ PHP
 			return [];
 		}
 		$foundModules = [];
-		foreach (['composer.lock', 'composer.json'] as $file) {
-			$content = $this->getCVSFileContent($sha, $file);
-			if (!$content) {
-				continue;
-			}
-			$composer = json_decode($content, true);
+
+		// try composer.lock first
+		$composerLock = $this->getCVSFileContent($sha, 'composer.lock');
+		if ($composerLock) {
+			$composer = json_decode($composerLock, true);
 			if (empty($composer['packages'])) {
 				return $requiredModules;
 			}
@@ -1229,8 +1227,25 @@ PHP
 					$foundModules[] = $package['name'];
 				}
 			}
+			return array_diff($requiredModules, $foundModules);
 		}
-		return array_diff($requiredModules, $foundModules);
+
+		// well, try composer.json then
+		$composerJson = $this->getCVSFileContent($sha, 'composer.json');
+		if ($composerJson) {
+			$composer = json_decode($composerJson, true);
+			if (empty($composer['require'])) {
+				return $requiredModules;
+			}
+			foreach ($composer['require'] as $package => $version) {
+				if (in_array($package, $requiredModules)) {
+					$foundModules[] = $package;
+				}
+			}
+			return array_diff($requiredModules, $foundModules);
+		}
+		// it looks like this project doesn't use composer, which is required.
+		return $requiredModules;
 	}
 
 	/**
