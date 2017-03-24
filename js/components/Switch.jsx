@@ -1,6 +1,6 @@
 var React = require("react");
 
-var wrapperClasses = function(checked) {
+var wrapperClasses = function(checked, disabled) {
 	var classes = [
 		'bootstrap-switch',
 		'bootstrap-switch-wrapper',
@@ -11,7 +11,10 @@ var wrapperClasses = function(checked) {
 	if(checked) {
 		classes.push("bootstrap-switch-on");
 	} else {
-		classes.push("bootstrap-switch-on");
+		classes.push("bootstrap-switch-off");
+	}
+	if (disabled) {
+		classes.push("bootstrap-switch-disabled");
 	}
 	return classes.join(' ');
 };
@@ -29,13 +32,13 @@ function Switch(props) {
 
 	return (
 		<div
-			className={wrapperClasses(props.checked)}
+			className={wrapperClasses(props.checked, props.disabled)}
 			style={{width: wrapperWidth + "px"}}
 			onClick={props.changeHandler}
 		>
 			<div
 				className="bootstrap-switch-container"
-				style={containerStyle(wrapperWidth, props.checked)}
+				style={containerStyle(wrapperWidth, props.checked, props.disabled)}
 			>
 					<span
 						className="bootstrap-switch-handle-off bootstrap-switch-default"
@@ -67,7 +70,8 @@ function Switch(props) {
 
 Switch.propTypes = {
 	checked: React.PropTypes.bool.isRequired,
-	changeHandler: React.PropTypes.func.isRequired
+	changeHandler: React.PropTypes.func.isRequired,
+	disabled: React.PropTypes.bool
 };
 
 module.exports = Switch;
