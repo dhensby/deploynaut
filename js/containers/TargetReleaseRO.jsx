@@ -36,11 +36,11 @@ const TargetReleaseRO = React.createClass({
 
 		let deployDiff = null;
 		let linkName = 'View details';
-		let caret = 'up';
+		let caret = 'down';
 		if (this.state.open) {
 			deployDiff = <DeployDiff changes={props.deployment.changes} />;
 			linkName = 'Hide details';
-			caret = 'down';
+			caret = 'up';
 		}
 
 		let deployer = null;
