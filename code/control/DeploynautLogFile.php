@@ -80,6 +80,10 @@ class DeploynautLogFile {
 	 * @param string $message
 	 */
 	public function write($message) {
+		// Blindly replace all occurences of password.
+		$message = preg_replace('/--password [\\S]*/', "--password ******", $message);
+		$message = preg_replace('/--password=[\\S]*/', "--password=******", $message);
+
 		// Make sure we write into the old path for existing logs. New logs use the sanitised file path instead.
 		$path = file_exists($this->getRawFilePath()) ? $this->getRawFilePath() : $this->getSanitisedLogFilePath();
 

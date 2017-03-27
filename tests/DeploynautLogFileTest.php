@@ -51,6 +51,21 @@ class DeploynautLogFileTest extends SapphireTest {
 		$this->assertEquals('Log has not been created yet.', $log->content());
 	}
 
+	public function testPasswordMasking() {
+		$log = new DeploynautLogFile('SomeSortOf Filename (UAT).log', $this->basePath);
+		$log->write("/var/jolly/roger/rainforest --password 'arglebarglewoops'");
+		$this->assertNotContains('arglebarglewoops', $log->content());
+
+		$log2 = new DeploynautLogFile('SomeSortOf Filename (UAT).log', $this->basePath);
+		$log2->write("/var/jolly/roger/rainforest --password 'arglebarglewoops' --pirate true");
+		$this->assertNotContains('arglebarglewoops', $log->content());
+
+		$log = new DeploynautLogFile('SomeSortOf Filename (UAT).log', $this->basePath);
+		$log->write("/var/jolly/roger/rainforest --password='arglebarglewoops'");
+		$this->assertNotContains('arglebarglewoops', $log->content());
+
+	}
+
 	public function tearDown() {
 		parent::tearDown();
 
