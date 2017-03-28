@@ -196,7 +196,11 @@ class DNRoot extends Controller implements PermissionProvider, TemplateGlobalPro
 		parent::init();
 
 		if (!Member::currentUser() && !Session::get('AutoLoginHash')) {
-			return Security::permissionFailure();
+			// we cannot return from here (from init), we need to throw an exception and use
+			// the permission response so that the request parsing stops here and users
+			// gets redirected to the login page
+			$permResponse = Security::permissionFailure();
+			$this->httpError($permResponse->getStatusCode(), $permResponse);
 		}
 
 		// Block framework jquery
