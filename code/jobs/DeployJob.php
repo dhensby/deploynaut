@@ -11,10 +11,6 @@ class DeployJob extends DeploynautJob {
 	public $args;
 
 	public function setUp() {
-		// Make this process a session leader so we can send signals
-		// to this job as a whole (including any subprocesses such as spawned by Symfony).
-		posix_setsid();
-
 		$this->updateStatus(DNDeployment::TR_DEPLOY);
 		chdir(BASE_PATH);
 	}
