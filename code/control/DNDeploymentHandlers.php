@@ -59,11 +59,7 @@ class DNDeploymentHandlers extends Object {
 		$deployment->DeployStarted = SS_Datetime::now()->Rfc2822();
 		$deployment->write();
 
-		$deployment->log()->write(sprintf(
-			'Deploy queued as job %s (sigFile is %s)',
-			$token,
-			$deployment->getSigFile()
-		));
+		$deployment->log()->write(sprintf('Deploy queued as job %s', $token));
 	}
 
 	public function onAbort(TransitionEvent $e) {

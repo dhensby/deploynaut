@@ -374,8 +374,7 @@ class DNDeployment extends DataObject implements Finite\StatefulInterface, HasSt
 			'logfile' => $this->logfile(),
 			'projectName' => $project->Name,
 			'env' => $project->getProcessEnv(),
-			'deploymentID' => $this->ID,
-			'sigFile' => $this->getSigFile(),
+			'deploymentID' => $this->ID
 		);
 
 		$strategy = $this->getDeploymentStrategy();
@@ -403,27 +402,4 @@ class DNDeployment extends DataObject implements Finite\StatefulInterface, HasSt
 		return Resque::enqueue('deploy', 'DeployJob', $args, true);
 	}
 
-	public function getSigFile() {
-		$dir = DNData::inst()->getSignalDir();
-		if (!is_dir($dir)) {
-			`mkdir $dir`;
-		}
-		return sprintf(
-			'%s/deploynaut-signal-%s-%s',
-			DNData::inst()->getSignalDir(),
-			$this->ClassName,
-			$this->ID
-		);
-	}
-
-	/**
-	 * Signal the worker to self-abort. If we had a reliable way of figuring out the right PID,
-	 * we could posix_kill directly, but Resque seems to not provide a way to find out the PID
-	 * from the job nor worker.
-	 */
-	public function setSignal($signal) {
-		$sigFile = $this->getSigFile();
-		// 2 is SIGINT - we can't use SIGINT constant in the Apache context, only available in workers.
-		file_put_contents($sigFile, $signal);
-	}
 }

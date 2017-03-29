@@ -55,7 +55,8 @@
 			</table>
 		</div>
 
-		<% if $HasPerm(ADMIN) %>
+		<%-- this has been disabled due to problem with signalling --%>
+		<% if $HasPerm(ADMIN) && false %>
 			<% if $Status=='Queued' || $Status=='Deploying' || $Status=='Aborting' %>
 				<button value="Abort" class="btn btn-danger abort pull-right" data-url="$Link/abort-deploy" data-terminate="Force abort">
 					<% if $Status=='Aborting' %>

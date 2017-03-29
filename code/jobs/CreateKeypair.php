@@ -1,4 +1,5 @@
 <?php
+use \Symfony\Component\Process\Process;
 
 /**
  * Class CreateKeypair
@@ -96,7 +97,7 @@ class CreateKeypair {
 	protected function createKeys($keyFile) {
 		$command = sprintf('ssh-keygen -q -t rsa -f %s -C %s -N ""', escapeshellarg($keyFile), escapeshellarg(basename($keyFile)));
 
-		$process = new AbortableProcess($command);
+		$process = new Process($command);
 		$process->run();
 		if(!$process->isSuccessful()) {
 			fwrite(
@@ -112,7 +113,7 @@ class CreateKeypair {
 
 			// Set permissions on the newly created keys
 			// chmod ($file, 600) doesn't set the correct permissions for some reason.
-			$process = new AbortableProcess(sprintf('chmod 600 %s', $keyFile));
+			$process = new Process(sprintf('chmod 600 %s', $keyFile));
 			$process->run();
 			if(!$process->isSuccessful()) {
 				fwrite(
@@ -121,7 +122,7 @@ class CreateKeypair {
 				);
 			}
 
-			$process = new AbortableProcess(sprintf('chmod 600 %s', $keyFile . '.pub'));
+			$process = new Process(sprintf('chmod 600 %s', $keyFile . '.pub'));
 			$process->run();
 			if(!$process->isSuccessful()) {
 				fwrite(

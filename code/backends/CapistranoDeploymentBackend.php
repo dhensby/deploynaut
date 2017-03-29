@@ -1,4 +1,5 @@
 <?php
+use \Symfony\Component\Process\Process;
 
 class CapistranoDeploymentBackend extends Object implements DeploymentBackend {
 
@@ -212,7 +213,7 @@ class CapistranoDeploymentBackend extends Object implements DeploymentBackend {
 			$result = $archive->validateArchiveContents($dataTransfer->Mode);
 			if(!$result->valid()) {
 				// do some cleaning, get rid of the extracted archive lying around
-				$process = new AbortableProcess(sprintf('rm -rf %s', escapeshellarg($workingDir)));
+				$process = new Process(sprintf('rm -rf %s', escapeshellarg($workingDir)));
 				$process->setTimeout(120);
 				$process->run();
 
@@ -279,7 +280,7 @@ class CapistranoDeploymentBackend extends Object implements DeploymentBackend {
 
 		$log->write(sprintf('Running command: %s', $command));
 
-		$process = new AbortableProcess($command);
+		$process = new Process($command);
 		$process->setTimeout(3600);
 		return $process;
 	}
@@ -359,7 +360,7 @@ class CapistranoDeploymentBackend extends Object implements DeploymentBackend {
 		// Remove any assets and db files lying around, they're not longer needed as they're now part
 		// of the sspak file we just generated. Use --force to avoid errors when files don't exist,
 		// e.g. when just an assets backup has been requested and no database.sql exists.
-		$process = new AbortableProcess(sprintf('rm -rf %s/assets && rm -f %s', escapeshellarg($filepathBase), escapeshellarg($databasePath)));
+		$process = new Process(sprintf('rm -rf %s/assets && rm -f %s', escapeshellarg($filepathBase), escapeshellarg($databasePath)));
 		$process->setTimeout(120);
 		$process->run();
 		if(!$process->isSuccessful()) {
@@ -405,7 +406,7 @@ class CapistranoDeploymentBackend extends Object implements DeploymentBackend {
 		$cleanupFn = function() use($self, $workingDir, $environment, $log) {
 			// Rebuild makes sense even if failed - maybe we can at least partly recover.
 			$self->rebuild($environment, $log);
-			$process = new AbortableProcess(sprintf('rm -rf %s', escapeshellarg($workingDir)));
+			$process = new Process(sprintf('rm -rf %s', escapeshellarg($workingDir)));
 			$process->setTimeout(120);
 			$process->run();
 		};

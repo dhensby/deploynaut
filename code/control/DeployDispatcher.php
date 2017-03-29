@@ -43,6 +43,8 @@ class DeployDispatcher extends Dispatcher {
 	 * @return bool
 	 */
 	public static function can_abort_deployment(\DNEnvironment $environment, \Member $member = null) {
+		return false; // todo this has been disabled due to a problem with the signalling.
+
 		if ($member === null) {
 			$member = \Member::currentUser();
 		}
