@@ -1,4 +1,5 @@
 <?php
+use \Symfony\Component\Process\Process;
 
 class FetchJob extends DeploynautJob {
 
@@ -123,7 +124,7 @@ class FetchJob extends DeploynautJob {
 		if($this->log) {
 			$this->log->write(sprintf('Running command: %s', $command));
 		}
-		$process = new AbortableProcess($command, $workingDir);
+		$process = new Process($command, $workingDir);
 		$process->setEnv($this->project->getProcessEnv());
 		$process->setTimeout(1800);
 		$process->run();

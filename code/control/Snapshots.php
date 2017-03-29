@@ -1,4 +1,5 @@
 <?php
+use \Symfony\Component\Process\Process;
 
 /**
  * Controller for the snapshot actions
@@ -192,7 +193,7 @@ class Snapshots extends DNRoot {
 		$workingDir = TEMP_FOLDER . DIRECTORY_SEPARATOR . 'deploynaut-transfer-' . $dataTransfer->ID;
 
 		$cleanupFn = function() use($workingDir, $dataTransfer, $dataArchive) {
-			$process = new \AbortableProcess(sprintf('rm -rf %s', escapeshellarg($workingDir)));
+			$process = new Process(sprintf('rm -rf %s', escapeshellarg($workingDir)));
 			$process->setTimeout(120);
 			$process->run();
 			$dataTransfer->delete();
@@ -233,7 +234,7 @@ class Snapshots extends DNRoot {
 		}
 
 		// cleanup any extracted sspak contents lying around
-		$process = new \AbortableProcess(sprintf('rm -rf %s', escapeshellarg($workingDir)));
+		$process = new Process(sprintf('rm -rf %s', escapeshellarg($workingDir)));
 		$process->setTimeout(120);
 		$process->run();
 
