@@ -17,21 +17,6 @@
  *
  * @method HasManyList Deployments()
  * @method HasManyList DataArchives()
- *
- * @method ManyManyList Viewers()
- * @method ManyManyList ViewerGroups()
- * @method ManyManyList Deployers()
- * @method ManyManyList DeployerGroups()
- * @method ManyManyList CanRestoreMembers()
- * @method ManyManyList CanRestoreGroups()
- * @method ManyManyList CanBackupMembers()
- * @method ManyManyList CanBackupGroups()
- * @method ManyManyList ArchiveUploaders()
- * @method ManyManyList ArchiveUploaderGroups()
- * @method ManyManyList ArchiveDownloaders()
- * @method ManyManyList ArchiveDownloaderGroups()
- * @method ManyManyList ArchiveDeleters()
- * @method ManyManyList ArchiveDeleterGroups()
  */
 class DNEnvironment extends DataObject {
 
@@ -65,36 +50,10 @@ class DNEnvironment extends DataObject {
 	/**
 	 * @var array
 	 */
-	public static $many_many = [
-		"Viewers" => "Member", // Who can view this environment
-		"ViewerGroups" => "Group",
-		"Deployers" => "Member", // Who can deploy to this environment
-		"DeployerGroups" => "Group",
-		"CanRestoreMembers" => "Member", // Who can restore archive files to this environment
-		"CanRestoreGroups" => "Group",
-		"CanBackupMembers" => "Member", // Who can backup archive files from this environment
-		"CanBackupGroups" => "Group",
-		"ArchiveUploaders" => "Member", // Who can upload archive files linked to this environment
-		"ArchiveUploaderGroups" => "Group",
-		"ArchiveDownloaders" => "Member", // Who can download archive files from this environment
-		"ArchiveDownloaderGroups" => "Group",
-		"ArchiveDeleters" => "Member", // Who can delete archive files from this environment,
-		"ArchiveDeleterGroups" => "Group",
-	];
-
-	/**
-	 * @var array
-	 */
 	public static $summary_fields = [
 		"Name" => "Environment Name",
 		"Usage" => "Usage",
-		"URL" => "URL",
-		"DeployersList" => "Can Deploy List",
-		"CanRestoreMembersList" => "Can Restore List",
-		"CanBackupMembersList" => "Can Backup List",
-		"ArchiveUploadersList" => "Can Upload List",
-		"ArchiveDownloadersList" => "Can Download List",
-		"ArchiveDeletersList" => "Can Delete List",
+		"URL" => "URL"
 	];
 
 	/**
@@ -310,12 +269,6 @@ class DNEnvironment extends DataObject {
 			return true;
 		}
 
-		// if no Viewers or ViewerGroups defined, fallback to DNProject::canView permissions
-		if ($this->Viewers()->exists() || $this->ViewerGroups()->exists()) {
-			return $this->Viewers()->byID($member->ID)
-				|| $member->inGroups($this->ViewerGroups());
-		}
-
 		return $this->Project()->canView($member);
 	}
 
@@ -332,20 +285,12 @@ class DNEnvironment extends DataObject {
 		if (!$member) {
 			return false;
 		}
-		// Must be logged in to check permissions
 
 		if ($this->Usage === self::PRODUCTION || $this->Usage === self::UNSPECIFIED) {
-			if ($this->Project()->allowed(DNRoot::ALLOW_PROD_DEPLOYMENT, $member)) {
-				return true;
-			}
+			return $this->Project()->allowed(DNRoot::ALLOW_PROD_DEPLOYMENT, $member);
 		} else {
-			if ($this->Project()->allowed(DNRoot::ALLOW_NON_PROD_DEPLOYMENT, $member)) {
-				return true;
-			}
+			return $this->Project()->allowed(DNRoot::ALLOW_NON_PROD_DEPLOYMENT, $member);
 		}
-
-		return $this->Deployers()->byID($member->ID)
-			|| $member->inGroups($this->DeployerGroups());
 	}
 
 	/**
@@ -371,20 +316,11 @@ class DNEnvironment extends DataObject {
 		if (!$member) {
 			return false;
 		}
-		// Must be logged in to check permissions
-
 		if ($this->Usage === self::PRODUCTION || $this->Usage === self::UNSPECIFIED) {
-			if ($this->Project()->allowed(Snapshots::ALLOW_PROD_SNAPSHOT, $member)) {
-				return true;
-			}
+			return $this->Project()->allowed(Snapshots::ALLOW_PROD_SNAPSHOT, $member);
 		} else {
-			if ($this->Project()->allowed(Snapshots::ALLOW_NON_PROD_SNAPSHOT, $member)) {
-				return true;
-			}
+			return $this->Project()->allowed(Snapshots::ALLOW_NON_PROD_SNAPSHOT, $member);
 		}
-
-		return $this->CanRestoreMembers()->byID($member->ID)
-			|| $member->inGroups($this->CanRestoreGroups());
 	}
 
 	/**
@@ -399,27 +335,17 @@ class DNEnvironment extends DataObject {
 		if ($project->HasDiskQuota() && $project->HasExceededDiskQuota()) {
 			return false;
 		}
-
 		if (!$member) {
 			$member = Member::currentUser();
 		}
-		// Must be logged in to check permissions
 		if (!$member) {
 			return false;
 		}
-
 		if ($this->Usage === self::PRODUCTION || $this->Usage === self::UNSPECIFIED) {
-			if ($this->Project()->allowed(Snapshots::ALLOW_PROD_SNAPSHOT, $member)) {
-				return true;
-			}
+			return $this->Project()->allowed(Snapshots::ALLOW_PROD_SNAPSHOT, $member);
 		} else {
-			if ($this->Project()->allowed(Snapshots::ALLOW_NON_PROD_SNAPSHOT, $member)) {
-				return true;
-			}
+			return $this->Project()->allowed(Snapshots::ALLOW_NON_PROD_SNAPSHOT, $member);
 		}
-
-		return $this->CanBackupMembers()->byID($member->ID)
-			|| $member->inGroups($this->CanBackupGroups());
 	}
 
 	/**
@@ -438,27 +364,17 @@ class DNEnvironment extends DataObject {
 		if ($project->HasDiskQuota() && $project->HasExceededDiskQuota()) {
 			return false;
 		}
-
 		if (!$member) {
 			$member = Member::currentUser();
 		}
 		if (!$member) {
 			return false;
 		}
-		// Must be logged in to check permissions
-
 		if ($this->Usage === self::PRODUCTION || $this->Usage === self::UNSPECIFIED) {
-			if ($this->Project()->allowed(Snapshots::ALLOW_PROD_SNAPSHOT, $member)) {
-				return true;
-			}
+			return $this->Project()->allowed(Snapshots::ALLOW_PROD_SNAPSHOT, $member);
 		} else {
-			if ($this->Project()->allowed(Snapshots::ALLOW_NON_PROD_SNAPSHOT, $member)) {
-				return true;
-			}
+			return $this->Project()->allowed(Snapshots::ALLOW_NON_PROD_SNAPSHOT, $member);
 		}
-
-		return $this->ArchiveUploaders()->byID($member->ID)
-			|| $member->inGroups($this->ArchiveUploaderGroups());
 	}
 
 	/**
@@ -475,20 +391,11 @@ class DNEnvironment extends DataObject {
 		if (!$member) {
 			return false;
 		}
-		// Must be logged in to check permissions
-
 		if ($this->Usage === self::PRODUCTION || $this->Usage === self::UNSPECIFIED) {
-			if ($this->Project()->allowed(Snapshots::ALLOW_PROD_SNAPSHOT, $member)) {
-				return true;
-			}
+			return $this->Project()->allowed(Snapshots::ALLOW_PROD_SNAPSHOT, $member);
 		} else {
-			if ($this->Project()->allowed(Snapshots::ALLOW_NON_PROD_SNAPSHOT, $member)) {
-				return true;
-			}
+			return $this->Project()->allowed(Snapshots::ALLOW_NON_PROD_SNAPSHOT, $member);
 		}
-
-		return $this->ArchiveDownloaders()->byID($member->ID)
-			|| $member->inGroups($this->ArchiveDownloaderGroups());
 	}
 
 	/**
@@ -505,112 +412,11 @@ class DNEnvironment extends DataObject {
 		if (!$member) {
 			return false;
 		}
-		// Must be logged in to check permissions
-
 		if ($this->Usage === self::PRODUCTION || $this->Usage === self::UNSPECIFIED) {
-			if ($this->Project()->allowed(Snapshots::ALLOW_PROD_SNAPSHOT, $member)) {
-				return true;
-			}
+			return $this->Project()->allowed(Snapshots::ALLOW_PROD_SNAPSHOT, $member);
 		} else {
-			if ($this->Project()->allowed(Snapshots::ALLOW_NON_PROD_SNAPSHOT, $member)) {
-				return true;
-			}
+			return $this->Project()->allowed(Snapshots::ALLOW_NON_PROD_SNAPSHOT, $member);
 		}
-
-		return $this->ArchiveDeleters()->byID($member->ID)
-			|| $member->inGroups($this->ArchiveDeleterGroups());
-	}
-
-	/**
-	 * Get a string of groups/people that are allowed to deploy to this environment.
-	 * Used in DNRoot_project.ss to list {@link Member}s who have permission to perform this action.
-	 *
-	 * @return string
-	 */
-	public function getDeployersList() {
-		return implode(
-			", ",
-			array_merge(
-				$this->DeployerGroups()->column("Title"),
-				$this->Deployers()->column("FirstName")
-			)
-		);
-	}
-
-	/**
-	 * Get a string of groups/people that are allowed to restore {@link DNDataArchive} objects into this environment.
-	 *
-	 * @return string
-	 */
-	public function getCanRestoreMembersList() {
-		return implode(
-			", ",
-			array_merge(
-				$this->CanRestoreGroups()->column("Title"),
-				$this->CanRestoreMembers()->column("FirstName")
-			)
-		);
-	}
-
-	/**
-	 * Get a string of groups/people that are allowed to backup {@link DNDataArchive} objects from this environment.
-	 *
-	 * @return string
-	 */
-	public function getCanBackupMembersList() {
-		return implode(
-			", ",
-			array_merge(
-				$this->CanBackupGroups()->column("Title"),
-				$this->CanBackupMembers()->column("FirstName")
-			)
-		);
-	}
-
-	/**
-	 * Get a string of groups/people that are allowed to upload {@link DNDataArchive}
-	 *  objects linked to this environment.
-	 *
-	 * @return string
-	 */
-	public function getArchiveUploadersList() {
-		return implode(
-			", ",
-			array_merge(
-				$this->ArchiveUploaderGroups()->column("Title"),
-				$this->ArchiveUploaders()->column("FirstName")
-			)
-		);
-	}
-
-	/**
-	 * Get a string of groups/people that are allowed to download {@link DNDataArchive} objects from this environment.
-	 *
-	 * @return string
-	 */
-	public function getArchiveDownloadersList() {
-		return implode(
-			", ",
-			array_merge(
-				$this->ArchiveDownloaderGroups()->column("Title"),
-				$this->ArchiveDownloaders()->column("FirstName")
-			)
-		);
-	}
-
-	/**
-	 * Get a string of groups/people that are allowed to delete {@link DNDataArchive} objects from this environment.
-	 *
-	 * @return string
-	 */
-	public function getArchiveDeletersList() {
-		return implode(
-			", ",
-			array_merge(
-				$this->ArchiveDeleterGroups()->column("Title"),
-				$this->ArchiveDeleters()->column("FirstName")
-			)
-		);
 	}
 
 	/**
@@ -783,22 +589,6 @@ class DNEnvironment extends DataObject {
 	public function getCMSFields() {
 		$fields = new FieldList(new TabSet('Root'));
 
-		$project = $this->Project();
-		if ($project && $project->exists()) {
-			$viewerGroups = $project->Viewers();
-			$groups = $viewerGroups->sort('Title')->map()->toArray();
-			$members = [];
-			foreach ($viewerGroups as $group) {
-				foreach ($group->Members()->map() as $k => $v) {
-					$members[$k] = $v;
-				}
-			}
-			asort($members);
-		} else {
-			$groups = [];
-			$members = [];
-		}
-
 		// Main tab
 		$fields->addFieldsToTab('Root.Main', [
 			// The Main.ProjectID
@@ -830,68 +620,6 @@ class DNEnvironment extends DataObject {
 				->setSource($backends)
 				->setDescription('What kind of deployment system should be used to deploy to this environment'));
 		}
-
-		$fields->addFieldsToTab('Root.UserPermissions', [
-			// The viewers of the environment
-			$this
-				->buildPermissionField('ViewerGroups', 'Viewers', $groups, $members)
-				->setTitle('Who can view this environment?')
-				->setDescription('Groups or Users who can view this environment'),
-
-			// The Main.Deployers
-			$this
-				->buildPermissionField('DeployerGroups', 'Deployers', $groups, $members)
-				->setTitle('Who can deploy?')
-				->setDescription('Groups or Users who can deploy to this environment'),
-
-			// A box to select all snapshot options.
-			$this
-				->buildPermissionField('TickAllSnapshotGroups', 'TickAllSnapshot', $groups, $members)
-				->setTitle("<em>All snapshot permissions</em>")
-				->addExtraClass('tickall')
-				->setDescription('UI shortcut to select all snapshot-related options - not written to the database.'),
-
-			// The Main.CanRestoreMembers
-			$this
-				->buildPermissionField('CanRestoreGroups', 'CanRestoreMembers', $groups, $members)
-				->setTitle('Who can restore?')
-				->setDescription('Groups or Users who can restore archives from Deploynaut into this environment'),
-
-			// The Main.CanBackupMembers
-			$this
-				->buildPermissionField('CanBackupGroups', 'CanBackupMembers', $groups, $members)
-				->setTitle('Who can backup?')
-				->setDescription('Groups or Users who can backup archives from this environment into Deploynaut'),
-
-			// The Main.ArchiveDeleters
-			$this
-				->buildPermissionField('ArchiveDeleterGroups', 'ArchiveDeleters', $groups, $members)
-				->setTitle('Who can delete?')
-				->setDescription("Groups or Users who can delete archives from this environment's staging area."),
-
-			// The Main.ArchiveUploaders
-			$this
-				->buildPermissionField('ArchiveUploaderGroups', 'ArchiveUploaders', $groups, $members)
-				->setTitle('Who can upload?')
-				->setDescription(
-					'Users who can upload archives linked to this environment into Deploynaut.<br />' .
-					'Linking them to an environment allows limiting download permissions (see below).'
-				),
-
-			// The Main.ArchiveDownloaders
-			$this
-				->buildPermissionField('ArchiveDownloaderGroups', 'ArchiveDownloaders', $groups, $members)
-				->setTitle('Who can download?')
-				->setDescription(<<<PHP
-Users who can download archives from this environment to their computer.<br />
-Since this implies access to the snapshot, it is also a prerequisite for restores
-to other environments, alongside the "Who can restore" permission.<br>
-Should include all users with upload permissions, otherwise they can't download
-their own uploads.
-PHP
-				)
-
-		]);
 
 		// The Main.DeployConfig
 		if ($this->Project()->exists()) {
@@ -1097,31 +825,6 @@ PHP
 			'ShortHash' => $sha,
 			'Hash' => '(unknown)',
 		];
-	}
-
-	/**
-	 * Build a set of multi-select fields for assigning permissions to a pair of group and member many_many relations
-	 *
-	 * @param string $groupField Group field name
-	 * @param string $memberField Member field name
-	 * @param array $groups List of groups
-	 * @param array $members List of members
-	 * @return FieldGroup
-	 */
-	protected function buildPermissionField($groupField, $memberField, $groups, $members) {
-		return FieldGroup::create(
-			ListboxField::create($groupField, false, $groups)
-				->setMultiple(true)
-				->setAttribute('data-placeholder', 'Groups')
-				->setAttribute('placeholder', 'Groups')
-				->setAttribute('style', 'width: 400px;'),
-
-			ListboxField::create($memberField, false, $members)
-				->setMultiple(true)
-				->setAttribute('data-placeholder', 'Members')
-				->setAttribute('placeholder', 'Members')
-				->setAttribute('style', 'width: 400px;')
-		);
 	}
 
 	/**

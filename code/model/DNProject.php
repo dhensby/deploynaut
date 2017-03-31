@@ -345,7 +345,7 @@ class DNProject extends DataObject {
 
 		return (bool) $this->Environments()->filterByCallback(function ($env) use ($member) {
 			return $env->canRestore($member);
-		})->Count();
+		})->count();
 	}
 
 	/**
@@ -693,11 +693,6 @@ class DNProject extends DataObject {
 		$workspaceField = new ReadonlyField('LocalWorkspace', 'Git workspace', $this->getLocalCVSPath());
 		$workspaceField->setDescription('This is where the GIT repository are located on this server');
 		$fields->insertAfter($workspaceField, 'CVSPath');
-
-		$readAccessGroups = ListboxField::create('Viewers', 'Project viewers', Group::get()->map()->toArray())
-			->setMultiple(true)
-			->setDescription('These groups can view the project in the front-end.');
-		$fields->addFieldToTab("Root.Main", $readAccessGroups);
 
 		$this->setCreateProjectFolderField($fields);
 		$this->setEnvironmentFields($fields, $environments);
