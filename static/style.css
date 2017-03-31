@@ -13046,6 +13046,7 @@ button.abort {
         @media screen and (min-width: 992px) {
           .modal.deploy .modal-dialog .modal-content .modal-body .menu.affix {
             position: fixed;
+            top: 70px;
             width: 220px; } }
         .modal.deploy .modal-dialog .modal-content .modal-body .menu .step {
           font-size: 16px;
