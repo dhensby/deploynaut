@@ -166,10 +166,6 @@ class DNEnvironment extends DataObject {
 		$e = DNEnvironment::create();
 		$e->Filename = $path;
 		$e->Name = basename($e->Filename, '.rb');
-
-		// add each administrator member as a deployer of the new environment
-		$adminGroup = Group::get()->filter('Code', 'administrators')->first();
-		$e->DeployerGroups()->add($adminGroup);
 		return $e;
 	}
 
