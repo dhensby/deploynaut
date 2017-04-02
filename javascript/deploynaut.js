@@ -242,7 +242,10 @@
 				envVal = form.find("select[name=EnvironmentID]").val(),
 				envLabel = form.find("select[name=EnvironmentID] option[value=\"" + envVal + '"]').text(),
 				msg = 'Are you sure you want to restore data onto environment ' + envLabel + '?';
-
+			if(!envVal){
+				alert("You must select an evironment to restore to.");
+				return false;
+			}
 			if(!confirm(msg)) e.preventDefault();
 		});
 
