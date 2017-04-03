@@ -15,7 +15,12 @@ function canBypass(state) {
 	if (constants.isRejected(current.state)) {
 		return false;
 	}
-	if (constants.isSubmitted(current.state)) {
+
+	// Submitted state does not allow bypass, except for the case where the requester
+	// has permissions to bypass their own submission if they assigned it to someone else
+	// and wish to bypass anyway. This is because they will not be shown approve or reject
+	// actions on their own submissions.
+	if (constants.isSubmitted(current.state) && state.deployer && (state.deployer.id !== state.user.id)) {
 		return false;
 	}
 	return true;
