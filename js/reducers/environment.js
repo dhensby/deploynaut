@@ -26,7 +26,7 @@ module.exports = function environment(state, action) {
 			});
 		case actions.SUCCEED_DEPLOYMENT_GET: {
 			const newApprovers = _.assign({}, state.approvers);
-			if (action.data.deployment.approver_id) {
+			if (action.data.deployment.approver_id && action.data.deployment.approver) {
 				newApprovers[action.data.deployment.approver_id] = action.data.deployment.approver;
 			}
 			return _.assign({}, state, {
