@@ -616,54 +616,6 @@ class DNRoot extends Controller implements PermissionProvider, TemplateGlobalPro
 	}
 
 	/**
-	 * Construct the deployment form
-	 *
-	 * @deprecated 2.0.0 - moved to DeployDispatcher
-	 *
-	 * @return Form
-	 */
-	public function getDeployForm($request = null) {
-
-		// Performs canView permission check by limiting visible projects
-		$project = $this->getCurrentProject();
-		if (!$project) {
-			return $this->project404Response();
-		}
-
-		// Performs canView permission check by limiting visible projects
-		$environment = $this->getCurrentEnvironment($project);
-		if (!$environment) {
-			return $this->environment404Response();
-		}
-
-		if (!$environment->canDeploy()) {
-			return new SS_HTTPResponse("Not allowed to deploy", 401);
-		}
-
-		// Generate the form
-		$form = new DeployForm($this, 'DeployForm', $environment, $project);
-
-		// If this is an ajax request we don't want to submit the form - we just want to retrieve the markup.
-		if (
-			$request &&
-			!$request->requestVar('action_showDeploySummary') &&
-			$this->getRequest()->isAjax() &&
-			$this->getRequest()->isGET()
-		) {
-			// We can just use the URL we're accessing
-			$form->setFormAction($this->getRequest()->getURL());
-
-			$body = json_encode(['Content' => $form->forAjaxTemplate()->forTemplate()]);
-			$this->getResponse()->addHeader('Content-Type', 'application/json');
-			$this->getResponse()->setBody($body);
-			return $body;
-		}
-
-		$form->setFormAction($this->getRequest()->getURL() . '/DeployForm');
-		return $form;
-	}
-
-	/**
 	 * @deprecated 2.0.0 - moved to GitDispatcher
 	 *
 	 * @param \SS_HTTPRequest $request
