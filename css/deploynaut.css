@@ -265,9 +265,6 @@ ul li pre {
 	border-bottom: 1px solid #eee;
 	padding: 8px 0;
 }
-#DeployForm_DeployForm select, #DeployForm_DeployForm input[type=text] {
-	width: 450px;
-}
 
 form.userswitcher label.left {
 	width: auto;
@@ -314,22 +311,6 @@ form.fields-wide .field label.left {
 
 #Form_MoveForm .Actions {
 	margin-top: 60px;
-}
-
-#DeployForm_DeployForm .SelectionGroup {
-	overflow: hidden;
-}
-#DeployForm_DeployForm .field.checkbox {
-	margin: 0px 0px 10px 25px;
-}
-#DeployForm_DeployForm .field.checkbox input {
-	margin: 0px 4px 3px;
-	padding: 0;
-	display: inline-block;
-	height: 20px;
-}
-#DeployForm_DeployForm .field.checkbox label {
-	height: 20px;
 }
 
 /** end custom form styling **/
