@@ -3,6 +3,11 @@
 (function($) {
 	"use strict";
 
+	var login = $('input[name="Login"]');
+	if (login && login.length > 0) {
+		login.focus();
+	}
+
 	// Popover on enviroment repository link
 	$(function () {
 		$('[data-toggle="popover"]').popover()
@@ -280,7 +285,7 @@
 			}
 
 			// numCheckBoxes is an integer equal to the number of .bulk-delete-select boxes
-			// If all .bulk-delete-select are checked then we 
+			// If all .bulk-delete-select are checked then we
 			if (bulkCheckboxes.filter(':checked').length === numCheckBoxes) {
 				// Hide Select all button
 				bulkSelectAll.addClass('hide');
