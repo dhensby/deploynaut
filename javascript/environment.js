@@ -1,16 +1,16 @@
 (function($) {
 	"use strict";
-	
+
 	$.entwine.warningLevel = $.entwine.WARN_LEVEL_BESTPRACTISE;
 	$.entwine('ss.deploynaut', function($) {
-		
+
 		$('.tickall select').entwine({
 			IDs: [],
 			targets: function() {
 				return [];
 			},
 			onchange: function() {
-				var 
+				var
 					oldVal = this.getIDs() || [],
 					newVal = this.val() || [],
 					targets = this.targets();
@@ -23,7 +23,7 @@
 							|| ($.inArray(targetItem, newVal) > -1); // Either added or already selected
 						return keep;
 					});
-					
+
 					// Select newly added items
 					$.each(newVal, function(newItemIndex, newItem) {
 						if(!($.inArray(newItem, targetFiltered) > -1) && !($.inArray(newItem, oldVal) > -1)) {
@@ -41,35 +41,11 @@
 				this.setIDs(newVal);
 			}
 		});
-		
-		$('.tickall select#Form_ItemEditForm_TickAllSnapshotGroups').entwine({
-			targets: function() {
-				return [
-					$('#Form_ItemEditForm_CanRestoreGroups'),
-					$('#Form_ItemEditForm_CanBackupGroups'),
-					$('#Form_ItemEditForm_ArchiveDeleterGroups'),
-					$('#Form_ItemEditForm_ArchiveUploaderGroups'),
-					$('#Form_ItemEditForm_ArchiveDownloaderGroups')
-				];
-			}
-		});
-		
-		$('.tickall select#Form_ItemEditForm_TickAllSnapshot').entwine({
-			targets: function() {
-				return [
-					$('#Form_ItemEditForm_CanRestoreMembers'),
-					$('#Form_ItemEditForm_CanBackupMembers'),
-					$('#Form_ItemEditForm_ArchiveDeleters'),
-					$('#Form_ItemEditForm_ArchiveUploaders'),
-					$('#Form_ItemEditForm_ArchiveDownloaders')
-				];
-			}
-		});
 
 		var updateLog = null;
-		
+
 		$('#Form_ItemEditForm_action_check').entwine({
-			
+
 			onclick: function(e) {
 				var url = this.attr('data-url'),
 					dialog = $('<div class="ss-ui-dialog" id="ss-ui-dialog-' + Math.random(0, 100000000) + '" />'),
@@ -85,14 +61,14 @@
 							width: 290,
 							height: 500
 						});
-						
+
 						// Setup the refresh of the log
 						self._setupPinging(modal, data.href);
 					},
 					dataType: 'json'
 				  });
 			},
-			
+
 			/**
 			 * Will fetch latest ping log and reload the content with it
 			 */
@@ -113,7 +89,7 @@
 					});
 				}, 500);
 			},
-			
+
 			/**
 			 * Will remove the pinging and refresh of the application list
 			 */
@@ -121,6 +97,6 @@
 				window.clearInterval(updateLog);
 			}
 		});
-		
+
 	});
 })(jQuery);

@@ -298,14 +298,11 @@ class DNDataArchive extends DataObject {
 		}
 
 		// Checks if the user can actually access the archive.
-		if(!$this->canDownload($member)) {
+		if (!$this->canDownload($member)) {
 			return false;
 		}
 
-		// Hooks into ArchiveUploaders permission to prevent proliferation of permission checkboxes.
-		// Bypasses the quota check - we don't need to check for it as long as we move the snapshot within the project.
-		return $targetEnv->ArchiveUploaders()->byID($member->ID)
-			|| $member->inGroups($targetEnv->ArchiveUploaderGroups());
+		return true;
 	}
 
 	/**
