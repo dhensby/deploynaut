@@ -262,6 +262,11 @@ class GitDispatcher extends Dispatcher {
 				'title' => $tag->Name()
 			];
 		}
+		$names = [];
+		foreach ($tags as $key => $tag) {
+			$names[$key] = $tag['title'];
+		}
+		array_multisort($names, SORT_NATURAL, $tags);
 		return $tags;
 	}
 
