@@ -73,6 +73,13 @@ class EnvironmentOverview extends Dispatcher {
 
 		if ($baseProject->hasMethod('listMembers')) {
 			foreach ($baseProject->listMembers() as $data) {
+
+				// approver list shouldn't include the current user, as approval
+				// is only possible by another user on the team.
+				if ($data['MemberID'] == \Member::currentUserID()) {
+					continue;
+				}
+
 				if ($baseProject->allowed(\ApprovalsDispatcher::ALLOW_APPROVAL, \Member::get()->byId($data['MemberID']))) {
 					$approversList[$data['MemberID']] = [
 						'id' => $data['MemberID'],
@@ -105,6 +112,7 @@ class EnvironmentOverview extends Dispatcher {
 				'approvers' => $approversList
 			],
 			'user' => [
+				'id' => \Member::currentUserID(),
 				'can_approve' => \ApprovalsDispatcher::can_approve($this->getCurrentEnvironment()),
 				'can_bypass_approval' => \ApprovalsDispatcher::can_bypass_approval($this->getCurrentEnvironment()),
 				'can_abort_deployment' => \DeployDispatcher::can_abort_deployment($this->getCurrentEnvironment())
