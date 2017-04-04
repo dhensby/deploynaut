@@ -126,15 +126,15 @@ const ApprovalRO = React.createClass({
 		let removeAction = null;
 		let rejectAction = null;
 		let rejectCancel = null;
-		if (props.can_approve && props.approval_state === constants.APPROVAL_SUBMITTED) {
+		if (props.user.can_approve && props.approval_state === constants.APPROVAL_SUBMITTED) {
 			removeAction = this.getRemoveAction();
 			rejectAction = this.getRejectShowReasonAction();
 			rejectCancel = this.getRejectHideReasonAction();
 		}
 
 		let mainActions = null;
-		// if the reject input isn't triggered we show these actions
-		if (!this.state.rejected_reason_open) {
+		// If the reject input isn't triggered we show these actions.
+		if (!this.state.rejected_reason_open && props.deployer && (props.deployer.id !== props.user.id)) {
 			mainActions = (
 				<div>
 					<ApproveRequest /> {rejectAction}
@@ -192,7 +192,8 @@ const mapStateToProps = function(state) {
 		date_requested_nice: current.date_requested_nice,
 		date_approved_nice: current.date_approved_nice,
 		approver: approver,
-		can_approve: state.user.can_approve,
+		deployer: current.deployer,
+		user: state.user,
 		rejected_reason: current.rejected_reason,
 		error: state.approval.error,
 		is_loading: state.deployment.is_loading
