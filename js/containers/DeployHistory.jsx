@@ -1,5 +1,6 @@
 const React = require('react');
 const ReactRedux = require('react-redux');
+const ReactRouter = require('react-router');
 const Pagination = require('react-bootstrap/lib/Pagination');
 const BuildStatus = require('../components/BuildStatus.jsx');
 const LoadingBar = require('../components/LoadingBar.jsx');
@@ -39,6 +40,29 @@ const DeployHistory = function(props) {
 		);
 	}
 
+	let rows = Object.keys(props.list).map(function(i) {
+		const row = props.list[i];
+		const state = row.is_current_build ? 'Current' : row.state;
+		return (
+			<tr className={"fade-in status-" + state} onClick={() => props.onItemClick(row.id)} key={i}>
+				<td>{row.date_started_nice}</td>
+				<td><BuildStatus deployment={row} /></td>
+				<td>{row.approver ? row.approver.name : <span className="bypassed">Bypassed</span>}</td>
+				<td>{row.deployer ? row.deployer.name : null}</td>
+				<td className="deploy-status"><span className="deploy-status-text">{state}</span></td>
+			</tr>
+		);
+	});
+	if (rows.length === 0 && props.is_loading === false) {
+		rows = (
+			<tr>
+				<td colSpan="5" className="text-center">
+					There are currently no deployments to show. Start a <ReactRouter.Link to="/deployment/new">new deployment</ReactRouter.Link>?
+				</td>
+			</tr>
+		);
+	}
+
 	return (
 		<div className="fade-in">
 			<h4>History</h4>
@@ -55,21 +79,7 @@ const DeployHistory = function(props) {
 					</thead>
 					<tbody>
 						{errorRow}
-						{
-							Object.keys(props.list).map(function(i) {
-								const row = props.list[i];
-								const state = row.is_current_build ? 'Current' : row.state;
-								return (
-									<tr className={"fade-in status-" + state} onClick={() => props.onItemClick(row.id)} key={i}>
-										<td>{row.date_started_nice}</td>
-										<td><BuildStatus deployment={row} /></td>
-										<td>{row.approver ? row.approver.name : <span className="bypassed">Bypassed</span>}</td>
-										<td>{row.deployer ? row.deployer.name : null}</td>
-										<td className="deploy-status"><span className="deploy-status-text">{state}</span></td>
-									</tr>
-								);
-							})
-						}
+						{rows}
 					</tbody>
 				</table>
 				<LoadingBar show={props.is_loading} />
