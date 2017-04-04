@@ -133,8 +133,8 @@ const ApprovalRO = React.createClass({
 		}
 
 		let mainActions = null;
-		// If the reject input isn't triggered we show these actions.
-		if (!this.state.rejected_reason_open && props.deployer && (props.deployer.id !== props.user.id)) {
+		// if the reject input isn't triggered we show these actions
+		if (!this.state.rejected_reason_open) {
 			mainActions = (
 				<div>
 					<ApproveRequest /> {rejectAction}

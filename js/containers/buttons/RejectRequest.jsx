@@ -9,9 +9,6 @@ function canReject(state) {
 		return false;
 	}
 	const current = state.deployment.list[state.deployment.current_id] || {};
-	if (current.deployer.id === state.user.id) {
-		return false;
-	}
 	if (constants.isApproved(current.state)) {
 		return false;
 	}
