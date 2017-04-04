@@ -160,14 +160,16 @@ const ApprovalRO = React.createClass({
 				<LoadingBar show={props.is_loading} />
 				{mainActions}
 				<div className={this.state.rejected_reason_open ? "" : "hide"}>
-					<label htmlFor="rejected_reason">Provide a reason why the deployment has been rejected</label>
-					<TextArea
-						id="rejected_reason"
-						value={props.rejected_reason}
-						rows="5"
-						onChange={props.onRejectReasonChange}
-						disabled={props.approval_state === constants.APPROVAL_REJECTED}
-					/>
+					<div className="form-group">
+						<label htmlFor="rejected_reason">Provide a reason why the deployment has been rejected</label>
+						<TextArea
+							id="rejected_reason"
+							value={props.rejected_reason}
+							rows="5"
+							onChange={props.onRejectReasonChange}
+							disabled={props.approval_state === constants.APPROVAL_REJECTED}
+						/>
+					</div>
 					<RejectRequest />
 					{rejectCancel}
 				</div>
