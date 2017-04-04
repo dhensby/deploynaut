@@ -112,6 +112,7 @@ class EnvironmentOverview extends Dispatcher {
 				'approvers' => $approversList
 			],
 			'user' => [
+				'id' => \Member::currentUserID(),
 				'can_approve' => \ApprovalsDispatcher::can_approve($this->getCurrentEnvironment()),
 				'can_bypass_approval' => \ApprovalsDispatcher::can_bypass_approval($this->getCurrentEnvironment()),
 				'can_abort_deployment' => \DeployDispatcher::can_abort_deployment($this->getCurrentEnvironment())

@@ -4,10 +4,23 @@ var actions = require('../../_actions.js');
 var Button = require('../../components/Button.jsx');
 const constants = require('../../constants/deployment.js');
 
-const mapStateToProps = function(state) {
+function canApprove(state) {
+	if (!state.user.can_approve) {
+		return false;
+	}
 	const current = state.deployment.list[state.deployment.current_id] || {};
+	if (current.deployer.id === state.user.id) {
+		return false;
+	}
+	if (!constants.isSubmitted(current.state)) {
+		return false;
+	}
+	return true;
+}
+
+const mapStateToProps = function(state) {
 	return {
-		display: state.user.can_approve && constants.isSubmitted(current.state),
+		display: canApprove(state),
 		disabled: state.approval.is_loading,
 		style: "btn-success btn-wide",
 		value: "Approve"
