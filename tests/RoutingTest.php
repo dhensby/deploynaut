@@ -50,7 +50,7 @@ class RoutingTest extends FunctionalTest
 		$project->Environments()->add($env);
 		$project->write();
 
-		$actual = $this->get('/naut/project/amoeba/environment/prod');
+		$actual = $this->get('/naut/project/amoeba/environment/prod/overview');
 		$this->assertEquals(200, $actual->getStatusCode());
 
 		$actual = $this->get('/naut/project/amoeba/environment/uat');
