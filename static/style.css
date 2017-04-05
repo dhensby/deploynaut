@@ -12089,8 +12089,7 @@ nav.sidebar .project-name {
     box-shadow: none; }
 
 .stack-pagination {
-  padding: 15px 0;
-  width: 200px; }
+  padding: 15px 0; }
   .stack-pagination > li > a {
     padding-left: 15px; }
   .stack-pagination li.virtual-s a {
