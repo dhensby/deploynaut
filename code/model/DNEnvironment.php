@@ -729,6 +729,25 @@ class DNEnvironment extends DataObject {
 	}
 
 	/**
+	 * Fetchs all deployments in progress. Limits to 1 hour to prevent deployments
+	 * if an old deployment is stuck.
+	 *
+	 * @return DataList
+	 */
+	public function runningDeployments() {
+		return DNDeployment::get()
+			->filter([
+				'EnvironmentID' => $this->ID,
+				'State' => [
+					DNDeployment::STATE_QUEUED,
+					DNDeployment::STATE_DEPLOYING,
+					DNDeployment::STATE_ABORTING
+				],
+				'Created:GreaterThan' => strtotime('-1 hour')
+			]);
+	}
+
+	/**
 	 * @param FieldList $fields
 	 */
 	protected function setDeployConfigurationFields(&$fields) {
