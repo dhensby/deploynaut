@@ -290,15 +290,6 @@ class DNEnvironment extends DataObject {
 	}
 
 	/**
-	 * Provide reason why the user cannot deploy.
-	 *
-	 * @return string
-	 */
-	public function getCannotDeployMessage() {
-		return 'You cannot deploy to this environment.';
-	}
-
-	/**
 	 * Allows only selected {@link Member} objects to restore {@link DNDataArchive} objects into this
 	 * {@link DNEnvironment}.
 	 *
@@ -499,44 +490,9 @@ class DNEnvironment extends DataObject {
 		// default / fallback sort order
 		$sort['LastEdited'] = 'DESC';
 
-		$deployments = $this->Deployments()
+		return $this->Deployments()
 			->where('"SHA" IS NOT NULL')
 			->sort($sort);
-
-		if (!$this->IsNewDeployEnabled()) {
-			$deployments = $deployments->filter('State', [
-				DNDeployment::STATE_COMPLETED,
-				DNDeployment::STATE_FAILED,
-				DNDeployment::STATE_INVALID
-			]);
-		}
-		return $deployments;
-	}
-
-	/**
-	 * Check if the new deployment form is enabled by whether the project has it,
-	 * falling back to environment variables on whether it's enabled.
-	 *
-	 * @return bool
-	 */
-	public function IsNewDeployEnabled() {
-		if ($this->Project()->IsNewDeployEnabled) {
-			return true;
-		}
-		// Check for feature flags:
-		// - FLAG_NEWDEPLOY_ENABLED: set to true to enable globally
-		// - FLAG_NEWDEPLOY_ENABLED_FOR_MEMBERS: set to semicolon-separated list of email addresses of allowed users.
-		if (defined('FLAG_NEWDEPLOY_ENABLED') && FLAG_NEWDEPLOY_ENABLED) {
-			return true;
-		}
-		if (defined('FLAG_NEWDEPLOY_ENABLED_FOR_MEMBERS') && FLAG_NEWDEPLOY_ENABLED_FOR_MEMBERS) {
-			$allowedMembers = explode(';', FLAG_NEWDEPLOY_ENABLED_FOR_MEMBERS);
-			$member = Member::currentUser();
-			if ($allowedMembers && $member && in_array($member->Email, $allowedMembers)) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	/**
@@ -546,10 +502,7 @@ class DNEnvironment extends DataObject {
 	 * @return string
 	 */
 	public function DeploymentsLink() {
-		if ($this->IsNewDeployEnabled()) {
-			return $this->Link(\EnvironmentOverview::ACTION_OVERVIEW);
-		}
-		return $this->Link();
+		return $this->Link(\EnvironmentOverview::ACTION_OVERVIEW);
 	}
 
 	/**
@@ -773,54 +726,6 @@ class DNEnvironment extends DataObject {
 			}
 			return $list;
 		}
-	}
-
-	/**
-	 * Fetchs all deployments in progress. Limits to 1 hour to prevent deployments
-	 * if an old deployment is stuck.
-	 *
-	 * @return DataList
-	 */
-	public function runningDeployments() {
-		return DNDeployment::get()
-			->filter([
-				'EnvironmentID' => $this->ID,
-				'State' => [
-					DNDeployment::STATE_QUEUED,
-					DNDeployment::STATE_DEPLOYING,
-					DNDeployment::STATE_ABORTING
-				],
-				'Created:GreaterThan' => strtotime('-1 hour')
-			]);
-	}
-
-	/**
-	 * @param string $sha
-	 * @return array
-	 */
-	protected function getCommitData($sha) {
-		try {
-			$repo = $this->Project()->getRepository();
-			if ($repo !== false) {
-				$commit = new \Gitonomy\Git\Commit($repo, $sha);
-				return [
-					'AuthorName' => (string) Convert::raw2xml($commit->getAuthorName()),
-					'AuthorEmail' => (string) Convert::raw2xml($commit->getAuthorEmail()),
-					'Message' => (string) Convert::raw2xml($this->getCommitMessage($commit)),
-					'ShortHash' => Convert::raw2xml($commit->getFixedShortHash(8)),
-					'Hash' => Convert::raw2xml($commit->getHash())
-				];
-			}
-		} catch (\Gitonomy\Git\Exception\ReferenceNotFoundException $exc) {
-			SS_Log::log($exc, SS_Log::WARN);
-		}
-		return [
-			'AuthorName' => '(unknown)',
-			'AuthorEmail' => '(unknown)',
-			'Message' => '(unknown)',
-			'ShortHash' => $sha,
-			'Hash' => '(unknown)',
-		];
 	}
 
 	/**

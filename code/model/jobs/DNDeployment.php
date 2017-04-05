@@ -114,15 +114,7 @@ class DNDeployment extends DataObject implements Finite\StatefulInterface, HasSt
 	}
 
 	public function Link() {
-		if ($this->Environment()->IsNewDeployEnabled()) {
-			return \Controller::join_links($this->Environment()->Link(\EnvironmentOverview::ACTION_OVERVIEW), 'deployment', $this->ID);
-		} else {
-			return \Controller::join_links($this->Environment()->Link(), 'deploy', $this->ID);
-		}
-	}
-
-	public function LogLink() {
-		return $this->Link() . '/log';
+		return \Controller::join_links($this->Environment()->Link(\EnvironmentOverview::ACTION_OVERVIEW), 'deployment', $this->ID);
 	}
 
 	public function canView($member = null) {
@@ -146,10 +138,6 @@ class DNDeployment extends DataObject implements Finite\StatefulInterface, HasSt
 	 */
 	public function log() {
 		return Injector::inst()->createWithArgs('DeploynautLogFile', array($this->logfile()));
-	}
-
-	public function LogContent() {
-		return $this->log()->content();
 	}
 
 	/**
