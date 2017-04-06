@@ -20,7 +20,7 @@ function canBypass(state) {
 	// has permissions to bypass their own submission if they assigned it to someone else
 	// and wish to bypass anyway. This is because they will not be shown approve or reject
 	// actions on their own submissions.
-	if (constants.isSubmitted(current.state) && current.deployer.id !== state.user.id) {
+	if (constants.isSubmitted(current.state) && current.deployer && (current.deployer.id !== state.user.id)) {
 		return false;
 	}
 	return true;
