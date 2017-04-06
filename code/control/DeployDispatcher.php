@@ -183,7 +183,7 @@ class DeployDispatcher extends Dispatcher {
 
 		$strategy = $this->environment->Backend()->planDeploy($this->environment, [
 			'sha' => $currentBuild->SHA,
-			'ref_type' => \GitDispatcher::REF_TYPE_PREVIOUS,
+			'ref_type' => \GitDispatcher::REF_TYPE_REDEPLOY_CURRENT,
 			'ref_name' => $currentBuild->RefName
 		]);
 		$deployment = $strategy->createDeployment();
