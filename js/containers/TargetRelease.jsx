@@ -30,14 +30,14 @@ const TargetRelease = React.createClass({
 
 		Object.keys(props.types).forEach(function(key) {
 			switch (key) {
-				case '0': // Promote build option
+				case '0':
+				case '5': // Promote build options (from UAT, and re-deploy current)
 					typeFields[key] = (
 						<BuildStatus status_box status_ago deployment={props.types[key].promote_build} />
 					);
 					break;
-				case '1': // Dropdowns for branch, tags, previously released
+				case '1': // Dropdowns for branch, and tags
 				case '2':
-				case '3':
 					typeFields[key] = (
 						<Dropdown
 							onSelect={props.onRefSelect}
