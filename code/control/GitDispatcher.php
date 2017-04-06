@@ -11,7 +11,6 @@ class GitDispatcher extends Dispatcher {
 	const REF_TYPE_FROM_UAT = 0;
 	const REF_TYPE_BRANCH = 1;
 	const REF_TYPE_TAG = 2;
-	const REF_TYPE_PREVIOUS = 3;
 	const REF_TYPE_SHA = 4;
 
 	/**
@@ -104,26 +103,11 @@ class GitDispatcher extends Dispatcher {
 			'description' => 'Deploy the latest version of a branch',
 			'list' => $this->getGitBranches($this->project)
 		];
-
 		$refs[self::REF_TYPE_TAG] = [
 			'id' => self::REF_TYPE_TAG,
 			'label' => 'Tag version',
 			'description' => 'Deploy a tagged release',
 			'list' => $this->getGitTags($this->project)
-		];
-
-		// @todo: the original was a tree that was keyed by environment, the
-		// front-end dropdown needs to be changed to support that. brrrr.
-		foreach ($this->getGitPrevDeploys($this->project) as $env) {
-			foreach ($env as $deploy) {
-				$prevDeploys[] = $deploy;
-			}
-		}
-		$refs[self::REF_TYPE_PREVIOUS] = [
-			'id' => self::REF_TYPE_PREVIOUS,
-			'label' => 'Redeploy a release that was previously deployed (to any environment)',
-			'description' => 'Deploy a previous release',
-			'list' => $prevDeploys
 		];
 		$refs[self::REF_TYPE_SHA] = [
 			'id' => self::REF_TYPE_SHA,
@@ -268,39 +252,6 @@ class GitDispatcher extends Dispatcher {
 		}
 		array_multisort($names, SORT_NATURAL, $tags);
 		return $tags;
-	}
-
-	/**
-	 * @param $project
-	 *
-	 * @return array
-	 */
-	protected function getGitPrevDeploys($project) {
-		$redeploy = [];
-		foreach ($project->DNEnvironmentList() as $dnEnvironment) {
-			$envName = $dnEnvironment->Name;
-			$perEnvDeploys = [];
-			foreach ($dnEnvironment->DeployHistory()->filter('State', \DNDeployment::STATE_COMPLETED) as $deploy) {
-				$sha = $deploy->SHA;
-
-				// Check if exists to make sure the newest deployment date is used.
-				if (!isset($perEnvDeploys[$sha])) {
-					$pastValue = sprintf(
-						"%s (deployed %s)",
-						substr($sha, 0, 8),
-						$deploy->obj('LastEdited')->Ago()
-					);
-					$perEnvDeploys[$sha] = [
-						'id' => $sha,
-						'title' => $pastValue
-					];
-				}
-			}
-			if (!empty($perEnvDeploys)) {
-				$redeploy[$envName] = array_values($perEnvDeploys);
-			}
-		}
-		return $redeploy;
 	}
 
 }
