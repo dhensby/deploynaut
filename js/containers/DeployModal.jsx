@@ -234,7 +234,7 @@ const mapStateToProps = function(state) {
 
 	return {
 		show: [
-			(!state.git.is_loading && !state.deployment.is_loading),
+			(!state.git.is_loading && && !state.git.is_fetching && !state.deployment.is_loading),
 			showPlan,
 			showPlan && showApproval,
 			constants.isApproved(current.state)
