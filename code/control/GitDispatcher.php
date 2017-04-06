@@ -12,6 +12,7 @@ class GitDispatcher extends Dispatcher {
 	const REF_TYPE_BRANCH = 1;
 	const REF_TYPE_TAG = 2;
 	const REF_TYPE_SHA = 4;
+	const REF_TYPE_REDEPLOY_CURRENT = 5;
 
 	/**
 	 * @var array
@@ -19,6 +20,10 @@ class GitDispatcher extends Dispatcher {
 	public static $allowed_actions = [
 		'update',
 		'show'
+	];
+
+	private static $dependencies = [
+		'formatter' => '%$DeploynautAPIFormatter'
 	];
 
 	/**
@@ -31,15 +36,16 @@ class GitDispatcher extends Dispatcher {
 	 */
 	protected $environment = null;
 
-	private static $dependencies = [
-		'formatter' => '%$DeploynautAPIFormatter'
-	];
+	/**
+	 * @var \DeploynautAPIFormatter
+	 */
+	protected $formatter;
+
 
 	public function init() {
 		parent::init();
 
 		$this->project = $this->getCurrentProject();
-
 		if (!$this->project) {
 			return $this->project404Response();
 		}
@@ -84,7 +90,6 @@ class GitDispatcher extends Dispatcher {
 		}
 
 		$refs = [];
-		$prevDeploys = [];
 
 		$uatEnvironment = $this->project->DNEnvironmentList()->filter('Usage', DNEnvironment::UAT)->first();
 		$uatBuild = $uatEnvironment ? $uatEnvironment->CurrentBuild() : null;
@@ -106,7 +111,7 @@ class GitDispatcher extends Dispatcher {
 		$refs[self::REF_TYPE_TAG] = [
 			'id' => self::REF_TYPE_TAG,
 			'label' => 'Tag version',
-			'description' => 'Deploy a tagged release',
+			'description' => 'Deploy a tagged version',
 			'list' => $this->getGitTags($this->project)
 		];
 		$refs[self::REF_TYPE_SHA] = [
@@ -114,6 +119,16 @@ class GitDispatcher extends Dispatcher {
 			'label' => 'Deploy a specific SHA',
 			'description' => 'Deploy a specific SHA'
 		];
+
+		$targetBuild = $targetEnvironment ? $targetEnvironment->CurrentBuild() : null;
+		if ($targetBuild && $targetBuild->exists()) {
+			$refs[self::REF_TYPE_REDEPLOY_CURRENT] = [
+				'id' => self::REF_TYPE_REDEPLOY_CURRENT,
+				'label' => 'Redeploy the current version on this environment',
+				'description' => 'Redeploy the current version on this environment',
+				'promote_build' => $this->formatter->getDeploymentData($targetBuild)
+			];
+		}
 
 		$options = [];
 		if ($targetEnvironment) {
