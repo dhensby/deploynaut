@@ -80,7 +80,7 @@ class EnvironmentOverview extends Dispatcher {
 					continue;
 				}
 
-				if ($baseProject->allowed(\ApprovalsDispatcher::ALLOW_APPROVAL, \Member::get()->byId($data['MemberID']))) {
+				if ($baseProject->allowed(\ApprovalsDispatcher::ALLOW_PROD_APPROVAL, \Member::get()->byId($data['MemberID']))) {
 					$approversList[$data['MemberID']] = [
 						'id' => $data['MemberID'],
 						'email' => $data['Email'],
@@ -113,8 +113,8 @@ class EnvironmentOverview extends Dispatcher {
 			],
 			'user' => [
 				'id' => \Member::currentUserID(),
-				'can_approve' => \ApprovalsDispatcher::can_approve($this->getCurrentEnvironment()),
-				'can_bypass_approval' => \ApprovalsDispatcher::can_bypass_approval($this->getCurrentEnvironment()),
+				'can_approve' => $this->getCurrentEnvironment()->canApprove(),
+				'can_bypass_approval' => $this->getCurrentEnvironment()->canBypass(),
 				'can_abort_deployment' => \DeployDispatcher::can_abort_deployment($this->getCurrentEnvironment())
 			]
 		];

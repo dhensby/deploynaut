@@ -1,28 +1,28 @@
 Member:
-  allowProdDeployment:
-    Email: allowProdDeployment
-  allowNonProdDeployment:
-    Email: allowNonProdDeployment
+  allowProdApproval:
+    Email: allowProdApproval
+  allowNonProdApproval:
+    Email: allowNonProdApproval:
   allowProdSnapshot:
     Email: allowProdSnapshot
   allowNonProdSnapshot:
     Email: allowNonProdSnapshot
 Permission:
-  allowProdDeployment:
-    Code: ALLOW_PROD_DEPLOYMENT
-  allowNonProdDeployment:
-    Code: ALLOW_NON_PROD_DEPLOYMENT
+  allowProdApproval:
+    Code: ALLOW_PROD_APPROVAL
+  allowNonProdApproval:
+    Code: ALLOW_NON_PROD_APPROVAL
   allowProdSnapshot:
     Code: ALLOW_PROD_SNAPSHOT
   allowNonProdSnapshot:
     Code: ALLOW_NON_PROD_SNAPSHOT
 Group:
-  allowProdDeployment:
-    Members: =>Member.allowProdDeployment
-    Permissions: =>Permission.allowProdDeployment
-  allowNonProdDeployment:
-    Members: =>Member.allowNonProdDeployment
-    Permissions: =>Permission.allowNonProdDeployment
+  allowProdApproval:
+    Members: =>Member.allowProdApproval
+    Permissions: =>Permission.allowProdApproval
+  allowNonProdApproval:
+    Members: =>Member.allowNonProdApproval
+    Permissions: =>Permission.allowNonProdApproval
   allowProdSnapshot:
     Members: =>Member.allowProdSnapshot
     Permissions: =>Permission.allowProdSnapshot
@@ -32,7 +32,7 @@ Group:
 
 DNProject:
   allowtest:
-    Viewers: =>Group.allowProdDeployment, =>Group.allowNonProdDeployment, =>Group.allowProdSnapshot, =>Group.allowNonProdSnapshot
+    Viewers: =>Group.allowProdApproval, =>Group.allowNonProdApproval, =>Group.allowProdSnapshot, =>Group.allowNonProdSnapshot
 
 DNEnvironment:
   prod:

@@ -11,8 +11,8 @@ class DNEnvironmentTest extends DeploynautTest {
 	public function testPermissions() {
 		$environment = $this->objFromFixture('DNEnvironment', 'uat');
 
-		$viewer1 = $this->objFromFixture('Member', 'allowNonProdDeployment');
-		$viewer2 = $this->objFromFixture('Member', 'allowProdDeployment');
+		$viewer1 = $this->objFromFixture('Member', 'allowNonProdApproval');
+		$viewer2 = $this->objFromFixture('Member', 'allowProdApproval');
 
 		$random = new Member(array('Email' => 'random@example.com'));
 		$random->write();
@@ -32,10 +32,10 @@ class DNEnvironmentTest extends DeploynautTest {
 	public function testAllows() {
 		$prod = $this->objFromFixture('DNEnvironment', 'prod');
 		$uat = $this->objFromFixture('DNEnvironment', 'uat');
-		$this->assertTrue($prod->canDeploy($this->objFromFixture('Member', 'allowProdDeployment')));
-		$this->assertFalse($prod->canDeploy($this->objFromFixture('Member', 'allowNonProdDeployment')));
-		$this->assertFalse($uat->canDeploy($this->objFromFixture('Member', 'allowProdDeployment')));
-		$this->assertTrue($uat->canDeploy($this->objFromFixture('Member', 'allowNonProdDeployment')));
+		$this->assertTrue($prod->canApprove($this->objFromFixture('Member', 'allowProdApproval')));
+		$this->assertFalse($prod->canApprove($this->objFromFixture('Member', 'allowNonProdApproval')));
+		$this->assertFalse($uat->canApprove($this->objFromFixture('Member', 'allowProdApproval')));
+		$this->assertTrue($uat->canApprove($this->objFromFixture('Member', 'allowNonProdApproval')));
 
 		$this->checkSnapshots('assertTrue', $prod, $this->objFromFixture('Member', 'allowProdSnapshot'));
 		$this->checkSnapshots('assertFalse', $prod, $this->objFromFixture('Member', 'allowNonProdSnapshot'));
