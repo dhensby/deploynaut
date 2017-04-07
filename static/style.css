@@ -1146,74 +1146,26 @@ hr {
 [role="button"] {
   cursor: pointer; }
 
-h1, h2, h3, h4, .modal.deploy .modal-dialog .modal-content .modal-header .nav > li > a, .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-outer .deploy-form .SelectionGroup > li > a, .deploy-form-outer .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .SelectionGroup > li > a, .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-loading .deploy-form .SelectionGroup > li > a, .deploy-form-loading .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .SelectionGroup > li > a, h5, h6,
+h1, h2, h3, h4, .modal.deploy .modal-dialog .modal-content .modal-header .nav > li > a, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
   font-family: inherit;
   font-weight: 300;
   line-height: 1.1;
   color: #555555; }
   h1 small,
-  h1 .small,
-  h1 .deploy-form-outer .deploy-form dl.quick-summary, .deploy-form-outer .deploy-form
-  h1 dl.quick-summary,
-  h1 .deploy-form-loading .deploy-form dl.quick-summary, .deploy-form-loading .deploy-form
-  h1 dl.quick-summary, h2 small,
-  h2 .small,
-  h2 .deploy-form-outer .deploy-form dl.quick-summary, .deploy-form-outer .deploy-form
-  h2 dl.quick-summary,
-  h2 .deploy-form-loading .deploy-form dl.quick-summary, .deploy-form-loading .deploy-form
-  h2 dl.quick-summary, h3 small,
-  h3 .small,
-  h3 .deploy-form-outer .deploy-form dl.quick-summary, .deploy-form-outer .deploy-form
-  h3 dl.quick-summary,
-  h3 .deploy-form-loading .deploy-form dl.quick-summary, .deploy-form-loading .deploy-form
-  h3 dl.quick-summary, h4 small, .modal.deploy .modal-dialog .modal-content .modal-header .nav > li > a small, .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-outer .deploy-form .SelectionGroup > li > a small, .deploy-form-outer .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .SelectionGroup > li > a small, .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-loading .deploy-form .SelectionGroup > li > a small, .deploy-form-loading .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .SelectionGroup > li > a small,
-  h4 .small, .modal.deploy .modal-dialog .modal-content .modal-header .nav > li > a .small, .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-outer .deploy-form .SelectionGroup > li > a .small, .deploy-form-outer .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .SelectionGroup > li > a .small, .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-loading .deploy-form .SelectionGroup > li > a .small, .deploy-form-loading .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .SelectionGroup > li > a .small,
-  h4 .deploy-form-outer .deploy-form dl.quick-summary, .deploy-form-outer .deploy-form
-  h4 dl.quick-summary, .modal.deploy .modal-dialog .modal-content .modal-header .nav > li > a .deploy-form-outer .deploy-form dl.quick-summary, .deploy-form-outer .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .nav > li > a dl.quick-summary, .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-outer .deploy-form .SelectionGroup > li > a dl.quick-summary, .deploy-form-outer .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .SelectionGroup > li > a dl.quick-summary,
-  h4 .deploy-form-loading .deploy-form dl.quick-summary, .deploy-form-loading .deploy-form
-  h4 dl.quick-summary, .modal.deploy .modal-dialog .modal-content .modal-header .nav > li > a .deploy-form-loading .deploy-form dl.quick-summary, .deploy-form-loading .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .nav > li > a dl.quick-summary, .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-loading .deploy-form .SelectionGroup > li > a dl.quick-summary, .deploy-form-loading .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .SelectionGroup > li > a dl.quick-summary, h5 small,
-  h5 .small,
-  h5 .deploy-form-outer .deploy-form dl.quick-summary, .deploy-form-outer .deploy-form
-  h5 dl.quick-summary,
-  h5 .deploy-form-loading .deploy-form dl.quick-summary, .deploy-form-loading .deploy-form
-  h5 dl.quick-summary, h6 small,
+  h1 .small, h2 small,
+  h2 .small, h3 small,
+  h3 .small, h4 small, .modal.deploy .modal-dialog .modal-content .modal-header .nav > li > a small,
+  h4 .small, .modal.deploy .modal-dialog .modal-content .modal-header .nav > li > a .small, h5 small,
+  h5 .small, h6 small,
   h6 .small,
-  h6 .deploy-form-outer .deploy-form dl.quick-summary, .deploy-form-outer .deploy-form
-  h6 dl.quick-summary,
-  h6 .deploy-form-loading .deploy-form dl.quick-summary, .deploy-form-loading .deploy-form
-  h6 dl.quick-summary,
   .h1 small,
-  .h1 .small,
-  .h1 .deploy-form-outer .deploy-form dl.quick-summary, .deploy-form-outer .deploy-form
-  .h1 dl.quick-summary,
-  .h1 .deploy-form-loading .deploy-form dl.quick-summary, .deploy-form-loading .deploy-form
-  .h1 dl.quick-summary, .h2 small,
-  .h2 .small,
-  .h2 .deploy-form-outer .deploy-form dl.quick-summary, .deploy-form-outer .deploy-form
-  .h2 dl.quick-summary,
-  .h2 .deploy-form-loading .deploy-form dl.quick-summary, .deploy-form-loading .deploy-form
-  .h2 dl.quick-summary, .h3 small,
-  .h3 .small,
-  .h3 .deploy-form-outer .deploy-form dl.quick-summary, .deploy-form-outer .deploy-form
-  .h3 dl.quick-summary,
-  .h3 .deploy-form-loading .deploy-form dl.quick-summary, .deploy-form-loading .deploy-form
-  .h3 dl.quick-summary, .h4 small,
-  .h4 .small,
-  .h4 .deploy-form-outer .deploy-form dl.quick-summary, .deploy-form-outer .deploy-form
-  .h4 dl.quick-summary,
-  .h4 .deploy-form-loading .deploy-form dl.quick-summary, .deploy-form-loading .deploy-form
-  .h4 dl.quick-summary, .h5 small,
-  .h5 .small,
-  .h5 .deploy-form-outer .deploy-form dl.quick-summary, .deploy-form-outer .deploy-form
-  .h5 dl.quick-summary,
-  .h5 .deploy-form-loading .deploy-form dl.quick-summary, .deploy-form-loading .deploy-form
-  .h5 dl.quick-summary, .h6 small,
-  .h6 .small,
-  .h6 .deploy-form-outer .deploy-form dl.quick-summary, .deploy-form-outer .deploy-form
-  .h6 dl.quick-summary,
-  .h6 .deploy-form-loading .deploy-form dl.quick-summary, .deploy-form-loading .deploy-form
-  .h6 dl.quick-summary {
+  .h1 .small, .h2 small,
+  .h2 .small, .h3 small,
+  .h3 .small, .h4 small,
+  .h4 .small, .h5 small,
+  .h5 .small, .h6 small,
+  .h6 .small {
     font-weight: normal;
     line-height: 1;
     color: #777777; }
@@ -1224,78 +1176,30 @@ h3, .h3 {
   margin-top: 20px;
   margin-bottom: 10px; }
   h1 small,
-  h1 .small,
-  h1 .deploy-form-outer .deploy-form dl.quick-summary, .deploy-form-outer .deploy-form
-  h1 dl.quick-summary,
-  h1 .deploy-form-loading .deploy-form dl.quick-summary, .deploy-form-loading .deploy-form
-  h1 dl.quick-summary, .h1 small,
+  h1 .small, .h1 small,
   .h1 .small,
-  .h1 .deploy-form-outer .deploy-form dl.quick-summary, .deploy-form-outer .deploy-form
-  .h1 dl.quick-summary,
-  .h1 .deploy-form-loading .deploy-form dl.quick-summary, .deploy-form-loading .deploy-form
-  .h1 dl.quick-summary,
   h2 small,
-  h2 .small,
-  h2 .deploy-form-outer .deploy-form dl.quick-summary, .deploy-form-outer .deploy-form
-  h2 dl.quick-summary,
-  h2 .deploy-form-loading .deploy-form dl.quick-summary, .deploy-form-loading .deploy-form
-  h2 dl.quick-summary, .h2 small,
+  h2 .small, .h2 small,
   .h2 .small,
-  .h2 .deploy-form-outer .deploy-form dl.quick-summary, .deploy-form-outer .deploy-form
-  .h2 dl.quick-summary,
-  .h2 .deploy-form-loading .deploy-form dl.quick-summary, .deploy-form-loading .deploy-form
-  .h2 dl.quick-summary,
   h3 small,
-  h3 .small,
-  h3 .deploy-form-outer .deploy-form dl.quick-summary, .deploy-form-outer .deploy-form
-  h3 dl.quick-summary,
-  h3 .deploy-form-loading .deploy-form dl.quick-summary, .deploy-form-loading .deploy-form
-  h3 dl.quick-summary, .h3 small,
-  .h3 .small,
-  .h3 .deploy-form-outer .deploy-form dl.quick-summary, .deploy-form-outer .deploy-form
-  .h3 dl.quick-summary,
-  .h3 .deploy-form-loading .deploy-form dl.quick-summary, .deploy-form-loading .deploy-form
-  .h3 dl.quick-summary {
+  h3 .small, .h3 small,
+  .h3 .small {
     font-size: 65%; }
 
-h4, .modal.deploy .modal-dialog .modal-content .modal-header .nav > li > a, .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-outer .deploy-form .SelectionGroup > li > a, .deploy-form-outer .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .SelectionGroup > li > a, .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-loading .deploy-form .SelectionGroup > li > a, .deploy-form-loading .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .SelectionGroup > li > a, .h4,
+h4, .modal.deploy .modal-dialog .modal-content .modal-header .nav > li > a, .h4,
 h5, .h5,
 h6, .h6 {
   margin-top: 10px;
   margin-bottom: 10px; }
-  h4 small, .modal.deploy .modal-dialog .modal-content .modal-header .nav > li > a small, .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-outer .deploy-form .SelectionGroup > li > a small, .deploy-form-outer .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .SelectionGroup > li > a small, .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-loading .deploy-form .SelectionGroup > li > a small, .deploy-form-loading .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .SelectionGroup > li > a small,
-  h4 .small, .modal.deploy .modal-dialog .modal-content .modal-header .nav > li > a .small, .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-outer .deploy-form .SelectionGroup > li > a .small, .deploy-form-outer .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .SelectionGroup > li > a .small, .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-loading .deploy-form .SelectionGroup > li > a .small, .deploy-form-loading .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .SelectionGroup > li > a .small,
-  h4 .deploy-form-outer .deploy-form dl.quick-summary, .deploy-form-outer .deploy-form
-  h4 dl.quick-summary, .modal.deploy .modal-dialog .modal-content .modal-header .nav > li > a .deploy-form-outer .deploy-form dl.quick-summary, .deploy-form-outer .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .nav > li > a dl.quick-summary, .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-outer .deploy-form .SelectionGroup > li > a dl.quick-summary, .deploy-form-outer .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .SelectionGroup > li > a dl.quick-summary,
-  h4 .deploy-form-loading .deploy-form dl.quick-summary, .deploy-form-loading .deploy-form
-  h4 dl.quick-summary, .modal.deploy .modal-dialog .modal-content .modal-header .nav > li > a .deploy-form-loading .deploy-form dl.quick-summary, .deploy-form-loading .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .nav > li > a dl.quick-summary, .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-loading .deploy-form .SelectionGroup > li > a dl.quick-summary, .deploy-form-loading .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .SelectionGroup > li > a dl.quick-summary, .h4 small,
+  h4 small, .modal.deploy .modal-dialog .modal-content .modal-header .nav > li > a small,
+  h4 .small, .modal.deploy .modal-dialog .modal-content .modal-header .nav > li > a .small, .h4 small,
   .h4 .small,
-  .h4 .deploy-form-outer .deploy-form dl.quick-summary, .deploy-form-outer .deploy-form
-  .h4 dl.quick-summary,
-  .h4 .deploy-form-loading .deploy-form dl.quick-summary, .deploy-form-loading .deploy-form
-  .h4 dl.quick-summary,
   h5 small,
-  h5 .small,
-  h5 .deploy-form-outer .deploy-form dl.quick-summary, .deploy-form-outer .deploy-form
-  h5 dl.quick-summary,
-  h5 .deploy-form-loading .deploy-form dl.quick-summary, .deploy-form-loading .deploy-form
-  h5 dl.quick-summary, .h5 small,
+  h5 .small, .h5 small,
   .h5 .small,
-  .h5 .deploy-form-outer .deploy-form dl.quick-summary, .deploy-form-outer .deploy-form
-  .h5 dl.quick-summary,
-  .h5 .deploy-form-loading .deploy-form dl.quick-summary, .deploy-form-loading .deploy-form
-  .h5 dl.quick-summary,
   h6 small,
-  h6 .small,
-  h6 .deploy-form-outer .deploy-form dl.quick-summary, .deploy-form-outer .deploy-form
-  h6 dl.quick-summary,
-  h6 .deploy-form-loading .deploy-form dl.quick-summary, .deploy-form-loading .deploy-form
-  h6 dl.quick-summary, .h6 small,
-  .h6 .small,
-  .h6 .deploy-form-outer .deploy-form dl.quick-summary, .deploy-form-outer .deploy-form
-  .h6 dl.quick-summary,
-  .h6 .deploy-form-loading .deploy-form dl.quick-summary, .deploy-form-loading .deploy-form
-  .h6 dl.quick-summary {
+  h6 .small, .h6 small,
+  .h6 .small {
     font-size: 75%; }
 
 h1, .h1 {
@@ -1307,7 +1211,7 @@ h2, .h2 {
 h3, .h3 {
   font-size: 24px; }
 
-h4, .modal.deploy .modal-dialog .modal-content .modal-header .nav > li > a, .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-outer .deploy-form .SelectionGroup > li > a, .deploy-form-outer .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .SelectionGroup > li > a, .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-loading .deploy-form .SelectionGroup > li > a, .deploy-form-loading .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .SelectionGroup > li > a, .h4 {
+h4, .modal.deploy .modal-dialog .modal-content .modal-header .nav > li > a, .h4 {
   font-size: 20px; }
 
 h5, .h5 {
@@ -1329,9 +1233,7 @@ p {
       font-size: 21px; } }
 
 small,
-.small,
-.deploy-form-outer .deploy-form dl.quick-summary,
-.deploy-form-loading .deploy-form dl.quick-summary {
+.small {
   font-size: 85%; }
 
 mark,
@@ -1519,22 +1421,14 @@ blockquote {
     margin-bottom: 0; }
   blockquote footer,
   blockquote small,
-  blockquote .small,
-  blockquote .deploy-form-outer .deploy-form dl.quick-summary, .deploy-form-outer .deploy-form
-  blockquote dl.quick-summary,
-  blockquote .deploy-form-loading .deploy-form dl.quick-summary, .deploy-form-loading .deploy-form
-  blockquote dl.quick-summary {
+  blockquote .small {
     display: block;
     font-size: 80%;
     line-height: 1.42857;
     color: #777777; }
     blockquote footer:before,
     blockquote small:before,
-    blockquote .small:before,
-    blockquote .deploy-form-outer .deploy-form dl.quick-summary:before, .deploy-form-outer .deploy-form
-    blockquote dl.quick-summary:before,
-    blockquote .deploy-form-loading .deploy-form dl.quick-summary:before, .deploy-form-loading .deploy-form
-    blockquote dl.quick-summary:before {
+    blockquote .small:before {
       content: '\2014 \00A0'; }
 
 .blockquote-reverse,
@@ -1551,32 +1445,16 @@ blockquote.pull-right,
   .blockquote-reverse footer:before,
   .blockquote-reverse small:before,
   .blockquote-reverse .small:before,
-  .blockquote-reverse .deploy-form-outer .deploy-form dl.quick-summary:before, .deploy-form-outer .deploy-form
-  .blockquote-reverse dl.quick-summary:before,
-  .blockquote-reverse .deploy-form-loading .deploy-form dl.quick-summary:before, .deploy-form-loading .deploy-form
-  .blockquote-reverse dl.quick-summary:before,
   blockquote.pull-right footer:before, .deploy-dropdown blockquote.status-icon footer:before, .deploy-dropdown blockquote.time footer:before, .deploy-dropdown.loading blockquote.loading-text footer:before, .deployment-status .deployment-progress .progress-bar blockquote.status footer:before,
   blockquote.pull-right small:before, .deploy-dropdown blockquote.status-icon small:before, .deploy-dropdown blockquote.time small:before, .deploy-dropdown.loading blockquote.loading-text small:before, .deployment-status .deployment-progress .progress-bar blockquote.status small:before,
-  blockquote.pull-right .small:before, .deploy-dropdown blockquote.status-icon .small:before, .deploy-dropdown blockquote.time .small:before, .deploy-dropdown.loading blockquote.loading-text .small:before, .deployment-status .deployment-progress .progress-bar blockquote.status .small:before,
-  blockquote.pull-right .deploy-form-outer .deploy-form dl.quick-summary:before, .deploy-form-outer .deploy-form
-  blockquote.pull-right dl.quick-summary:before, .deploy-dropdown blockquote.status-icon .deploy-form-outer .deploy-form dl.quick-summary:before, .deploy-form-outer .deploy-form .deploy-dropdown blockquote.status-icon dl.quick-summary:before, .deploy-dropdown blockquote.time .deploy-form-outer .deploy-form dl.quick-summary:before, .deploy-form-outer .deploy-form .deploy-dropdown blockquote.time dl.quick-summary:before, .deploy-dropdown.loading blockquote.loading-text .deploy-form-outer .deploy-form dl.quick-summary:before, .deploy-form-outer .deploy-form .deploy-dropdown.loading blockquote.loading-text dl.quick-summary:before, .deployment-status .deployment-progress .progress-bar blockquote.status .deploy-form-outer .deploy-form dl.quick-summary:before, .deploy-form-outer .deploy-form .deployment-status .deployment-progress .progress-bar blockquote.status dl.quick-summary:before,
-  blockquote.pull-right .deploy-form-loading .deploy-form dl.quick-summary:before, .deploy-form-loading .deploy-form
-  blockquote.pull-right dl.quick-summary:before, .deploy-dropdown blockquote.status-icon .deploy-form-loading .deploy-form dl.quick-summary:before, .deploy-form-loading .deploy-form .deploy-dropdown blockquote.status-icon dl.quick-summary:before, .deploy-dropdown blockquote.time .deploy-form-loading .deploy-form dl.quick-summary:before, .deploy-form-loading .deploy-form .deploy-dropdown blockquote.time dl.quick-summary:before, .deploy-dropdown.loading blockquote.loading-text .deploy-form-loading .deploy-form dl.quick-summary:before, .deploy-form-loading .deploy-form .deploy-dropdown.loading blockquote.loading-text dl.quick-summary:before, .deployment-status .deployment-progress .progress-bar blockquote.status .deploy-form-loading .deploy-form dl.quick-summary:before, .deploy-form-loading .deploy-form .deployment-status .deployment-progress .progress-bar blockquote.status dl.quick-summary:before {
+  blockquote.pull-right .small:before, .deploy-dropdown blockquote.status-icon .small:before, .deploy-dropdown blockquote.time .small:before, .deploy-dropdown.loading blockquote.loading-text .small:before, .deployment-status .deployment-progress .progress-bar blockquote.status .small:before {
     content: ''; }
   .blockquote-reverse footer:after,
   .blockquote-reverse small:after,
   .blockquote-reverse .small:after,
-  .blockquote-reverse .deploy-form-outer .deploy-form dl.quick-summary:after, .deploy-form-outer .deploy-form
-  .blockquote-reverse dl.quick-summary:after,
-  .blockquote-reverse .deploy-form-loading .deploy-form dl.quick-summary:after, .deploy-form-loading .deploy-form
-  .blockquote-reverse dl.quick-summary:after,
   blockquote.pull-right footer:after, .deploy-dropdown blockquote.status-icon footer:after, .deploy-dropdown blockquote.time footer:after, .deploy-dropdown.loading blockquote.loading-text footer:after, .deployment-status .deployment-progress .progress-bar blockquote.status footer:after,
   blockquote.pull-right small:after, .deploy-dropdown blockquote.status-icon small:after, .deploy-dropdown blockquote.time small:after, .deploy-dropdown.loading blockquote.loading-text small:after, .deployment-status .deployment-progress .progress-bar blockquote.status small:after,
-  blockquote.pull-right .small:after, .deploy-dropdown blockquote.status-icon .small:after, .deploy-dropdown blockquote.time .small:after, .deploy-dropdown.loading blockquote.loading-text .small:after, .deployment-status .deployment-progress .progress-bar blockquote.status .small:after,
-  blockquote.pull-right .deploy-form-outer .deploy-form dl.quick-summary:after, .deploy-form-outer .deploy-form
-  blockquote.pull-right dl.quick-summary:after, .deploy-dropdown blockquote.status-icon .deploy-form-outer .deploy-form dl.quick-summary:after, .deploy-form-outer .deploy-form .deploy-dropdown blockquote.status-icon dl.quick-summary:after, .deploy-dropdown blockquote.time .deploy-form-outer .deploy-form dl.quick-summary:after, .deploy-form-outer .deploy-form .deploy-dropdown blockquote.time dl.quick-summary:after, .deploy-dropdown.loading blockquote.loading-text .deploy-form-outer .deploy-form dl.quick-summary:after, .deploy-form-outer .deploy-form .deploy-dropdown.loading blockquote.loading-text dl.quick-summary:after, .deployment-status .deployment-progress .progress-bar blockquote.status .deploy-form-outer .deploy-form dl.quick-summary:after, .deploy-form-outer .deploy-form .deployment-status .deployment-progress .progress-bar blockquote.status dl.quick-summary:after,
-  blockquote.pull-right .deploy-form-loading .deploy-form dl.quick-summary:after, .deploy-form-loading .deploy-form
-  blockquote.pull-right dl.quick-summary:after, .deploy-dropdown blockquote.status-icon .deploy-form-loading .deploy-form dl.quick-summary:after, .deploy-form-loading .deploy-form .deploy-dropdown blockquote.status-icon dl.quick-summary:after, .deploy-dropdown blockquote.time .deploy-form-loading .deploy-form dl.quick-summary:after, .deploy-form-loading .deploy-form .deploy-dropdown blockquote.time dl.quick-summary:after, .deploy-dropdown.loading blockquote.loading-text .deploy-form-loading .deploy-form dl.quick-summary:after, .deploy-form-loading .deploy-form .deploy-dropdown.loading blockquote.loading-text dl.quick-summary:after, .deployment-status .deployment-progress .progress-bar blockquote.status .deploy-form-loading .deploy-form dl.quick-summary:after, .deploy-form-loading .deploy-form .deployment-status .deployment-progress .progress-bar blockquote.status dl.quick-summary:after {
+  blockquote.pull-right .small:after, .deploy-dropdown blockquote.status-icon .small:after, .deploy-dropdown blockquote.time .small:after, .deploy-dropdown.loading blockquote.loading-text .small:after, .deployment-status .deployment-progress .progress-bar blockquote.status .small:after {
     content: '\00A0 \2014'; }
 
 address {
@@ -1674,7 +1552,7 @@ pre {
   .row:after {
     clear: both; }
 
-.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .deploy-form-outer .deploy-form:after, .deploy-form-loading .deploy-form:after, .deploy-form-outer .deploy-form .SelectionGroup, .deploy-form-loading .deploy-form .SelectionGroup, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .deploy-form-outer .deploy-form .SelectionGroup + .tab-content, .deploy-form-loading .deploy-form .SelectionGroup + .tab-content, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
   position: relative;
   min-height: 1px;
   padding-left: 15px;
@@ -1943,7 +1821,7 @@ pre {
     margin-left: 100%; } }
 
 @media (min-width: 992px) {
-  .col-md-1, .col-md-2, .col-md-3, .col-md-4, .deploy-form-outer .deploy-form:after, .deploy-form-loading .deploy-form:after, .deploy-form-outer .deploy-form .SelectionGroup, .deploy-form-loading .deploy-form .SelectionGroup, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .deploy-form-outer .deploy-form .SelectionGroup + .tab-content, .deploy-form-loading .deploy-form .SelectionGroup + .tab-content, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
+  .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
     float: left; }
   .col-md-1 {
     width: 8.33333%; }
@@ -1951,7 +1829,7 @@ pre {
     width: 16.66667%; }
   .col-md-3 {
     width: 25%; }
-  .col-md-4, .deploy-form-outer .deploy-form:after, .deploy-form-loading .deploy-form:after, .deploy-form-outer .deploy-form .SelectionGroup, .deploy-form-loading .deploy-form .SelectionGroup {
+  .col-md-4 {
     width: 33.33333%; }
   .col-md-5 {
     width: 41.66667%; }
@@ -1959,7 +1837,7 @@ pre {
     width: 50%; }
   .col-md-7 {
     width: 58.33333%; }
-  .col-md-8, .deploy-form-outer .deploy-form .SelectionGroup + .tab-content, .deploy-form-loading .deploy-form .SelectionGroup + .tab-content {
+  .col-md-8 {
     width: 66.66667%; }
   .col-md-9 {
     width: 75%; }
@@ -4429,41 +4307,41 @@ input[type="reset"],
     z-index: 2;
     margin-left: -1px; }
 
-.nav, .deploy-form-outer .deploy-form .SelectionGroup, .deploy-form-loading .deploy-form .SelectionGroup {
+.nav {
   margin-bottom: 0;
   padding-left: 0;
   list-style: none; }
-  .nav:before, .deploy-form-outer .deploy-form .SelectionGroup:before, .deploy-form-loading .deploy-form .SelectionGroup:before, .nav:after, .deploy-form-outer .deploy-form .SelectionGroup:after, .deploy-form-loading .deploy-form .SelectionGroup:after {
+  .nav:before, .nav:after {
     content: " ";
     display: table; }
-  .nav:after, .deploy-form-outer .deploy-form .SelectionGroup:after, .deploy-form-loading .deploy-form .SelectionGroup:after {
+  .nav:after {
     clear: both; }
-  .nav > li, .deploy-form-outer .deploy-form .SelectionGroup > li, .deploy-form-loading .deploy-form .SelectionGroup > li {
+  .nav > li {
     position: relative;
     display: block; }
-    .nav > li > a, .deploy-form-outer .deploy-form .SelectionGroup > li > a, .deploy-form-loading .deploy-form .SelectionGroup > li > a {
+    .nav > li > a {
       position: relative;
       display: block;
       padding: 10px 15px; }
-      .nav > li > a:hover, .deploy-form-outer .deploy-form .SelectionGroup > li > a:hover, .deploy-form-loading .deploy-form .SelectionGroup > li > a:hover, .nav > li > a:focus, .deploy-form-outer .deploy-form .SelectionGroup > li > a:focus, .deploy-form-loading .deploy-form .SelectionGroup > li > a:focus {
+      .nav > li > a:hover, .nav > li > a:focus {
         text-decoration: none;
         background-color: #eeeeee; }
-    .nav > li.disabled > a, .deploy-form-outer .deploy-form .SelectionGroup > li.disabled > a, .deploy-form-loading .deploy-form .SelectionGroup > li.disabled > a {
+    .nav > li.disabled > a {
       color: #777777; }
-      .nav > li.disabled > a:hover, .deploy-form-outer .deploy-form .SelectionGroup > li.disabled > a:hover, .deploy-form-loading .deploy-form .SelectionGroup > li.disabled > a:hover, .nav > li.disabled > a:focus, .deploy-form-outer .deploy-form .SelectionGroup > li.disabled > a:focus, .deploy-form-loading .deploy-form .SelectionGroup > li.disabled > a:focus {
+      .nav > li.disabled > a:hover, .nav > li.disabled > a:focus {
         color: #777777;
         text-decoration: none;
         background-color: transparent;
         cursor: not-allowed; }
-  .nav .open > a, .deploy-form-outer .deploy-form .SelectionGroup .open > a, .deploy-form-loading .deploy-form .SelectionGroup .open > a, .nav .open > a:hover, .deploy-form-outer .deploy-form .SelectionGroup .open > a:hover, .deploy-form-loading .deploy-form .SelectionGroup .open > a:hover, .nav .open > a:focus, .deploy-form-outer .deploy-form .SelectionGroup .open > a:focus, .deploy-form-loading .deploy-form .SelectionGroup .open > a:focus {
+  .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
     background-color: #eeeeee;
     border-color: #3aaef9; }
-  .nav .nav-divider, .deploy-form-outer .deploy-form .SelectionGroup .nav-divider, .deploy-form-loading .deploy-form .SelectionGroup .nav-divider {
+  .nav .nav-divider {
     height: 1px;
     margin: 9px 0;
     overflow: hidden;
     background-color: #e5e5e5; }
-  .nav > li > a > img, .deploy-form-outer .deploy-form .SelectionGroup > li > a > img, .deploy-form-loading .deploy-form .SelectionGroup > li > a > img {
+  .nav > li > a > img {
     max-width: none; }
 
 .nav-tabs {
@@ -4485,19 +4363,19 @@ input[type="reset"],
       border-bottom-color: transparent;
       cursor: default; }
 
-.nav-pills > li, .deploy-form-outer .deploy-form .SelectionGroup > li, .deploy-form-loading .deploy-form .SelectionGroup > li {
+.nav-pills > li {
   float: left; }
-  .nav-pills > li > a, .deploy-form-outer .deploy-form .SelectionGroup > li > a, .deploy-form-loading .deploy-form .SelectionGroup > li > a {
+  .nav-pills > li > a {
     border-radius: 0px; }
-  .nav-pills > li + li, .deploy-form-outer .deploy-form .SelectionGroup > li + li, .deploy-form-loading .deploy-form .SelectionGroup > li + li {
+  .nav-pills > li + li {
     margin-left: 2px; }
-  .nav-pills > li.active > a, .deploy-form-outer .deploy-form .SelectionGroup > li.active > a, .deploy-form-loading .deploy-form .SelectionGroup > li.active > a, .nav-pills > li.active > a:hover, .deploy-form-outer .deploy-form .SelectionGroup > li.active > a:hover, .deploy-form-loading .deploy-form .SelectionGroup > li.active > a:hover, .nav-pills > li.active > a:focus, .deploy-form-outer .deploy-form .SelectionGroup > li.active > a:focus, .deploy-form-loading .deploy-form .SelectionGroup > li.active > a:focus {
+  .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
     color: #555555;
     background-color: #fff; }
 
-.nav-stacked > li, .deploy-form-outer .deploy-form .SelectionGroup > li, .deploy-form-loading .deploy-form .SelectionGroup > li {
+.nav-stacked > li {
   float: none; }
-  .nav-stacked > li + li, .deploy-form-outer .deploy-form .SelectionGroup > li + li, .deploy-form-loading .deploy-form .SelectionGroup > li + li {
+  .nav-stacked > li + li {
     margin-top: 2px;
     margin-left: 0; }
 
@@ -5210,14 +5088,14 @@ a.deployment-branch:focus {
     top: 0;
     padding: 1px 5px; }
   .list-group-item.active > .badge,
-  .nav-pills > .active > a > .badge, .deploy-form-outer .deploy-form .SelectionGroup > .active > a > .badge, .deploy-form-loading .deploy-form .SelectionGroup > .active > a > .badge {
+  .nav-pills > .active > a > .badge {
     color: #3aaef9;
     background-color: #fff; }
   .list-group-item > .badge {
     float: right; }
   .list-group-item > .badge + .badge {
     margin-right: 5px; }
-  .nav-pills > li > a > .badge, .deploy-form-outer .deploy-form .SelectionGroup > li > a > .badge, .deploy-form-loading .deploy-form .SelectionGroup > li > a > .badge {
+  .nav-pills > li > a > .badge {
     margin-left: 3px; }
 
 a.badge:hover, a.badge:focus {
@@ -5295,15 +5173,7 @@ a.thumbnail.active {
   .alert h4, .message.bad h4,
   .message.required h4, .deploy-dropdown.error h4, .deploy-dropdown-errors h4, .alert .modal.deploy .modal-dialog .modal-content .modal-header .nav > li > a, .modal.deploy .modal-dialog .modal-content .modal-header .alert .nav > li > a, .message.bad .modal.deploy .modal-dialog .modal-content .modal-header .nav > li > a, .modal.deploy .modal-dialog .modal-content .modal-header .message.bad .nav > li > a,
   .message.required .modal.deploy .modal-dialog .modal-content .modal-header .nav > li > a, .modal.deploy .modal-dialog .modal-content .modal-header
-  .message.required .nav > li > a, .deploy-dropdown.error .modal.deploy .modal-dialog .modal-content .modal-header .nav > li > a, .modal.deploy .modal-dialog .modal-content .modal-header .deploy-dropdown.error .nav > li > a, .deploy-dropdown-errors .modal.deploy .modal-dialog .modal-content .modal-header .nav > li > a, .modal.deploy .modal-dialog .modal-content .modal-header .deploy-dropdown-errors .nav > li > a, .alert .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-outer .deploy-form .SelectionGroup > li > a, .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-outer .deploy-form .alert .SelectionGroup > li > a, .message.bad .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-outer .deploy-form .SelectionGroup > li > a, .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-outer .deploy-form .message.bad .SelectionGroup > li > a,
-  .message.required .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-outer .deploy-form .SelectionGroup > li > a, .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-outer .deploy-form
-  .message.required .SelectionGroup > li > a, .deploy-dropdown.error .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-outer .deploy-form .SelectionGroup > li > a, .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-outer .deploy-form .deploy-dropdown.error .SelectionGroup > li > a, .deploy-dropdown-errors .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-outer .deploy-form .SelectionGroup > li > a, .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-outer .deploy-form .deploy-dropdown-errors .SelectionGroup > li > a, .alert .deploy-form-outer .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .SelectionGroup > li > a, .deploy-form-outer .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .alert .SelectionGroup > li > a, .message.bad .deploy-form-outer .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .SelectionGroup > li > a, .deploy-form-outer .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .message.bad .SelectionGroup > li > a,
-  .message.required .deploy-form-outer .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .SelectionGroup > li > a, .deploy-form-outer .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header
-  .message.required .SelectionGroup > li > a, .deploy-dropdown.error .deploy-form-outer .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .SelectionGroup > li > a, .deploy-form-outer .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .deploy-dropdown.error .SelectionGroup > li > a, .deploy-dropdown-errors .deploy-form-outer .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .SelectionGroup > li > a, .deploy-form-outer .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .deploy-dropdown-errors .SelectionGroup > li > a, .alert .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-loading .deploy-form .SelectionGroup > li > a, .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-loading .deploy-form .alert .SelectionGroup > li > a, .message.bad .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-loading .deploy-form .SelectionGroup > li > a, .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-loading .deploy-form .message.bad .SelectionGroup > li > a,
-  .message.required .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-loading .deploy-form .SelectionGroup > li > a, .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-loading .deploy-form
-  .message.required .SelectionGroup > li > a, .deploy-dropdown.error .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-loading .deploy-form .SelectionGroup > li > a, .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-loading .deploy-form .deploy-dropdown.error .SelectionGroup > li > a, .deploy-dropdown-errors .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-loading .deploy-form .SelectionGroup > li > a, .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-loading .deploy-form .deploy-dropdown-errors .SelectionGroup > li > a, .alert .deploy-form-loading .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .SelectionGroup > li > a, .deploy-form-loading .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .alert .SelectionGroup > li > a, .message.bad .deploy-form-loading .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .SelectionGroup > li > a, .deploy-form-loading .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .message.bad .SelectionGroup > li > a,
-  .message.required .deploy-form-loading .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .SelectionGroup > li > a, .deploy-form-loading .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header
-  .message.required .SelectionGroup > li > a, .deploy-dropdown.error .deploy-form-loading .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .SelectionGroup > li > a, .deploy-form-loading .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .deploy-dropdown.error .SelectionGroup > li > a, .deploy-dropdown-errors .deploy-form-loading .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .SelectionGroup > li > a, .deploy-form-loading .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .deploy-dropdown-errors .SelectionGroup > li > a {
+  .message.required .nav > li > a, .deploy-dropdown.error .modal.deploy .modal-dialog .modal-content .modal-header .nav > li > a, .modal.deploy .modal-dialog .modal-content .modal-header .deploy-dropdown.error .nav > li > a, .deploy-dropdown-errors .modal.deploy .modal-dialog .modal-content .modal-header .nav > li > a, .modal.deploy .modal-dialog .modal-content .modal-header .deploy-dropdown-errors .nav > li > a {
     margin-top: 0;
     color: inherit; }
   .alert .alert-link, .message.bad .alert-link,
@@ -5567,23 +5437,11 @@ button.list-group-item {
   border-color: #3aaef9; }
   .list-group-item.active .list-group-item-heading,
   .list-group-item.active .list-group-item-heading > small,
-  .list-group-item.active .list-group-item-heading > .small,
-  .list-group-item.active .deploy-form-outer .deploy-form .list-group-item-heading > dl.quick-summary, .deploy-form-outer .deploy-form
-  .list-group-item.active .list-group-item-heading > dl.quick-summary,
-  .list-group-item.active .deploy-form-loading .deploy-form .list-group-item-heading > dl.quick-summary, .deploy-form-loading .deploy-form
-  .list-group-item.active .list-group-item-heading > dl.quick-summary, .list-group-item.active:hover .list-group-item-heading,
+  .list-group-item.active .list-group-item-heading > .small, .list-group-item.active:hover .list-group-item-heading,
   .list-group-item.active:hover .list-group-item-heading > small,
-  .list-group-item.active:hover .list-group-item-heading > .small,
-  .list-group-item.active:hover .deploy-form-outer .deploy-form .list-group-item-heading > dl.quick-summary, .deploy-form-outer .deploy-form
-  .list-group-item.active:hover .list-group-item-heading > dl.quick-summary,
-  .list-group-item.active:hover .deploy-form-loading .deploy-form .list-group-item-heading > dl.quick-summary, .deploy-form-loading .deploy-form
-  .list-group-item.active:hover .list-group-item-heading > dl.quick-summary, .list-group-item.active:focus .list-group-item-heading,
+  .list-group-item.active:hover .list-group-item-heading > .small, .list-group-item.active:focus .list-group-item-heading,
   .list-group-item.active:focus .list-group-item-heading > small,
-  .list-group-item.active:focus .list-group-item-heading > .small,
-  .list-group-item.active:focus .deploy-form-outer .deploy-form .list-group-item-heading > dl.quick-summary, .deploy-form-outer .deploy-form
-  .list-group-item.active:focus .list-group-item-heading > dl.quick-summary,
-  .list-group-item.active:focus .deploy-form-loading .deploy-form .list-group-item-heading > dl.quick-summary, .deploy-form-loading .deploy-form
-  .list-group-item.active:focus .list-group-item-heading > dl.quick-summary {
+  .list-group-item.active:focus .list-group-item-heading > .small {
     color: inherit; }
   .list-group-item.active .list-group-item-text, .list-group-item.active:hover .list-group-item-text, .list-group-item.active:focus .list-group-item-text {
     color: white; }
@@ -5719,13 +5577,9 @@ button.list-group-item-danger {
   color: inherit; }
   .panel-title > a,
   .panel-title > small,
-  .panel-title > .small, .deploy-form-outer .deploy-form
-  .panel-title > dl.quick-summary, .deploy-form-loading .deploy-form
-  .panel-title > dl.quick-summary,
+  .panel-title > .small,
   .panel-title > small > a,
-  .panel-title > .small > a, .deploy-form-outer .deploy-form
-  .panel-title > dl.quick-summary > a, .deploy-form-loading .deploy-form
-  .panel-title > dl.quick-summary > a {
+  .panel-title > .small > a {
     color: inherit; }
 
 .panel-footer {
@@ -6882,7 +6736,7 @@ button.close {
   font-weight: normal;
   font-style: normal; }
 
-.fa, .icon-star, .deploy-dropdown .status-icon, .deploy-form-outer .deploy-form .header.loading .status-icon, .deploy-form-loading .deploy-form .header.loading .status-icon {
+.fa, .icon-star, .deploy-dropdown .status-icon {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
@@ -6939,10 +6793,10 @@ button.close {
 .fa-pull-right {
   float: right; }
 
-.fa.fa-pull-left, .fa-pull-left.icon-star, .deploy-dropdown .fa-pull-left.status-icon, .deploy-form-outer .deploy-form .header.loading .fa-pull-left.status-icon, .deploy-form-loading .deploy-form .header.loading .fa-pull-left.status-icon {
+.fa.fa-pull-left, .fa-pull-left.icon-star, .deploy-dropdown .fa-pull-left.status-icon {
   margin-right: .3em; }
 
-.fa.fa-pull-right, .fa-pull-right.icon-star, .deploy-dropdown .fa-pull-right.status-icon, .deploy-form-outer .deploy-form .header.loading .fa-pull-right.status-icon, .deploy-form-loading .deploy-form .header.loading .fa-pull-right.status-icon {
+.fa.fa-pull-right, .fa-pull-right.icon-star, .deploy-dropdown .fa-pull-right.status-icon {
   margin-left: .3em; }
 
 /* Deprecated as of 4.4.0 */
@@ -6952,13 +6806,13 @@ button.close {
 .pull-left {
   float: left; }
 
-.fa.pull-left, .pull-left.icon-star, .deploy-dropdown .pull-left.status-icon, .deploy-form-outer .deploy-form .header.loading .pull-left.status-icon, .deploy-form-loading .deploy-form .header.loading .pull-left.status-icon {
+.fa.pull-left, .pull-left.icon-star, .deploy-dropdown .pull-left.status-icon {
   margin-right: .3em; }
 
-.fa.pull-right, .pull-right.icon-star, .deploy-dropdown .icon-star.time, .deploy-dropdown.loading .icon-star.loading-text, .deployment-status .deployment-progress .progress-bar .icon-star.status, .deploy-dropdown .status-icon, .deploy-dropdown .fa.time, .deploy-dropdown.loading .fa.loading-text, .deploy-dropdown.loading .loading-text.status-icon, .deploy-form-outer .deploy-form .header.loading .pull-right.status-icon, .deploy-form-loading .deploy-form .header.loading .pull-right.status-icon, .deploy-form-outer .deploy-form .header.loading .deploy-dropdown .status-icon, .deploy-dropdown .deploy-form-outer .deploy-form .header.loading .status-icon, .deploy-form-loading .deploy-form .header.loading .deploy-dropdown .status-icon, .deploy-dropdown .deploy-form-loading .deploy-form .header.loading .status-icon, .deploy-form-outer .deploy-form .header.loading .deployment-status .deployment-progress .progress-bar .status-icon.status, .deployment-status .deployment-progress .progress-bar .deploy-form-outer .deploy-form .header.loading .status-icon.status, .deploy-form-loading .deploy-form .header.loading .deployment-status .deployment-progress .progress-bar .status-icon.status, .deployment-status .deployment-progress .progress-bar .deploy-form-loading .deploy-form .header.loading .status-icon.status, .deployment-status .deployment-progress .progress-bar .fa.status, .deployment-status .deployment-progress .progress-bar .deploy-dropdown .status.status-icon, .deploy-dropdown .deployment-status .deployment-progress .progress-bar .status.status-icon {
+.fa.pull-right, .pull-right.icon-star, .deploy-dropdown .icon-star.time, .deploy-dropdown.loading .icon-star.loading-text, .deployment-status .deployment-progress .progress-bar .icon-star.status, .deploy-dropdown .status-icon, .deploy-dropdown .fa.time, .deploy-dropdown.loading .fa.loading-text, .deploy-dropdown.loading .loading-text.status-icon, .deployment-status .deployment-progress .progress-bar .fa.status, .deployment-status .deployment-progress .progress-bar .deploy-dropdown .status.status-icon, .deploy-dropdown .deployment-status .deployment-progress .progress-bar .status.status-icon {
   margin-left: .3em; }
 
-.fa-spin, .deploy-dropdown.loading .status-icon, .deploy-form-outer .deploy-form .header.loading .status-icon, .deploy-form-loading .deploy-form .header.loading .status-icon {
+.fa-spin, .deploy-dropdown.loading .status-icon {
   -webkit-animation: fa-spin 2s infinite linear;
   animation: fa-spin 2s infinite linear; }
 
@@ -7138,7 +6992,7 @@ button.close {
 .fa-repeat:before {
   content: ""; }
 
-.fa-refresh:before, .deploy-dropdown .status-icon:before, .deploy-dropdown.open .status-icon:before, .deploy-dropdown.loading .status-icon:before, .deploy-form-outer .deploy-form .header.loading .status-icon:before, .deploy-form-loading .deploy-form .header.loading .status-icon:before {
+.fa-refresh:before, .deploy-dropdown .status-icon:before, .deploy-dropdown.open .status-icon:before, .deploy-dropdown.loading .status-icon:before {
   content: ""; }
 
 .fa-list-alt:before {
@@ -10473,15 +10327,7 @@ input[type="reset"], .deploy-dropdown {
   input[type="button"] .fa,
   input[type="reset"] .fa, .deploy-dropdown .fa, .btn .icon-star, .action .icon-star, input[type="submit"] .icon-star,
   input[type="button"] .icon-star,
-  input[type="reset"] .icon-star, .deploy-dropdown .icon-star, .deploy-dropdown .status-icon, .btn .deploy-form-outer .deploy-form .header.loading .status-icon, .deploy-form-outer .deploy-form .header.loading .btn .status-icon, .action .deploy-form-outer .deploy-form .header.loading .status-icon, .deploy-form-outer .deploy-form .header.loading .action .status-icon, input[type="submit"] .deploy-form-outer .deploy-form .header.loading .status-icon, .deploy-form-outer .deploy-form .header.loading input[type="submit"] .status-icon,
-  input[type="button"] .deploy-form-outer .deploy-form .header.loading .status-icon, .deploy-form-outer .deploy-form .header.loading
-  input[type="button"] .status-icon,
-  input[type="reset"] .deploy-form-outer .deploy-form .header.loading .status-icon, .deploy-form-outer .deploy-form .header.loading
-  input[type="reset"] .status-icon, .deploy-dropdown .deploy-form-outer .deploy-form .header.loading .status-icon, .deploy-form-outer .deploy-form .header.loading .deploy-dropdown .status-icon, .btn .deploy-form-loading .deploy-form .header.loading .status-icon, .deploy-form-loading .deploy-form .header.loading .btn .status-icon, .action .deploy-form-loading .deploy-form .header.loading .status-icon, .deploy-form-loading .deploy-form .header.loading .action .status-icon, input[type="submit"] .deploy-form-loading .deploy-form .header.loading .status-icon, .deploy-form-loading .deploy-form .header.loading input[type="submit"] .status-icon,
-  input[type="button"] .deploy-form-loading .deploy-form .header.loading .status-icon, .deploy-form-loading .deploy-form .header.loading
-  input[type="button"] .status-icon,
-  input[type="reset"] .deploy-form-loading .deploy-form .header.loading .status-icon, .deploy-form-loading .deploy-form .header.loading
-  input[type="reset"] .status-icon, .deploy-dropdown .deploy-form-loading .deploy-form .header.loading .status-icon, .deploy-form-loading .deploy-form .header.loading .deploy-dropdown .status-icon {
+  input[type="reset"] .icon-star, .deploy-dropdown .icon-star, .deploy-dropdown .status-icon {
     margin-right: 6px; }
   .btn .no-text, .action .no-text, input[type="submit"] .no-text,
   input[type="button"] .no-text,
@@ -10811,13 +10657,9 @@ p {
     margin-top: -10px;
     margin-bottom: 20px; }
 
-pre.nav, .deploy-form-outer .deploy-form pre.SelectionGroup, .deploy-form-loading .deploy-form pre.SelectionGroup,
+pre.nav,
 ol.nav,
-.deploy-form-outer .deploy-form ol.SelectionGroup,
-.deploy-form-loading .deploy-form ol.SelectionGroup,
-ul.nav,
-.deploy-form-outer .deploy-form ul.SelectionGroup,
-.deploy-form-loading .deploy-form ul.SelectionGroup {
+ul.nav {
   margin-top: 0; }
 
 pre ul,
@@ -11853,11 +11695,7 @@ ol.list {
 .message.required .fa, .deploy-dropdown.error .fa, .deploy-dropdown-errors .fa, .alert .icon-star, .message.bad .icon-star,
 .message.required .icon-star, .deploy-dropdown.error .icon-star, .deploy-dropdown-errors .icon-star, .alert .deploy-dropdown .status-icon, .deploy-dropdown .alert .status-icon, .message.bad .deploy-dropdown .status-icon, .deploy-dropdown .message.bad .status-icon,
 .message.required .deploy-dropdown .status-icon, .deploy-dropdown
-.message.required .status-icon, .deploy-dropdown.error .status-icon, .deploy-dropdown-errors .deploy-dropdown .status-icon, .deploy-dropdown .deploy-dropdown-errors .status-icon, .alert .deploy-form-outer .deploy-form .header.loading .status-icon, .deploy-form-outer .deploy-form .header.loading .alert .status-icon, .message.bad .deploy-form-outer .deploy-form .header.loading .status-icon, .deploy-form-outer .deploy-form .header.loading .message.bad .status-icon,
-.message.required .deploy-form-outer .deploy-form .header.loading .status-icon, .deploy-form-outer .deploy-form .header.loading
-.message.required .status-icon, .deploy-dropdown.error .deploy-form-outer .deploy-form .header.loading .status-icon, .deploy-form-outer .deploy-form .header.loading .deploy-dropdown.error .status-icon, .deploy-dropdown-errors .deploy-form-outer .deploy-form .header.loading .status-icon, .deploy-form-outer .deploy-form .header.loading .deploy-dropdown-errors .status-icon, .alert .deploy-form-loading .deploy-form .header.loading .status-icon, .deploy-form-loading .deploy-form .header.loading .alert .status-icon, .message.bad .deploy-form-loading .deploy-form .header.loading .status-icon, .deploy-form-loading .deploy-form .header.loading .message.bad .status-icon,
-.message.required .deploy-form-loading .deploy-form .header.loading .status-icon, .deploy-form-loading .deploy-form .header.loading
-.message.required .status-icon, .deploy-dropdown.error .deploy-form-loading .deploy-form .header.loading .status-icon, .deploy-form-loading .deploy-form .header.loading .deploy-dropdown.error .status-icon, .deploy-dropdown-errors .deploy-form-loading .deploy-form .header.loading .status-icon, .deploy-form-loading .deploy-form .header.loading .deploy-dropdown-errors .status-icon {
+.message.required .status-icon, .deploy-dropdown.error .status-icon, .deploy-dropdown-errors .deploy-dropdown .status-icon, .deploy-dropdown .deploy-dropdown-errors .status-icon {
   margin-right: 4px; }
 
 .alert ul, .message.bad ul,
@@ -12035,29 +11873,29 @@ nav.sidebar .project-name {
 
 .side-content {
   padding: 0 20px 1px; }
-  .side-content ul.nav ul, .side-content .deploy-form-outer .deploy-form ul.SelectionGroup ul, .deploy-form-outer .deploy-form .side-content ul.SelectionGroup ul, .side-content .deploy-form-loading .deploy-form ul.SelectionGroup ul, .deploy-form-loading .deploy-form .side-content ul.SelectionGroup ul {
+  .side-content ul.nav ul {
     background-color: rgba(0, 0, 0, 0.15);
     padding: 0;
     margin: 0;
     overflow: hidden;
     font-size: 13px; }
-    .side-content ul.nav ul ul, .side-content .deploy-form-outer .deploy-form ul.SelectionGroup ul ul, .deploy-form-outer .deploy-form .side-content ul.SelectionGroup ul ul, .side-content .deploy-form-loading .deploy-form ul.SelectionGroup ul ul, .deploy-form-loading .deploy-form .side-content ul.SelectionGroup ul ul {
+    .side-content ul.nav ul ul {
       padding-left: 12px;
       overflow: hidden; }
-      .side-content ul.nav ul ul li, .side-content .deploy-form-outer .deploy-form ul.SelectionGroup ul ul li, .deploy-form-outer .deploy-form .side-content ul.SelectionGroup ul ul li, .side-content .deploy-form-loading .deploy-form ul.SelectionGroup ul ul li, .deploy-form-loading .deploy-form .side-content ul.SelectionGroup ul ul li {
+      .side-content ul.nav ul ul li {
         position: relative; }
-        .side-content ul.nav ul ul li a, .side-content .deploy-form-outer .deploy-form ul.SelectionGroup ul ul li a, .deploy-form-outer .deploy-form .side-content ul.SelectionGroup ul ul li a, .side-content .deploy-form-loading .deploy-form ul.SelectionGroup ul ul li a, .deploy-form-loading .deploy-form .side-content ul.SelectionGroup ul ul li a {
+        .side-content ul.nav ul ul li a {
           padding-left: 0; }
-    .side-content ul.nav ul a, .side-content .deploy-form-outer .deploy-form ul.SelectionGroup ul a, .deploy-form-outer .deploy-form .side-content ul.SelectionGroup ul a, .side-content .deploy-form-loading .deploy-form ul.SelectionGroup ul a, .deploy-form-loading .deploy-form .side-content ul.SelectionGroup ul a {
+    .side-content ul.nav ul a {
       padding-left: 0; }
-      .side-content ul.nav ul a:hover, .side-content .deploy-form-outer .deploy-form ul.SelectionGroup ul a:hover, .deploy-form-outer .deploy-form .side-content ul.SelectionGroup ul a:hover, .side-content .deploy-form-loading .deploy-form ul.SelectionGroup ul a:hover, .deploy-form-loading .deploy-form .side-content ul.SelectionGroup ul a:hover {
+      .side-content ul.nav ul a:hover {
         color: #fff;
         background-color: transparent;
         text-decoration: none;
         opacity: 1; }
-    .side-content ul.nav ul li.active a, .side-content .deploy-form-outer .deploy-form ul.SelectionGroup ul li.active a, .deploy-form-outer .deploy-form .side-content ul.SelectionGroup ul li.active a, .side-content .deploy-form-loading .deploy-form ul.SelectionGroup ul li.active a, .deploy-form-loading .deploy-form .side-content ul.SelectionGroup ul li.active a {
+    .side-content ul.nav ul li.active a {
       color: #fff; }
-    .side-content ul.nav ul li a.active, .side-content .deploy-form-outer .deploy-form ul.SelectionGroup ul li a.active, .deploy-form-outer .deploy-form .side-content ul.SelectionGroup ul li a.active, .side-content .deploy-form-loading .deploy-form ul.SelectionGroup ul li a.active, .deploy-form-loading .deploy-form .side-content ul.SelectionGroup ul li a.active {
+    .side-content ul.nav ul li a.active {
       color: #fff; }
   .side-content li > a:hover, .side-content li > a:focus {
     color: #fff;
@@ -12111,20 +11949,20 @@ nav.sidebar .project-name {
   right: 15px;
   top: 12px;
   background: transparent url(../img/icon-arrow.svg) no-repeat; }
-  .icon-arrow ul.nav ul, .icon-arrow .deploy-form-outer .deploy-form ul.SelectionGroup ul, .deploy-form-outer .deploy-form .icon-arrow ul.SelectionGroup ul, .icon-arrow .deploy-form-loading .deploy-form ul.SelectionGroup ul, .deploy-form-loading .deploy-form .icon-arrow ul.SelectionGroup ul {
+  .icon-arrow ul.nav ul {
     background-color: rgba(0, 0, 0, 0.15);
     padding: 0;
     margin: 0;
     overflow: hidden; }
-    .icon-arrow ul.nav ul a, .icon-arrow .deploy-form-outer .deploy-form ul.SelectionGroup ul a, .deploy-form-outer .deploy-form .icon-arrow ul.SelectionGroup ul a, .icon-arrow .deploy-form-loading .deploy-form ul.SelectionGroup ul a, .deploy-form-loading .deploy-form .icon-arrow ul.SelectionGroup ul a {
+    .icon-arrow ul.nav ul a {
       opacity: .8;
       padding-left: 54px; }
-      .icon-arrow ul.nav ul a:hover, .icon-arrow .deploy-form-outer .deploy-form ul.SelectionGroup ul a:hover, .deploy-form-outer .deploy-form .icon-arrow ul.SelectionGroup ul a:hover, .icon-arrow .deploy-form-loading .deploy-form ul.SelectionGroup ul a:hover, .deploy-form-loading .deploy-form .icon-arrow ul.SelectionGroup ul a:hover {
+      .icon-arrow ul.nav ul a:hover {
         color: #fff;
         background-color: transparent;
         text-decoration: none;
         opacity: 1; }
-    .icon-arrow ul.nav ul li.active a, .icon-arrow .deploy-form-outer .deploy-form ul.SelectionGroup ul li.active a, .deploy-form-outer .deploy-form .icon-arrow ul.SelectionGroup ul li.active a, .icon-arrow .deploy-form-loading .deploy-form ul.SelectionGroup ul li.active a, .deploy-form-loading .deploy-form .icon-arrow ul.SelectionGroup ul li.active a {
+    .icon-arrow ul.nav ul li.active a {
       color: #fff; }
   .icon-arrow li > a:hover, .icon-arrow li > a:focus {
     color: #fff;
@@ -12146,58 +11984,54 @@ nav.sidebar .project-name {
 .collapsing {
   transition-duration: 0s !important; }
 
-.side-content .nav, .side-content .deploy-form-outer .deploy-form .SelectionGroup, .deploy-form-outer .deploy-form .side-content .SelectionGroup, .side-content .deploy-form-loading .deploy-form .SelectionGroup, .deploy-form-loading .deploy-form .side-content .SelectionGroup {
+.side-content .nav {
   margin: 0 -20px;
   padding: 0; }
-  .side-content .nav .collapse, .side-content .deploy-form-outer .deploy-form .SelectionGroup .collapse, .deploy-form-outer .deploy-form .side-content .SelectionGroup .collapse, .side-content .deploy-form-loading .deploy-form .SelectionGroup .collapse, .deploy-form-loading .deploy-form .side-content .SelectionGroup .collapse,
-  .side-content .nav .collapse.in,
-  .side-content .deploy-form-outer .deploy-form .SelectionGroup .collapse.in, .deploy-form-outer .deploy-form
-  .side-content .SelectionGroup .collapse.in,
-  .side-content .deploy-form-loading .deploy-form .SelectionGroup .collapse.in, .deploy-form-loading .deploy-form
-  .side-content .SelectionGroup .collapse.in {
+  .side-content .nav .collapse,
+  .side-content .nav .collapse.in {
     display: block; }
-  .side-content .nav ul, .side-content .deploy-form-outer .deploy-form .SelectionGroup ul, .deploy-form-outer .deploy-form .side-content .SelectionGroup ul, .side-content .deploy-form-loading .deploy-form .SelectionGroup ul, .deploy-form-loading .deploy-form .side-content .SelectionGroup ul {
+  .side-content .nav ul {
     height: 0;
     list-style: none; }
-    .side-content .nav ul > li, .side-content .deploy-form-outer .deploy-form .SelectionGroup ul > li, .deploy-form-outer .deploy-form .side-content .SelectionGroup ul > li, .side-content .deploy-form-loading .deploy-form .SelectionGroup ul > li, .deploy-form-loading .deploy-form .side-content .SelectionGroup ul > li {
+    .side-content .nav ul > li {
       opacity: 0;
       transform: translateX(-15px);
       transition: all 0.25s ease-out 0s; }
-  .side-content .nav li.open > ul, .side-content .deploy-form-outer .deploy-form .SelectionGroup li.open > ul, .deploy-form-outer .deploy-form .side-content .SelectionGroup li.open > ul, .side-content .deploy-form-loading .deploy-form .SelectionGroup li.open > ul, .deploy-form-loading .deploy-form .side-content .SelectionGroup li.open > ul {
+  .side-content .nav li.open > ul {
     height: auto; }
-    .side-content .nav li.open > ul > li, .side-content .deploy-form-outer .deploy-form .SelectionGroup li.open > ul > li, .deploy-form-outer .deploy-form .side-content .SelectionGroup li.open > ul > li, .side-content .deploy-form-loading .deploy-form .SelectionGroup li.open > ul > li, .deploy-form-loading .deploy-form .side-content .SelectionGroup li.open > ul > li {
+    .side-content .nav li.open > ul > li {
       opacity: 1;
       transform: translateX(0px); }
-  .side-content .nav li.open > a, .side-content .deploy-form-outer .deploy-form .SelectionGroup li.open > a, .deploy-form-outer .deploy-form .side-content .SelectionGroup li.open > a, .side-content .deploy-form-loading .deploy-form .SelectionGroup li.open > a, .deploy-form-loading .deploy-form .side-content .SelectionGroup li.open > a {
+  .side-content .nav li.open > a {
     background-color: transparent;
     color: #fff; }
-  .side-content .nav li .nav-submenu, .side-content .deploy-form-outer .deploy-form .SelectionGroup li .nav-submenu, .deploy-form-outer .deploy-form .side-content .SelectionGroup li .nav-submenu, .side-content .deploy-form-loading .deploy-form .SelectionGroup li .nav-submenu, .deploy-form-loading .deploy-form .side-content .SelectionGroup li .nav-submenu {
+  .side-content .nav li .nav-submenu {
     max-height: 40px; }
-  .side-content .nav li a:focus, .side-content .deploy-form-outer .deploy-form .SelectionGroup li a:focus, .deploy-form-outer .deploy-form .side-content .SelectionGroup li a:focus, .side-content .deploy-form-loading .deploy-form .SelectionGroup li a:focus, .deploy-form-loading .deploy-form .side-content .SelectionGroup li a:focus {
+  .side-content .nav li a:focus {
     background-color: transparent; }
-  .side-content .nav > li a, .side-content .deploy-form-outer .deploy-form .SelectionGroup > li a, .deploy-form-outer .deploy-form .side-content .SelectionGroup > li a, .side-content .deploy-form-loading .deploy-form .SelectionGroup > li a, .deploy-form-loading .deploy-form .side-content .SelectionGroup > li a {
+  .side-content .nav > li a {
     color: rgba(255, 255, 255, 0.5);
     padding: 10px 35px 10px 20px;
     display: block;
     transition: color 0.12s ease-out 0s; }
-    .side-content .nav > li a:hover, .side-content .deploy-form-outer .deploy-form .SelectionGroup > li a:hover, .deploy-form-outer .deploy-form .side-content .SelectionGroup > li a:hover, .side-content .deploy-form-loading .deploy-form .SelectionGroup > li a:hover, .deploy-form-loading .deploy-form .side-content .SelectionGroup > li a:hover {
+    .side-content .nav > li a:hover {
       color: rgba(255, 255, 255, 0.5);
       background-color: rgba(0, 0, 0, 0.2); }
-    .side-content .nav > li a.nav-add-stack, .side-content .deploy-form-outer .deploy-form .SelectionGroup > li a.nav-add-stack, .deploy-form-outer .deploy-form .side-content .SelectionGroup > li a.nav-add-stack, .side-content .deploy-form-loading .deploy-form .SelectionGroup > li a.nav-add-stack, .deploy-form-loading .deploy-form .side-content .SelectionGroup > li a.nav-add-stack {
+    .side-content .nav > li a.nav-add-stack {
       float: right;
       background: #222222;
       color: rgba(255, 255, 255, 0.5);
       vertical-align: middle;
       padding: 3px 6px; }
-      .side-content .nav > li a.nav-add-stack:hover, .side-content .deploy-form-outer .deploy-form .SelectionGroup > li a.nav-add-stack:hover, .deploy-form-outer .deploy-form .side-content .SelectionGroup > li a.nav-add-stack:hover, .side-content .deploy-form-loading .deploy-form .SelectionGroup > li a.nav-add-stack:hover, .deploy-form-loading .deploy-form .side-content .SelectionGroup > li a.nav-add-stack:hover, .side-content .nav > li a.nav-add-stack:focus, .side-content .deploy-form-outer .deploy-form .SelectionGroup > li a.nav-add-stack:focus, .deploy-form-outer .deploy-form .side-content .SelectionGroup > li a.nav-add-stack:focus, .side-content .deploy-form-loading .deploy-form .SelectionGroup > li a.nav-add-stack:focus, .deploy-form-loading .deploy-form .side-content .SelectionGroup > li a.nav-add-stack:focus {
+      .side-content .nav > li a.nav-add-stack:hover, .side-content .nav > li a.nav-add-stack:focus {
         background: #3aaef9;
         color: #fff; }
-  .side-content .nav > li.nav-main-heading, .side-content .deploy-form-outer .deploy-form .SelectionGroup > li.nav-main-heading, .deploy-form-outer .deploy-form .side-content .SelectionGroup > li.nav-main-heading, .side-content .deploy-form-loading .deploy-form .SelectionGroup > li.nav-main-heading, .deploy-form-loading .deploy-form .side-content .SelectionGroup > li.nav-main-heading {
+  .side-content .nav > li.nav-main-heading {
     font-size: 12px;
     font-weight: 400;
     padding: 22px 13px 6px 20px;
     text-transform: uppercase; }
-  .side-content .nav > li > ul, .side-content .deploy-form-outer .deploy-form .SelectionGroup > li > ul, .deploy-form-outer .deploy-form .side-content .SelectionGroup > li > ul, .side-content .deploy-form-loading .deploy-form .SelectionGroup > li > ul, .deploy-form-loading .deploy-form .side-content .SelectionGroup > li > ul {
+  .side-content .nav > li > ul {
     padding-left: 50px; }
 
 .header-navbar {
@@ -12205,22 +12039,22 @@ nav.sidebar .project-name {
   background-color: #fff;
   min-width: 320px;
   left: 230px; }
-  .header-navbar .nav a, .header-navbar .deploy-form-outer .deploy-form .SelectionGroup a, .deploy-form-outer .deploy-form .header-navbar .SelectionGroup a, .header-navbar .deploy-form-loading .deploy-form .SelectionGroup a, .deploy-form-loading .deploy-form .header-navbar .SelectionGroup a {
+  .header-navbar .nav a {
     padding: 18px 16px 21px; }
     @media (max-width: 768px) {
-      .header-navbar .nav a .title, .header-navbar .deploy-form-outer .deploy-form .SelectionGroup a .title, .deploy-form-outer .deploy-form .header-navbar .SelectionGroup a .title, .header-navbar .deploy-form-loading .deploy-form .SelectionGroup a .title, .deploy-form-loading .deploy-form .header-navbar .SelectionGroup a .title {
+      .header-navbar .nav a .title {
         display: none !important; } }
-    .header-navbar .nav a i, .header-navbar .deploy-form-outer .deploy-form .SelectionGroup a i, .deploy-form-outer .deploy-form .header-navbar .SelectionGroup a i, .header-navbar .deploy-form-loading .deploy-form .SelectionGroup a i, .deploy-form-loading .deploy-form .header-navbar .SelectionGroup a i {
+    .header-navbar .nav a i {
       margin-right: 5px;
       font-size: 16px; }
       @media (max-width: 768px) {
-        .header-navbar .nav a i, .header-navbar .deploy-form-outer .deploy-form .SelectionGroup a i, .deploy-form-outer .deploy-form .header-navbar .SelectionGroup a i, .header-navbar .deploy-form-loading .deploy-form .SelectionGroup a i, .deploy-form-loading .deploy-form .header-navbar .SelectionGroup a i {
+        .header-navbar .nav a i {
           margin-right: 0;
           font-size: 18px;
           line-height: 24px; } }
-  .header-navbar .nav li.pull-right:first-child a, .header-navbar .deploy-form-outer .deploy-form .SelectionGroup li.pull-right:first-child a, .deploy-form-outer .deploy-form .header-navbar .SelectionGroup li.pull-right:first-child a, .header-navbar .deploy-form-loading .deploy-form .SelectionGroup li.pull-right:first-child a, .deploy-form-loading .deploy-form .header-navbar .SelectionGroup li.pull-right:first-child a, .header-navbar .nav .deploy-dropdown li.status-icon:first-child a, .deploy-dropdown .header-navbar .nav li.status-icon:first-child a, .header-navbar .deploy-form-outer .deploy-form .SelectionGroup .deploy-dropdown li.status-icon:first-child a, .deploy-dropdown .header-navbar .deploy-form-outer .deploy-form .SelectionGroup li.status-icon:first-child a, .deploy-form-outer .deploy-form .header-navbar .SelectionGroup .deploy-dropdown li.status-icon:first-child a, .deploy-dropdown .deploy-form-outer .deploy-form .header-navbar .SelectionGroup li.status-icon:first-child a, .header-navbar .deploy-form-loading .deploy-form .SelectionGroup .deploy-dropdown li.status-icon:first-child a, .deploy-dropdown .header-navbar .deploy-form-loading .deploy-form .SelectionGroup li.status-icon:first-child a, .deploy-form-loading .deploy-form .header-navbar .SelectionGroup .deploy-dropdown li.status-icon:first-child a, .deploy-dropdown .deploy-form-loading .deploy-form .header-navbar .SelectionGroup li.status-icon:first-child a, .header-navbar .nav .deploy-dropdown li.time:first-child a, .deploy-dropdown .header-navbar .nav li.time:first-child a, .header-navbar .deploy-form-outer .deploy-form .SelectionGroup .deploy-dropdown li.time:first-child a, .deploy-dropdown .header-navbar .deploy-form-outer .deploy-form .SelectionGroup li.time:first-child a, .deploy-form-outer .deploy-form .header-navbar .SelectionGroup .deploy-dropdown li.time:first-child a, .deploy-dropdown .deploy-form-outer .deploy-form .header-navbar .SelectionGroup li.time:first-child a, .header-navbar .deploy-form-loading .deploy-form .SelectionGroup .deploy-dropdown li.time:first-child a, .deploy-dropdown .header-navbar .deploy-form-loading .deploy-form .SelectionGroup li.time:first-child a, .deploy-form-loading .deploy-form .header-navbar .SelectionGroup .deploy-dropdown li.time:first-child a, .deploy-dropdown .deploy-form-loading .deploy-form .header-navbar .SelectionGroup li.time:first-child a, .header-navbar .nav .deploy-dropdown.loading li.loading-text:first-child a, .deploy-dropdown.loading .header-navbar .nav li.loading-text:first-child a, .header-navbar .deploy-form-outer .deploy-form .SelectionGroup .deploy-dropdown.loading li.loading-text:first-child a, .deploy-dropdown.loading .header-navbar .deploy-form-outer .deploy-form .SelectionGroup li.loading-text:first-child a, .deploy-form-outer .deploy-form .header-navbar .SelectionGroup .deploy-dropdown.loading li.loading-text:first-child a, .deploy-dropdown.loading .deploy-form-outer .deploy-form .header-navbar .SelectionGroup li.loading-text:first-child a, .header-navbar .deploy-form-loading .deploy-form .SelectionGroup .deploy-dropdown.loading li.loading-text:first-child a, .deploy-dropdown.loading .header-navbar .deploy-form-loading .deploy-form .SelectionGroup li.loading-text:first-child a, .deploy-form-loading .deploy-form .header-navbar .SelectionGroup .deploy-dropdown.loading li.loading-text:first-child a, .deploy-dropdown.loading .deploy-form-loading .deploy-form .header-navbar .SelectionGroup li.loading-text:first-child a, .header-navbar .nav .deployment-status .deployment-progress .progress-bar li.status:first-child a, .deployment-status .deployment-progress .progress-bar .header-navbar .nav li.status:first-child a, .header-navbar .deploy-form-outer .deploy-form .SelectionGroup .deployment-status .deployment-progress .progress-bar li.status:first-child a, .deployment-status .deployment-progress .progress-bar .header-navbar .deploy-form-outer .deploy-form .SelectionGroup li.status:first-child a, .deploy-form-outer .deploy-form .header-navbar .SelectionGroup .deployment-status .deployment-progress .progress-bar li.status:first-child a, .deployment-status .deployment-progress .progress-bar .deploy-form-outer .deploy-form .header-navbar .SelectionGroup li.status:first-child a, .header-navbar .deploy-form-loading .deploy-form .SelectionGroup .deployment-status .deployment-progress .progress-bar li.status:first-child a, .deployment-status .deployment-progress .progress-bar .header-navbar .deploy-form-loading .deploy-form .SelectionGroup li.status:first-child a, .deploy-form-loading .deploy-form .header-navbar .SelectionGroup .deployment-status .deployment-progress .progress-bar li.status:first-child a, .deployment-status .deployment-progress .progress-bar .deploy-form-loading .deploy-form .header-navbar .SelectionGroup li.status:first-child a {
+  .header-navbar .nav li.pull-right:first-child a, .header-navbar .nav .deploy-dropdown li.status-icon:first-child a, .deploy-dropdown .header-navbar .nav li.status-icon:first-child a, .header-navbar .nav .deploy-dropdown li.time:first-child a, .deploy-dropdown .header-navbar .nav li.time:first-child a, .header-navbar .nav .deploy-dropdown.loading li.loading-text:first-child a, .deploy-dropdown.loading .header-navbar .nav li.loading-text:first-child a, .header-navbar .nav .deployment-status .deployment-progress .progress-bar li.status:first-child a, .deployment-status .deployment-progress .progress-bar .header-navbar .nav li.status:first-child a {
     margin-right: 15px; }
-  .header-navbar .nav li.active a, .header-navbar .deploy-form-outer .deploy-form .SelectionGroup li.active a, .deploy-form-outer .deploy-form .header-navbar .SelectionGroup li.active a, .header-navbar .deploy-form-loading .deploy-form .SelectionGroup li.active a, .deploy-form-loading .deploy-form .header-navbar .SelectionGroup li.active a {
+  .header-navbar .nav li.active a {
     color: #222222; }
   .header-navbar .nav-header {
     margin-left: 30px; }
@@ -12277,10 +12111,6 @@ button.sidebar-open {
     .deployment-branch .fa, .main-container .labels .label .icon-star, .main-container .labels .deployment-tag .icon-star, .main-container .labels
     .deployment-branch .icon-star, .main-container .labels .label .deploy-dropdown .status-icon, .deploy-dropdown .main-container .labels .label .status-icon, .main-container .labels .deployment-tag .deploy-dropdown .status-icon, .deploy-dropdown .main-container .labels .deployment-tag .status-icon, .main-container .labels
     .deployment-branch .deploy-dropdown .status-icon, .deploy-dropdown .main-container .labels
-    .deployment-branch .status-icon, .main-container .labels .label .deploy-form-outer .deploy-form .header.loading .status-icon, .deploy-form-outer .deploy-form .header.loading .main-container .labels .label .status-icon, .main-container .labels .deployment-tag .deploy-form-outer .deploy-form .header.loading .status-icon, .deploy-form-outer .deploy-form .header.loading .main-container .labels .deployment-tag .status-icon, .main-container .labels
-    .deployment-branch .deploy-form-outer .deploy-form .header.loading .status-icon, .deploy-form-outer .deploy-form .header.loading .main-container .labels
-    .deployment-branch .status-icon, .main-container .labels .label .deploy-form-loading .deploy-form .header.loading .status-icon, .deploy-form-loading .deploy-form .header.loading .main-container .labels .label .status-icon, .main-container .labels .deployment-tag .deploy-form-loading .deploy-form .header.loading .status-icon, .deploy-form-loading .deploy-form .header.loading .main-container .labels .deployment-tag .status-icon, .main-container .labels
-    .deployment-branch .deploy-form-loading .deploy-form .header.loading .status-icon, .deploy-form-loading .deploy-form .header.loading .main-container .labels
     .deployment-branch .status-icon {
       margin-right: 2px; }
 
@@ -12288,32 +12118,24 @@ button.sidebar-open {
   display: block;
   margin-bottom: 20px; }
 
-.main-container .nav.nav-tabs, .main-container .deploy-form-outer .deploy-form .nav-tabs.SelectionGroup, .deploy-form-outer .deploy-form .main-container .nav-tabs.SelectionGroup, .main-container .deploy-form-loading .deploy-form .nav-tabs.SelectionGroup, .deploy-form-loading .deploy-form .main-container .nav-tabs.SelectionGroup {
+.main-container .nav.nav-tabs {
   border-bottom: none; }
-  .main-container .nav.nav-tabs > li > a, .main-container .deploy-form-outer .deploy-form .nav-tabs.SelectionGroup > li > a, .deploy-form-outer .deploy-form .main-container .nav-tabs.SelectionGroup > li > a, .main-container .deploy-form-loading .deploy-form .nav-tabs.SelectionGroup > li > a, .deploy-form-loading .deploy-form .main-container .nav-tabs.SelectionGroup > li > a,
+  .main-container .nav.nav-tabs > li > a,
   .main-container .nav.nav-tabs > li > a:hover,
-  .main-container .deploy-form-outer .deploy-form .nav-tabs.SelectionGroup > li > a:hover, .deploy-form-outer .deploy-form
-  .main-container .nav-tabs.SelectionGroup > li > a:hover,
-  .main-container .deploy-form-loading .deploy-form .nav-tabs.SelectionGroup > li > a:hover, .deploy-form-loading .deploy-form
-  .main-container .nav-tabs.SelectionGroup > li > a:hover,
-  .main-container .nav.nav-tabs > li > a:focus,
-  .main-container .deploy-form-outer .deploy-form .nav-tabs.SelectionGroup > li > a:focus, .deploy-form-outer .deploy-form
-  .main-container .nav-tabs.SelectionGroup > li > a:focus,
-  .main-container .deploy-form-loading .deploy-form .nav-tabs.SelectionGroup > li > a:focus, .deploy-form-loading .deploy-form
-  .main-container .nav-tabs.SelectionGroup > li > a:focus {
+  .main-container .nav.nav-tabs > li > a:focus {
     border-color: transparent;
     padding-left: 0;
     padding-right: 0;
     margin-right: 20px;
     background-color: transparent; }
-  .main-container .nav.nav-tabs > li.active > a, .main-container .deploy-form-outer .deploy-form .nav-tabs.SelectionGroup > li.active > a, .deploy-form-outer .deploy-form .main-container .nav-tabs.SelectionGroup > li.active > a, .main-container .deploy-form-loading .deploy-form .nav-tabs.SelectionGroup > li.active > a, .deploy-form-loading .deploy-form .main-container .nav-tabs.SelectionGroup > li.active > a {
+  .main-container .nav.nav-tabs > li.active > a {
     border: none;
     border-bottom: 3px solid #3aaef9;
     background-color: transparent; }
-    .main-container .nav.nav-tabs > li.active > a:hover, .main-container .deploy-form-outer .deploy-form .nav-tabs.SelectionGroup > li.active > a:hover, .deploy-form-outer .deploy-form .main-container .nav-tabs.SelectionGroup > li.active > a:hover, .main-container .deploy-form-loading .deploy-form .nav-tabs.SelectionGroup > li.active > a:hover, .deploy-form-loading .deploy-form .main-container .nav-tabs.SelectionGroup > li.active > a:hover, .main-container .nav.nav-tabs > li.active > a:focus, .main-container .deploy-form-outer .deploy-form .nav-tabs.SelectionGroup > li.active > a:focus, .deploy-form-outer .deploy-form .main-container .nav-tabs.SelectionGroup > li.active > a:focus, .main-container .deploy-form-loading .deploy-form .nav-tabs.SelectionGroup > li.active > a:focus, .deploy-form-loading .deploy-form .main-container .nav-tabs.SelectionGroup > li.active > a:focus {
+    .main-container .nav.nav-tabs > li.active > a:hover, .main-container .nav.nav-tabs > li.active > a:focus {
       color: #222222;
       border-bottom-color: #078be0; }
-  .main-container .nav.nav-tabs > li:last-child a, .main-container .deploy-form-outer .deploy-form .nav-tabs.SelectionGroup > li:last-child a, .deploy-form-outer .deploy-form .main-container .nav-tabs.SelectionGroup > li:last-child a, .main-container .deploy-form-loading .deploy-form .nav-tabs.SelectionGroup > li:last-child a, .deploy-form-loading .deploy-form .main-container .nav-tabs.SelectionGroup > li:last-child a {
+  .main-container .nav.nav-tabs > li:last-child a {
     margin-right: 0; }
 
 .content {
@@ -12439,20 +12261,6 @@ button.sidebar-open {
 .deploy-dropdown-errors {
   white-space: pre; }
 
-.deploy-form-loading {
-  display: table;
-  width: 100%; }
-  .deploy-form-loading > .icon-holder {
-    display: table-cell;
-    color: #3aaef9;
-    vertical-align: middle;
-    text-align: center;
-    height: 15em; }
-    .deploy-form-loading > .icon-holder > .fa, .deploy-form-loading > .icon-holder > .icon-star, .deploy-dropdown .deploy-form-loading > .icon-holder > .status-icon, .deploy-form-outer .deploy-form .header.loading .deploy-form-loading > .icon-holder > .status-icon, .deploy-form-loading .deploy-form .header.loading .deploy-form-loading > .icon-holder > .status-icon {
-      font-size: 52px; }
-    .deploy-form-loading > .icon-holder > span {
-      display: block; }
-
 .btn-wide {
   padding: 8px 25px; }
   @media (max-width: 992px) {
@@ -12465,133 +12273,6 @@ button.sidebar-open {
   @media (max-width: 992px) {
     .btn-lg-wide {
       width: 100%; } }
-
-.deploy-form-outer, .deploy-form-loading {
-  border: 1px solid #bbb;
-  border-top-width: 0;
-  overflow: hidden; }
-  .deploy-form-outer .deploy-form, .deploy-form-loading .deploy-form {
-    position: relative; }
-    .deploy-form-outer .deploy-form .transitionIcon, .deploy-form-loading .deploy-form .transitionIcon {
-      width: 40px; }
-    .deploy-form-outer .deploy-form .changeAction, .deploy-form-loading .deploy-form .changeAction {
-      width: 80px; }
-    .deploy-form-outer .deploy-form .deploy-button small, .deploy-form-loading .deploy-form .deploy-button small {
-      font-size: 70%;
-      text-transform: none; }
-    .deploy-form-outer .deploy-form .header, .deploy-form-loading .deploy-form .header {
-      position: static;
-      font-size: 16px;
-      font-weight: bold;
-      color: #3aaef9;
-      margin-bottom: 1em; }
-      .deploy-form-outer .deploy-form .header .numberCircle, .deploy-form-loading .deploy-form .header .numberCircle {
-        display: inline-block;
-        min-width: 10px;
-        padding: 3px 7px;
-        font-weight: bold;
-        line-height: 1;
-        color: #fff;
-        text-align: center;
-        white-space: nowrap;
-        background-color: #3aaef9;
-        border-radius: 50%; }
-      .deploy-form-outer .deploy-form .header.inactive, .deploy-form-loading .deploy-form .header.inactive {
-        color: #ddd; }
-        .deploy-form-outer .deploy-form .header.inactive .numberCircle, .deploy-form-loading .deploy-form .header.inactive .numberCircle {
-          background-color: #ddd; }
-      .deploy-form-outer .deploy-form .header.loading .status-icon, .deploy-form-loading .deploy-form .header.loading .status-icon {
-        padding: 0 5px; }
-      .deploy-form-outer .deploy-form .header.loading .numberCircle, .deploy-form-loading .deploy-form .header.loading .numberCircle {
-        display: none; }
-    .deploy-form-outer .deploy-form:after, .deploy-form-loading .deploy-form:after {
-      height: 300px;
-      background-color: #f0f3f4;
-      content: " ";
-      display: block;
-      bottom: 0;
-      left: 0;
-      top: 0;
-      float: none;
-      position: unset;
-      border-right: 1px solid #bbb; }
-      @media (max-width: 992px) {
-        .deploy-form-outer .deploy-form:after, .deploy-form-loading .deploy-form:after {
-          display: none; } }
-    .deploy-form-outer .deploy-form .SelectionGroup, .deploy-form-loading .deploy-form .SelectionGroup {
-      padding-right: 0;
-      font-weight: 300;
-      z-index: 2; }
-      .deploy-form-outer .deploy-form .SelectionGroup > li, .deploy-form-loading .deploy-form .SelectionGroup > li {
-        background-color: #f0f3f4;
-        border: 1px solid #ccc;
-        border-left-width: 0; }
-        @media (max-width: 992px) {
-          .deploy-form-outer .deploy-form .SelectionGroup > li, .deploy-form-loading .deploy-form .SelectionGroup > li {
-            border-right: none; } }
-        .deploy-form-outer .deploy-form .SelectionGroup > li a, .deploy-form-loading .deploy-form .SelectionGroup > li a {
-          color: #555555;
-          font-size: 16px;
-          padding: 25px 15px;
-          display: block; }
-        .deploy-form-outer .deploy-form .SelectionGroup > li.active, .deploy-form-loading .deploy-form .SelectionGroup > li.active {
-          background-color: #ffffff;
-          border: none; }
-          .deploy-form-outer .deploy-form .SelectionGroup > li.active + li, .deploy-form-loading .deploy-form .SelectionGroup > li.active + li {
-            border-top-width: 1px; }
-          .deploy-form-outer .deploy-form .SelectionGroup > li.active a, .deploy-form-loading .deploy-form .SelectionGroup > li.active a {
-            color: #555555; }
-        .deploy-form-outer .deploy-form .SelectionGroup > li:last-child, .deploy-form-loading .deploy-form .SelectionGroup > li:last-child {
-          border-bottom-width: 0; }
-          @media (max-width: 992px) {
-            .deploy-form-outer .deploy-form .SelectionGroup > li:last-child, .deploy-form-loading .deploy-form .SelectionGroup > li:last-child {
-              border-bottom-width: 1px; } }
-        .deploy-form-outer .deploy-form .SelectionGroup > li + li, .deploy-form-loading .deploy-form .SelectionGroup > li + li {
-          margin-top: 0;
-          border-top-width: 0; }
-      .deploy-form-outer .deploy-form .SelectionGroup + .tab-content, .deploy-form-loading .deploy-form .SelectionGroup + .tab-content {
-        padding: 2em 30px;
-        background-color: #fff;
-        box-shadow: -1penvirx 0 0 #bbb; }
-        @media (max-width: 768px) {
-          .deploy-form-outer .deploy-form .SelectionGroup + .tab-content, .deploy-form-loading .deploy-form .SelectionGroup + .tab-content {
-            box-shadow: none; } }
-        .deploy-form-outer .deploy-form .SelectionGroup + .tab-content input[type="checkbox"], .deploy-form-loading .deploy-form .SelectionGroup + .tab-content input[type="checkbox"] {
-          margin-bottom: 1em;
-          margin-top: 1em;
-          margin-right: 0.5em; }
-        .deploy-form-outer .deploy-form .SelectionGroup + .tab-content select, .deploy-form-loading .deploy-form .SelectionGroup + .tab-content select,
-        .deploy-form-outer .deploy-form .SelectionGroup + .tab-content .select2, .deploy-form-loading .deploy-form .SelectionGroup + .tab-content .select2,
-        .deploy-form-outer .deploy-form .SelectionGroup + .tab-content input[type="text"], .deploy-form-loading .deploy-form .SelectionGroup + .tab-content input[type="text"],
-        .deploy-form-outer .deploy-form .SelectionGroup + .tab-content .CompositeField, .deploy-form-loading .deploy-form .SelectionGroup + .tab-content .CompositeField {
-          width: 100%;
-          margin-bottom: 0.75em; }
-          .deploy-form-outer .deploy-form .SelectionGroup + .tab-content select > *, .deploy-form-loading .deploy-form .SelectionGroup + .tab-content select > *,
-          .deploy-form-outer .deploy-form .SelectionGroup + .tab-content .select2 > *, .deploy-form-loading .deploy-form .SelectionGroup + .tab-content .select2 > *,
-          .deploy-form-outer .deploy-form .SelectionGroup + .tab-content input[type="text"] > *, .deploy-form-loading .deploy-form .SelectionGroup + .tab-content input[type="text"] > *,
-          .deploy-form-outer .deploy-form .SelectionGroup + .tab-content .CompositeField > *, .deploy-form-loading .deploy-form .SelectionGroup + .tab-content .CompositeField > * {
-            width: 100%; }
-    .deploy-form-outer .deploy-form .section, .deploy-form-loading .deploy-form .section {
-      margin-bottom: 30px; }
-    .deploy-form-outer .deploy-form .center, .deploy-form-loading .deploy-form .center {
-      text-align: center; }
-    .deploy-form-outer .deploy-form dl.quick-summary, .deploy-form-loading .deploy-form dl.quick-summary {
-      float: left;
-      opacity: 0.7;
-      -webkit-transition: all 0.3s ease-out;
-      -moz-transition: all 0.3s ease-out;
-      -o-transition: all 0.3s ease-out;
-      transition: all 0.3s ease-out;
-      padding: 3px 8px; }
-      .deploy-form-outer .deploy-form dl.quick-summary.activated, .deploy-form-loading .deploy-form dl.quick-summary.activated {
-        opacity: 1.0; }
-      .deploy-form-outer .deploy-form dl.quick-summary dt, .deploy-form-loading .deploy-form dl.quick-summary dt {
-        width: 70px;
-        font-weight: normal;
-        float: left;
-        clear: left; }
-      .deploy-form-outer .deploy-form dl.quick-summary dd, .deploy-form-loading .deploy-form dl.quick-summary dd {
-        margin-left: 80px; }
 
 button.deploy {
   float: left;
@@ -12656,7 +12337,7 @@ button.deploy {
   margin-bottom: 10px; }
   .environment-details h3 {
     margin-bottom: 7px; }
-  .environment-details h3 .fa, .environment-details h3 .icon-star, .environment-details h3 .deploy-dropdown .status-icon, .deploy-dropdown .environment-details h3 .status-icon, .environment-details h3 .deploy-form-outer .deploy-form .header.loading .status-icon, .deploy-form-outer .deploy-form .header.loading .environment-details h3 .status-icon, .environment-details h3 .deploy-form-loading .deploy-form .header.loading .status-icon, .deploy-form-loading .deploy-form .header.loading .environment-details h3 .status-icon {
+  .environment-details h3 .fa, .environment-details h3 .icon-star, .environment-details h3 .deploy-dropdown .status-icon, .deploy-dropdown .environment-details h3 .status-icon {
     font-size: 14px;
     vertical-align: super; }
   .environment-details .build-details span.git-sha,
@@ -12884,9 +12565,6 @@ select.validation-error, .form-group
 .current-build-data {
   margin-top: 10px; }
 
-#deployment-dialog-holder {
-  margin-top: 20px; }
-
 .project-build-in-progress .progress-icon {
   color: #3aaef9;
   margin-bottom: 2em; }
@@ -12940,9 +12618,9 @@ textarea.deploy-key {
   background-color: #3aaef9;
   border-radius: 3px 3px 0 0;
   border-bottom: 1px solid #eee; }
-  .modal-header .nav, .modal-header .deploy-form-outer .deploy-form .SelectionGroup, .deploy-form-outer .deploy-form .modal-header .SelectionGroup, .modal-header .deploy-form-loading .deploy-form .SelectionGroup, .deploy-form-loading .deploy-form .modal-header .SelectionGroup {
+  .modal-header .nav {
     float: right; }
-  .modal-header .nav > li > a, .modal-header .deploy-form-outer .deploy-form .SelectionGroup > li > a, .deploy-form-outer .deploy-form .modal-header .SelectionGroup > li > a, .modal-header .deploy-form-loading .deploy-form .SelectionGroup > li > a, .deploy-form-loading .deploy-form .modal-header .SelectionGroup > li > a {
+  .modal-header .nav > li > a {
     padding: 0;
     cursor: pointer;
     text-shadow: none;
@@ -12950,7 +12628,7 @@ textarea.deploy-key {
     font-weight: lighter; }
   .modal-header .icon {
     padding-right: 10px; }
-  .modal-header p, .modal-header h1, .modal-header h2, .modal-header h3, .modal-header h4, .modal.deploy .modal-dialog .modal-content .modal-header .nav > li > a, .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-outer .deploy-form .SelectionGroup > li > a, .deploy-form-outer .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .SelectionGroup > li > a, .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-loading .deploy-form .SelectionGroup > li > a, .deploy-form-loading .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .SelectionGroup > li > a, .modal-header h5, .modal-header .h1, .modal-header .h2, .modal-header .h3, .modal-header .h4, .modal-header .h5 {
+  .modal-header p, .modal-header h1, .modal-header h2, .modal-header h3, .modal-header h4, .modal.deploy .modal-dialog .modal-content .modal-header .nav > li > a, .modal-header h5, .modal-header .h1, .modal-header .h2, .modal-header .h3, .modal-header .h4, .modal-header .h5 {
     color: #fff; }
 
 .content .variables-description p {
@@ -13021,7 +12699,7 @@ button.abort {
       .modal.deploy .modal-dialog .modal-content .modal-header .modal-title {
         color: #505050;
         margin-top: 7px; }
-      .modal.deploy .modal-dialog .modal-content .modal-header .nav > li > a, .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-outer .deploy-form .SelectionGroup > li > a, .deploy-form-outer .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .SelectionGroup > li > a, .modal.deploy .modal-dialog .modal-content .modal-header .deploy-form-loading .deploy-form .SelectionGroup > li > a, .deploy-form-loading .deploy-form .modal.deploy .modal-dialog .modal-content .modal-header .SelectionGroup > li > a {
+      .modal.deploy .modal-dialog .modal-content .modal-header .nav > li > a {
         background: transparent;
         border: 0;
         padding: 6px 20px;
