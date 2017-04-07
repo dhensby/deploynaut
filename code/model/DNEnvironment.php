@@ -269,24 +269,42 @@ class DNEnvironment extends DataObject {
 	}
 
 	/**
-	 * Allow deploy only to some people.
-	 *
+	 * Does the user have the ability to bypass deployments for this environment?
 	 * @param Member|null $member
-	 * @return boolean
+	 * @return bool
 	 */
-	public function canDeploy($member = null) {
+	public function canBypass($member = null) {
 		if (!$member) {
-			$member = Member::currentUser();
+			$member = \Member::currentUser();
 		}
 		if (!$member) {
 			return false;
 		}
 
+		$project = $this->Project();
 		if ($this->Usage === self::PRODUCTION || $this->Usage === self::UNSPECIFIED) {
-			return $this->Project()->allowed(DNRoot::ALLOW_PROD_DEPLOYMENT, $member);
-		} else {
-			return $this->Project()->allowed(DNRoot::ALLOW_NON_PROD_DEPLOYMENT, $member);
+			return $project->allowed(\ApprovalsDispatcher::ALLOW_PROD_APPROVAL_BYPASS, $member);
 		}
+		return $project->allowed(\ApprovalsDispatcher::ALLOW_NON_PROD_APPROVAL_BYPASS, $member);
+	}
+
+	/**
+	 * Does the user have the ability to approve deployments for this environment?
+	 * @param Member|null $member
+	 * @return bool
+	 */
+	public function canApprove($member = null) {
+		if (!$member) {
+			$member = \Member::currentUser();
+		}
+		if (!$member) {
+			return false;
+		}
+		$project = $this->Project();
+		if ($this->Usage === self::PRODUCTION || $this->Usage === self::UNSPECIFIED) {
+			return $project->allowed(\ApprovalsDispatcher::ALLOW_PROD_APPROVAL, $member);
+		}
+		return $project->allowed(\ApprovalsDispatcher::ALLOW_NON_PROD_APPROVAL, $member);
 	}
 
 	/**

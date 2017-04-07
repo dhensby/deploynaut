@@ -85,7 +85,7 @@ class APIEnvironment extends APINoun {
 	 * @return SS_HTTPResponse
 	 */
 	protected function createPing() {
-		if(!$this->record->canDeploy($this->getMember())) {
+		if(!$this->record->canBypass($this->getMember())) {
 			return $this->message('You are not authorized to do that on this environment', 403);
 		}
 		$ping = DNPing::create();

@@ -17,10 +17,6 @@ class DNRoot extends Controller implements PermissionProvider, TemplateGlobalPro
 
 	const PROJECT_OVERVIEW = 'overview';
 
-	const ALLOW_PROD_DEPLOYMENT = 'ALLOW_PROD_DEPLOYMENT';
-
-	const ALLOW_NON_PROD_DEPLOYMENT = 'ALLOW_NON_PROD_DEPLOYMENT';
-
 	const ALLOW_CREATE_ENVIRONMENT = 'ALLOW_CREATE_ENVIRONMENT';
 
 	/**
@@ -597,17 +593,9 @@ class DNRoot extends Controller implements PermissionProvider, TemplateGlobalPro
 	 */
 	public function providePermissions() {
 		return [
-			self::ALLOW_PROD_DEPLOYMENT => [
-				'name' => "Ability to deploy to production environments",
-				'category' => "Deploynaut",
-			],
-			self::ALLOW_NON_PROD_DEPLOYMENT => [
-				'name' => "Ability to deploy to non-production environments",
-				'category' => "Deploynaut",
-			],
 			self::ALLOW_CREATE_ENVIRONMENT => [
-				'name' => "Ability to create environments",
-				'category' => "Deploynaut",
+				'name' => 'Ability to create environments',
+				'category' => 'Deploynaut'
 			],
 		];
 	}

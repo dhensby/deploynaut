@@ -4,9 +4,13 @@ class ApprovalsDispatcher extends Dispatcher {
 
 	const ACTION_APPROVALS = 'approvals';
 
-	const ALLOW_APPROVAL = 'ALLOW_APPROVAL';
+	const ALLOW_PROD_APPROVAL = 'ALLOW_PROD_APPROVAL';
 
-	const ALLOW_APPROVAL_BYPASS = 'ALLOW_APPROVAL_BYPASS';
+	const ALLOW_PROD_APPROVAL_BYPASS = 'ALLOW_PROD_APPROVAL_BYPASS';
+
+	const ALLOW_NON_PROD_APPROVAL = 'ALLOW_NON_PROD_APPROVAL';
+
+	const ALLOW_NON_PROD_APPROVAL_BYPASS = 'ALLOW_NON_PROD_APPROVAL_BYPASS';
 
 	/**
 	 * @var array
@@ -31,34 +35,6 @@ class ApprovalsDispatcher extends Dispatcher {
 	 * @var \DNEnvironment
 	 */
 	protected $environment = null;
-
-	/**
-	 * @param \DNEnvironment $environment
-	 * @param \Member|null $member
-	 * @return bool
-	 */
-	public static function can_approve(\DNEnvironment $environment, \Member $member = null) {
-		if ($member === null) {
-			$member = \Member::currentUser();
-		}
-		return $environment->Project()->allowed(self::ALLOW_APPROVAL, $member);
-	}
-
-	/**
-	 * @param \DNEnvironment $environment
-	 * @param \Member|null $member
-	 * @return bool
-	 */
-	public static function can_bypass_approval(\DNEnvironment $environment, \Member $member = null) {
-		if ($member === null) {
-			$member = \Member::currentUser();
-		}
-		// special case for non-Production environments: users who can deploy are able to bypass approval.
-		if ($environment->Usage !== \DNEnvironment::PRODUCTION && $environment->canDeploy($member)) {
-			return true;
-		}
-		return $environment->Project()->allowed(self::ALLOW_APPROVAL_BYPASS, $member);
-	}
 
 	public function init() {
 		parent::init();
@@ -94,7 +70,7 @@ class ApprovalsDispatcher extends Dispatcher {
 
 		$approver = \Member::get()->byId($request->postVar('approver_id'));
 		if ($approver && $approver->exists()) {
-			if (!self::can_approve($this->environment, $approver)) {
+			if (!$this->environment->canApprove($approver)) {
 				return $this->getAPIResponse(['message' => 'The given approver does not have permissions to approve'], 403);
 			}
 			$deployment->ApproverID = $approver->ID;
@@ -175,8 +151,8 @@ class ApprovalsDispatcher extends Dispatcher {
 			return $errorResponse;
 		}
 
-		$canBypass = self::can_bypass_approval($this->environment);
-		$canApprove = self::can_approve($this->environment);
+		$canBypass = $this->environment->canBypass();
+		$canApprove = $this->environment->canApprove();
 
 		// ensure we have either bypass or approval permission of the logged in user
 		if (!$canBypass || !$canBypass) {
@@ -245,7 +221,7 @@ class ApprovalsDispatcher extends Dispatcher {
 		}
 
 		// reject permissions are the same as can approve
-		if (!self::can_approve($this->environment)) {
+		if (!$this->environment->canApprove()) {
 			return $this->getAPIResponse(['message' => 'You are not authorised to reject this deployment'], 403);
 		}
 
