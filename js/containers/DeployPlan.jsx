@@ -82,4 +82,3 @@ const mapDispatchToProps = function(dispatch) {
 };
 
 module.exports = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(DeployPlan);
-
