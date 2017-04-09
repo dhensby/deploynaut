@@ -6,6 +6,8 @@ module.exports = function environment(state, action) {
 	if (typeof state === 'undefined') {
 		return {
 			id: null,
+			is_ready: null,
+			not_ready_message: null,
 			name: null,
 			project_name: null,
 			usage: null,
@@ -18,6 +20,8 @@ module.exports = function environment(state, action) {
 		case actions.SET_ENVIRONMENT:
 			return _.assign({}, state, {
 				id: action.data.id,
+				is_ready: action.data.is_ready,
+				not_ready_message: action.data.not_ready_message,
 				name: action.data.name,
 				project_name: action.data.project_name,
 				usage: action.data.usage,

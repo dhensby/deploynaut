@@ -17,6 +17,16 @@ class EnvironmentOverview extends Dispatcher {
 		'deployment'
 	];
 
+	/**
+	 * @var \DNProject
+	 */
+	protected $project = null;
+
+	/**
+	 * @var \DNEnvironment
+	 */
+	protected $environment = null;
+
 	public function init() {
 		parent::init();
 		$this->project = $this->getCurrentProject();
@@ -65,10 +75,10 @@ class EnvironmentOverview extends Dispatcher {
 
 		// virtual stacks have a special case in that they need to look at the base project
 		// due to the team setup being on the base.
-		if ($this->getCurrentProject() instanceof VirtualProject) {
-			$baseProject = $this->getCurrentProject()->BaseProject();
+		if ($this->project instanceof VirtualProject) {
+			$baseProject = $this->project->BaseProject();
 		} else {
-			$baseProject = $this->getCurrentProject();
+			$baseProject = $this->project;
 		}
 
 		if ($baseProject->hasMethod('listMembers')) {
@@ -93,11 +103,11 @@ class EnvironmentOverview extends Dispatcher {
 
 		$base = Director::absoluteBaseURL();
 		return [
-			'basename' => Director::baseURL() . $this->getCurrentEnvironment()->Link(self::ACTION_OVERVIEW),
+			'basename' => Director::baseURL() . $this->environment->Link(self::ACTION_OVERVIEW),
 			'dispatchers' => [
-				'git' => $base . $this->getCurrentProject()->Link('git'),
-				'deploys' => $base . $this->getCurrentEnvironment()->Link('deploys'),
-				'approvals' => $base . $this->getCurrentEnvironment()->Link('approvals')
+				'git' => $base . $this->project->Link('git'),
+				'deploys' => $base . $this->environment->Link('deploys'),
+				'approvals' => $base . $this->environment->Link('approvals')
 			],
 			'api_auth' => [
 				'name' => $this->getSecurityToken()->getName(),
@@ -105,17 +115,19 @@ class EnvironmentOverview extends Dispatcher {
 			],
 			'environment' => [
 				'id' => $this->environment->ID,
+				'is_ready' => $this->environment->isReady(),
+				'not_ready_message' => $this->environment->getNotReadyMessage(),
 				'name' => $this->environment->Name,
-				'project_name' => $this->getCurrentProject()->Name,
+				'project_name' => $this->project->Name,
 				'usage' => $this->environment->Usage,
 				'supported_options' => $this->environment->getSupportedOptions()->map('name', 'defaultValue'),
 				'approvers' => $approversList
 			],
 			'user' => [
 				'id' => \Member::currentUserID(),
-				'can_approve' => $this->getCurrentEnvironment()->canApprove(),
-				'can_bypass_approval' => $this->getCurrentEnvironment()->canBypass(),
-				'can_abort_deployment' => \DeployDispatcher::can_abort_deployment($this->getCurrentEnvironment())
+				'can_approve' => $this->environment->canApprove(),
+				'can_bypass_approval' => $this->environment->canBypass(),
+				'can_abort_deployment' => \DeployDispatcher::can_abort_deployment($this->environment)
 			]
 		];
 	}

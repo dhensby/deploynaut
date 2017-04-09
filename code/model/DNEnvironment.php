@@ -247,6 +247,23 @@ class DNEnvironment extends DataObject {
 	}
 
 	/**
+	 * Is this environment ready to be used?
+	 * By default, this is whether the environment config file has been setup.
+	 * @return bool
+	 */
+	public function isReady() {
+		return $this->envFileExists();
+	}
+
+	/**
+	 * The message to show to a user when the environment isn't ready to be used.
+	 * @return string
+	 */
+	public function getNotReadyMessage() {
+		return 'This environment cannot be used as it has not been properly configured yet.';
+	}
+
+	/**
 	 * Environments are only viewable by people that can view the environment.
 	 *
 	 * @param Member|null $member

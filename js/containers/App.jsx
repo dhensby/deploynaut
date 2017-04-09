@@ -1,12 +1,13 @@
 const React = require('react');
+const ReactRedux = require('react-redux');
 const ReactRouter = require('react-router');
 
 const CurrentBuildStatus = require('./CurrentBuildStatus.jsx');
 const UpcomingDeployments = require('./UpcomingDeployments.jsx');
 const DeployHistory = require('./DeployHistory.jsx');
 
-function App(props) {
-	return (
+const App = function App(props) {
+	let output = (
 		<div>
 			<CurrentBuildStatus />
 			<div className="row">
@@ -23,6 +24,19 @@ function App(props) {
 			{props.children}
 		</div>
 	);
-}
+	if (props.environment.is_ready === false) {
+		output = (
+			<div className="alert alert-warning" dangerouslySetInnerHTML={{__html: props.environment.not_ready_message}}></div>
+		);
+	}
 
-module.exports = App;
+	return output;
+};
+
+const mapStateToProps = function(state) {
+	return {
+		environment: state.environment
+	};
+};
+
+module.exports = ReactRedux.connect(mapStateToProps)(App);
