@@ -289,8 +289,12 @@
 
 		bulkSubmit.click(function() {
 			var numSnapsToDelete = bulkCheckboxes.filter(':checked').length;
+			var plural = "snapshots";
+			if(numSnapsToDelete < 2) {
+				plural = "snapshot";
+			}
 			// Display the "are you sure" pop-up
-			var submitForm = confirm("Are you sure you want to delete "+numSnapsToDelete+" snapshots? This can not be undone.");
+			var submitForm = confirm("Are you sure you want to delete "+numSnapsToDelete+" "+plural+"? This can not be undone.");
 			// If they don't choose to continue return false
 			if (!submitForm) {
 				return false;
