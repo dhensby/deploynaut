@@ -254,6 +254,12 @@
 		var bulkSelectAll = $('.bulk-delete-select-all')
 		var bulkDeselectAll = $('.bulk-delete-deselect-all');
 
+		// Hide "Delete" and "Select All" if there's no boxes to tick
+		if (bulkCheckboxes.length < 1) {
+			bulkSelectAll.addClass('hide');
+			bulkSubmit.addClass('hide');
+		}
+
 		bulkCheckboxes.click(function() {
 			var numCheckBoxes = bulkCheckboxes.length;
 			// If the submit button is disabled and there's one or more snapshots selected, enable the submit button
