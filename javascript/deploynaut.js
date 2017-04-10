@@ -254,6 +254,12 @@
 		var bulkSelectAll = $('.bulk-delete-select-all')
 		var bulkDeselectAll = $('.bulk-delete-deselect-all');
 
+		// Hide "Delete" and "Select All" if there's no boxes to tick
+		if (bulkCheckboxes.length < 1) {
+			bulkSelectAll.addClass('hide');
+			bulkSubmit.addClass('hide');
+		}
+
 		bulkCheckboxes.click(function() {
 			var numCheckBoxes = bulkCheckboxes.length;
 			// If the submit button is disabled and there's one or more snapshots selected, enable the submit button
@@ -289,8 +295,12 @@
 
 		bulkSubmit.click(function() {
 			var numSnapsToDelete = bulkCheckboxes.filter(':checked').length;
+			var plural = "snapshots";
+			if(numSnapsToDelete < 2) {
+				plural = "snapshot";
+			}
 			// Display the "are you sure" pop-up
-			var submitForm = confirm("Are you sure you want to delete "+numSnapsToDelete+" snapshots? This can not be undone.");
+			var submitForm = confirm("Are you sure you want to delete "+numSnapsToDelete+" "+plural+"? This can not be undone.");
 			// If they don't choose to continue return false
 			if (!submitForm) {
 				return false;
