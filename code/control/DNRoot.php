@@ -185,6 +185,74 @@ class DNRoot extends Controller implements PermissionProvider, TemplateGlobalPro
 	}
 
 	/**
+	 * Override core handleAction method so that we can handle restful requests more elegantly
+	 *
+	 * @param SS_HTTPRequest $request
+	 * @param string $action
+	 *
+	 * @return SS_HTTPResponse
+	 */
+	protected function handleAction($request, $action)
+	{
+		$this->extend('beforeCallActionHandler', $request, $action);
+
+		foreach($request->latestParams() as $k => $v) {
+			if($v || !isset($this->urlParams[$k])) $this->urlParams[$k] = $v;
+		}
+
+		$this->action = $action;
+		$this->requestParams = $request->requestVars();
+		$verb = strtolower($request->httpMethod());
+		$actionMethod = strtolower(($verb === 'get' ? 'do' : $verb) . $action);
+		if (!$this->hasMethod($actionMethod) && $this->hasMethod($action)) {
+			$actionMethod = $action;
+		}
+
+		if ($this->hasAction($action) && !$this->hasMethod($actionMethod)) {
+			$allowedVerbs = [];
+			$actionLength = strlen($action);
+			foreach (get_class_methods($this) as $method) {
+				if (strtolower(substr($method, -$actionLength, $actionLength)) === $action) {
+					$allowedVerb = strtolower(substr($method, 0, -$actionLength));
+					if ($allowedVerb === 'do') {
+						$allowedVerb = 'get';
+					}
+					if (in_array($allowedVerb, ['get', 'post', 'put', 'patch', 'delete', 'head'])) {
+						$allowedVerbs[] = $allowedVerb;
+					}
+				}
+			}
+			$this->httpError(405, sprintf('%s requests are not allowed to this end point. Please try: %s',
+				strtoupper($verb), strtoupper(implode(', ', $allowedVerbs))));
+		}
+
+		if($this->hasMethod($actionMethod)) {
+
+			$res = $this->extend('beforeCallActionHandler', $request, $action);
+			if ($res) {
+				$result = reset($res);
+			} else {
+
+				$result = $this->$actionMethod($request);
+
+				$res = $this->extend('afterCallActionHandler', $request, $action);
+				if ($res) {
+					$result = reset($res);
+				}
+			}
+
+			// If the action returns an array, customise with it before rendering the template.
+			if(is_array($result)) {
+				return $this->getViewer($action)->process($this->customise($result));
+			} else {
+				return $result;
+			}
+		} else {
+			return $this->getViewer($action)->process($this);
+		}
+	}
+
+	/**
 	 * @return string
 	 */
 	public function Link() {
